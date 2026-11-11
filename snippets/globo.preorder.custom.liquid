@@ -10,8 +10,8 @@
           window.GloboPreorderParams.selectors.productPositionMessage = ".product-form__actions";
           window.GloboPreorderParams.selectors.productAddToCartTextElement = ".atc-text";
           window.GloboPreorderParams.selectors.collectionAddToCartTextElement = ".atc-text";
-          window.GloboPreorderParams.selectors.collectionProductForm = "form.spf-product__form";
-          window.GloboPreorderParams.selectors.collectionAddToCartBtn = 'button[type="submit"]';
+          window.GloboPreorderParams.selectors.collectionProductForm = "form.spf-product__form, form.ng-pcard__form";
+          window.GloboPreorderParams.selectors.collectionAddToCartBtn = 'button[type="submit"].add-to-cart, button[type="submit"].ng-pcard__cart';
           window.GloboPreorderParams.selectors.quickViewActivator = ".sf__tooltip-item, .open-quick-view";
           window.GloboPreorderParams.selectors.quickViewProductForm = ".sf-modal.sf-modal__wrapper.fixed form.product-form, #gfqv-modal form.gfqv-product-form";    
       },
@@ -22,11 +22,13 @@
               const {form, profile } = e.detail;
 
               const preorderBtn = form.querySelector('.gPreorderBtn')
+              if (!preorderBtn) return;
 
               preorderBtn.innerHTML = profile.message.preorderText;
+              preorderBtn.classList.add('is-preorder');
 
               const color = Globo.Preorder.settings.settings.colorButton
-              if(form.classList.contains('spf-product__form')){
+              if (form.classList.contains('spf-product__form') || form.classList.contains('ng-pcard__form')) {
                   preorderBtn.setAttribute('style', `color: ${color.preorderTextColor} !important; background: ${color.preorderBackgroundColor} !important; border: 1px solid ${color.preorderBorderColor} !important;`)
               }
           })

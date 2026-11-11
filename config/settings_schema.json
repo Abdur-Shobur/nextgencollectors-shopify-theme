@@ -962,6 +962,10 @@
           {
             "value": "4",
             "label": "Style 4"
+          },
+          {
+            "value": "5",
+            "label": "Style 5 (NextGen card)"
           }
         ]
       },

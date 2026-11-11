@@ -1,0 +1,312 @@
+/* NextGen product card style 5 */
+
+.ng-pcard {
+	--ng-pc-border: #e8e4dc;
+	--ng-pc-muted: #8a8580;
+	--ng-pc-ink: #231f20;
+	--ng-pc-bg: #fff;
+	--ng-pc-img-bg: #f5f3ef;
+	--ng-pc-radius: 0.75rem;
+	background: var(--ng-pc-bg);
+	border: 1px solid var(--ng-pc-border);
+	border-radius: var(--ng-pc-radius);
+	overflow: hidden;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.ng-pcard__media {
+	position: relative;
+	background: var(--ng-pc-img-bg);
+	aspect-ratio: var(--ng-pc-ratio, 1 / 1);
+	overflow: hidden;
+}
+
+.ng-pcard__media-link {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.ng-pcard__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.ng-pcard__img--primary {
+	transition:
+		opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+	transform: scale(1);
+	opacity: 1;
+}
+
+.ng-pcard__img--secondary {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	visibility: hidden;
+	transform: scale(1.08);
+	transition:
+		opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+		visibility 0.45s;
+}
+
+.ng-pcard__img img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+	display: block;
+}
+
+.ng-pcard--has-hover-image:hover .ng-pcard__img--primary,
+.ng-pcard--has-hover-image:focus-within .ng-pcard__img--primary {
+	opacity: 0;
+	transform: scale(0.96);
+}
+
+.ng-pcard--has-hover-image:hover .ng-pcard__img--secondary,
+.ng-pcard--has-hover-image:focus-within .ng-pcard__img--secondary {
+	opacity: 1;
+	visibility: visible;
+	transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ng-pcard__img--primary,
+	.ng-pcard__img--secondary {
+		transition: opacity 0.2s ease;
+		transform: none !important;
+	}
+}
+
+.ng-pcard__wish {
+	position: absolute;
+	top: 0.75rem;
+	right: 0.75rem;
+	z-index: 3;
+	width: 2.25rem;
+	height: 2.25rem;
+	border-radius: 50%;
+	background: #fff;
+	border: 1px solid var(--ng-pc-border);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ng-pcard__wish .sf__tooltip-item,
+.ng-pcard__wish .sf__btn-icon,
+.ng-pcard__wish a,
+.ng-pcard__wish button {
+	width: 100%;
+	height: 100%;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	margin: 0 !important;
+	padding: 0 !important;
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+}
+
+.ng-pcard__wish .sf__tooltip-content {
+	display: none !important;
+}
+
+.ng-pcard__badge {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 2;
+}
+
+.ng-pcard__body {
+	padding: 0.875rem 1rem 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	flex: 1;
+}
+
+.ng-pcard__title {
+	margin: 0;
+	font-size: 0.9375rem;
+	font-weight: 700;
+	line-height: 1.35;
+	color: var(--ng-pc-ink);
+}
+
+.ng-pcard__title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.ng-pcard__title a:hover {
+	color: var(--color-secondary, #8a6a1f);
+}
+
+.ng-pcard__meta {
+	margin: 0;
+	font-size: 0.8125rem;
+	color: var(--ng-pc-muted);
+	line-height: 1.3;
+}
+
+.ng-pcard__reviews {
+	min-height: 1.25rem;
+	font-size: 0.75rem;
+}
+
+.ng-pcard__reviews .jdgm-prev-badge__text,
+.ng-pcard__reviews .spr-badge-caption {
+	color: var(--ng-pc-muted);
+}
+
+.ng-pcard__footer {
+	margin-top: auto;
+	padding-top: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.ng-pcard__price {
+	min-width: 0;
+}
+
+.ng-pcard__price .prod__price {
+	font-size: 0.9375rem;
+	font-weight: 700;
+	color: var(--ng-pc-ink);
+}
+
+.ng-pcard__price .prod__compare_price {
+	font-size: 0.8125rem;
+	color: var(--ng-pc-muted);
+}
+
+.ng-pcard__cart {
+	flex: none;
+	width: 2.5rem;
+	height: 2.5rem;
+	min-width: 2.5rem;
+	border-radius: 0.5rem;
+	border: 1px solid var(--ng-pc-border);
+	background: #fff;
+	color: var(--ng-pc-ink);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	cursor: pointer;
+	overflow: visible;
+	transition:
+		background-color 0.15s,
+		border-color 0.15s,
+		color 0.15s;
+}
+
+.ng-pcard__cart:hover {
+	border-color: var(--ng-pc-ink);
+	background: #faf9f7;
+}
+
+.ng-pcard__cart.disabled,
+.ng-pcard__cart:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.ng-pcard__cart .atc-text,
+.ng-pcard__cart .sf-spinner-button {
+	display: none !important;
+}
+
+.ng-pcard__cart svg {
+	width: 1.125rem;
+	height: 1.125rem;
+}
+
+/* Globo / preorder: expand so full label is visible */
+.ng-pcard__cart.gPreorderBtn,
+.ng-pcard__cart.is-preorder {
+	width: auto;
+	min-width: 2.5rem;
+	height: auto;
+	min-height: 2.5rem;
+	padding: 0.4rem 0.75rem;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	line-height: 1.2;
+	text-transform: uppercase;
+	white-space: nowrap;
+	gap: 0;
+}
+
+.ng-pcard__cart.gPreorderBtn svg,
+.ng-pcard__cart.is-preorder svg {
+	display: none;
+}
+
+.ng-pcard__cart.gPreorderBtn .atc-text,
+.ng-pcard__cart.is-preorder .atc-text {
+	display: inline !important;
+	position: static;
+	width: auto;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	overflow: visible;
+	clip: auto;
+	white-space: nowrap;
+	font-size: inherit;
+	font-weight: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
+	color: inherit;
+}
+
+/* Featured collection split header */
+.ng-fc-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-bottom: 1.25rem;
+}
+
+.ng-fc-header__title {
+	margin: 0;
+	font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--ng-pc-ink, #231f20);
+}
+
+.ng-fc-header__link {
+	font-size: 0.9375rem;
+	font-weight: 500;
+	color: var(--ng-pc-ink, #231f20);
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.ng-fc-header__link:hover {
+	color: var(--color-secondary, #8a6a1f);
+	text-decoration: underline;
+}
+
+.sf__featured-collection.ng-fc--style-5 .sf__featured-collection-button {
+	display: none;
+}

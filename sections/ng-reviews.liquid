@@ -1,0 +1,237 @@
+{{ 'ng-reviews.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #ng-reviews-{{ section.id }} {
+    --ng-rv-bg: {{ section.settings.background_color | default: '#fbf8f1' }};
+    --ng-rv-accent: {{ section.settings.accent_color | default: settings.color_primary | default: '#d3b566' }};
+    --ng-rv-star: {{ section.settings.star_color | default: '#e6b422' }};
+  }
+</style>
+
+<section
+  id="ng-reviews-{{ section.id }}"
+  class="ng-reviews"
+  data-ng-reviews
+  data-section-id="{{ section.id }}"
+>
+  <div class="{{ section.settings.container }}">
+    <div class="ng-reviews__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ng-reviews__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ng-reviews__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="ng-reviews__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ng-reviews__track-wrap">
+        {%- if section.settings.show_arrows -%}
+          <button class="ng-reviews__nav ng-reviews__nav--prev" type="button" aria-label="Previous reviews" data-ng-reviews-prev>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button class="ng-reviews__nav ng-reviews__nav--next" type="button" aria-label="Next reviews" data-ng-reviews-next>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        {%- endif -%}
+
+        <div class="ng-reviews__track" data-ng-reviews-track>
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign rating = block.settings.rating | default: 5 | plus: 0
+              if rating < 1
+                assign rating = 1
+              endif
+              if rating > 5
+                assign rating = 5
+              endif
+              assign author = block.settings.author | default: 'Customer'
+              assign initial = author | slice: 0 | upcase
+            -%}
+            <article class="ng-reviews__card" {{ block.shopify_attributes }}>
+              <div class="ng-reviews__stars" aria-label="{{ rating }} out of 5 stars">
+                {%- for i in (1..5) -%}
+                  <svg viewBox="0 0 24 24" aria-hidden="true"{% if i > rating %} style="opacity:0.25"{% endif %}>
+                    <path d="m12 2 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/>
+                  </svg>
+                {%- endfor -%}
+              </div>
+
+              {%- if block.settings.content != blank -%}
+                <p class="ng-reviews__quote">{{ block.settings.content }}</p>
+              {%- endif -%}
+
+              <div class="ng-reviews__author">
+                <span class="ng-reviews__avatar">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 96 | image_tag: loading: 'lazy', alt: author }}
+                  {%- else -%}
+                    {{ initial }}
+                  {%- endif -%}
+                </span>
+                <div class="ng-reviews__meta">
+                  <p class="ng-reviews__name">{{ author }}</p>
+                  {%- if block.settings.detail != blank -%}
+                    <p class="ng-reviews__detail">{{ block.settings.detail }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'ng-reviews.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "NG Reviews",
+  "tag": "section",
+  "class": "section-ng-reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Let customers speak for us"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Real feedback from collectors across Australia."
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "container-fluid",
+      "options": [
+        { "value": "container-fluid", "label": "Default" },
+        { "value": "container", "label": "Boxed" },
+        { "value": "w-full", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows (desktop)",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#fbf8f1"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#d3b566"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#e6b422"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Review text",
+          "default": "Excellent quality and fast shipping. Will definitely order again."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Alex M."
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detail",
+          "default": "Verified buyer",
+          "info": "e.g. Verified buyer, city, or product name"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NG Reviews",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "content": "Beautiful coins and packaging was excellent. Arrived quickly and exactly as described.",
+            "author": "Sarah K.",
+            "detail": "Verified buyer · Brisbane"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "content": "Great prices compared with local dealers. Customer support helped me choose the right piece.",
+            "author": "James R.",
+            "detail": "Verified buyer · Sydney"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "content": "My Perth Mint order was perfect. Will be back for the next release.",
+            "author": "Michelle T.",
+            "detail": "Verified buyer · Melbourne"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "content": "Secure shipping and clear updates the whole way. Highly recommend for collectors.",
+            "author": "Daniel P.",
+            "detail": "Verified buyer · Perth"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

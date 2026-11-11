@@ -1,0 +1,258 @@
+{{ 'ng-product-tabs.css' | asset_url | stylesheet_tag }}
+{{ 'ng-product-card.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading = section.settings.heading
+  assign view_all_label = section.settings.view_all_label
+  assign limit = section.settings.limit | default: 10
+  assign items_per_row = section.settings.items_per_row | default: 5
+  assign item_gap = section.settings.item_gap | default: 20
+  assign card_style = section.settings.pcard_layout | default: '5'
+  assign image_ratio = section.settings.pcard_image_ratio | default: '1/1'
+  assign show_vendor = section.settings.show_vendor
+-%}
+
+<style>
+  #ng-pt-{{ section.id }} {
+    --ng-pt-cols: {{ items_per_row }};
+    --ng-pt-gap: {{ item_gap }}px;
+    --ng-pt-accent: {{ section.settings.accent_color | default: settings.color_primary | default: '#d3b566' }};
+    --ng-pt-plum: {{ section.settings.tab_active_color | default: '#3b2230' }};
+    background: {{ section.settings.background_color | default: 'transparent' }};
+  }
+</style>
+
+<section
+  id="ng-pt-{{ section.id }}"
+  class="ng-pt"
+  data-ng-product-tabs
+  data-section-id="{{ section.id }}"
+>
+  <div class="{{ section.settings.container }}">
+    {%- if heading != blank or view_all_label != blank -%}
+      <div class="ng-pt__header">
+        {%- if heading != blank -%}
+          <h2 class="ng-pt__title">{{ heading }}</h2>
+        {%- endif -%}
+        {%- if view_all_label != blank -%}
+          {%- assign first_collection = collections[section.blocks.first.settings.collection] -%}
+          <a
+            class="ng-pt__view-all"
+            href="{{ first_collection.url | default: routes.collections_url }}"
+            data-ng-pt-view-all
+          >
+            {{ view_all_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="ng-pt__tabs" role="tablist" aria-label="{{ heading | default: 'Product collections' | escape }}">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign collection = collections[block.settings.collection]
+            assign tab_name = block.settings.title
+            if tab_name == blank
+              if collection != blank
+                assign tab_name = collection.title
+              else
+                assign tab_name = 'Tab ' | append: forloop.index
+              endif
+            endif
+          -%}
+          <button
+            type="button"
+            class="ng-pt__tab{% if forloop.first %} is-active{% endif %}"
+            role="tab"
+            id="ng-pt-tab-{{ block.id }}"
+            aria-controls="ng-pt-panel-{{ block.id }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            data-ng-pt-tab
+            data-collection-url="{{ collection.url }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ tab_name }}
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <div class="ng-pt__panels">
+        {%- for block in section.blocks -%}
+          {%- assign collection = collections[block.settings.collection] -%}
+          <div
+            class="ng-pt__panel{% if forloop.first %} is-active{% endif %}"
+            role="tabpanel"
+            id="ng-pt-panel-{{ block.id }}"
+            aria-labelledby="ng-pt-tab-{{ block.id }}"
+            data-ng-pt-panel
+            {% unless forloop.first %}hidden{% endunless %}
+          >
+            {%- if collection != blank and collection.products_count > 0 -%}
+              <div class="ng-pt__grid">
+                {%- for product in collection.products limit: limit -%}
+                  <div class="ng-pt__item">
+                    {% render 'product-card',
+                      product: product,
+                      card_style: card_style,
+                      image_ratio: image_ratio,
+                      show_vendor: show_vendor
+                    %}
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- else -%}
+              <div class="ng-pt__empty">
+                {%- if collection == blank -%}
+                  Select a collection for this tab.
+                {%- else -%}
+                  No products in {{ collection.title }}.
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<script src="{{ 'ng-product-tabs.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "NG Product tabs",
+  "tag": "section",
+  "class": "section-ng-product-tabs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Mint"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all products →"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container",
+      "default": "container-fluid",
+      "options": [
+        { "value": "container-fluid", "label": "Default" },
+        { "value": "container", "label": "Boxed" },
+        { "value": "w-full", "label": "Full width" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products per tab",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "items_per_row",
+      "label": "Products per row",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Gap",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "pcard_layout",
+      "label": "Product card style",
+      "default": "5",
+      "options": [
+        { "value": "1", "label": "Style 1" },
+        { "value": "2", "label": "Style 2" },
+        { "value": "3", "label": "Style 3" },
+        { "value": "4", "label": "Style 4" },
+        { "value": "5", "label": "Style 5 (NextGen)" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "pcard_image_ratio",
+      "label": "Image ratio",
+      "default": "1/1",
+      "options": [
+        { "value": "1/1", "label": "1:1" },
+        { "value": "3/4", "label": "3:4" },
+        { "value": "4/3", "label": "4:3" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#d3b566"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Active tab color",
+      "default": "#3b2230"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Collection"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NG Product tabs",
+      "blocks": [
+        { "type": "tab", "settings": { "title": "Germania Mint" } },
+        { "type": "tab", "settings": { "title": "T&S Coins" } },
+        { "type": "tab", "settings": { "title": "The Perth Mint" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

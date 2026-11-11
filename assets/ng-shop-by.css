@@ -1,0 +1,182 @@
+/* Shop by Category / Collection / Brand — circular slider */
+
+.ng-shop-by {
+	--ng-sb-ink: #231f20;
+	--ng-sb-muted: #5c5660;
+	--ng-sb-line: #e8e4dc;
+	--ng-sb-circle: #f3f1ec;
+	--ng-sb-gap: clamp(0.75rem, 2vw, 1.5rem);
+	--ng-sb-size: clamp(5.5rem, 14vw, 8.5rem);
+	background: #ffffff;
+	color: var(--ng-sb-ink);
+	padding: clamp(1.75rem, 4vw, 2.75rem) 0;
+}
+
+.ng-shop-by__inner {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.ng-shop-by__header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.ng-shop-by__title {
+	margin: 0;
+	font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+	color: var(--ng-sb-ink);
+}
+
+.ng-shop-by__view-all {
+	font-size: 0.9375rem;
+	font-weight: 500;
+	color: var(--ng-sb-ink);
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.ng-shop-by__view-all:hover {
+	color: var(--ng-sb-accent, #8a6a1f);
+	text-decoration: underline;
+}
+
+.ng-shop-by__track-wrap {
+	position: relative;
+}
+
+.ng-shop-by__track {
+	display: flex;
+	gap: var(--ng-sb-gap);
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+	padding: 0.25rem 0 0.5rem;
+}
+
+.ng-shop-by__track::-webkit-scrollbar {
+	display: none;
+}
+
+.ng-shop-by__item {
+	flex: 0 0 auto;
+	width: var(--ng-sb-size);
+	scroll-snap-align: start;
+	text-align: center;
+	text-decoration: none;
+	color: inherit;
+}
+
+.ng-shop-by__circle {
+	width: var(--ng-sb-size);
+	height: var(--ng-sb-size);
+	border-radius: 50%;
+	background: var(--ng-sb-circle);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	margin: 0 auto;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.ng-shop-by__item:hover .ng-shop-by__circle {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(35, 31, 32, 0.1);
+}
+
+.ng-shop-by__circle img {
+	width: 72%;
+	height: 72%;
+	object-fit: contain;
+	display: block;
+}
+
+.ng-shop-by__circle--cover img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.ng-shop-by__label {
+	display: block;
+	margin-top: 0.75rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	line-height: 1.3;
+	color: var(--ng-sb-ink);
+}
+
+.ng-shop-by__nav {
+	position: absolute;
+	top: calc(var(--ng-sb-size) / 2);
+	transform: translateY(-50%);
+	z-index: 2;
+	width: 2.25rem;
+	height: 2.25rem;
+	border: 0;
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: var(--ng-sb-ink);
+	padding: 0;
+}
+
+.ng-shop-by__nav:hover {
+	background: #fff;
+	color: var(--ng-sb-accent, #8a6a1f);
+}
+
+.ng-shop-by__nav:disabled {
+	opacity: 0.35;
+	cursor: default;
+}
+
+.ng-shop-by__nav--prev {
+	left: 0;
+}
+
+.ng-shop-by__nav--next {
+	right: 0;
+}
+
+.ng-shop-by__nav svg {
+	width: 1rem;
+	height: 1rem;
+}
+
+@media (max-width: 767.98px) {
+	.ng-shop-by {
+		--ng-sb-size: clamp(5rem, 26vw, 6.5rem);
+		--ng-sb-gap: 0.875rem;
+	}
+
+	.ng-shop-by__nav {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ng-shop-by__track {
+		scroll-behavior: auto;
+	}
+
+	.ng-shop-by__circle {
+		transition: none;
+	}
+}

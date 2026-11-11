@@ -52,6 +52,9 @@
 {%- endunless -%}
 
 {% assign sold_number = product.metafields.foxkit.sold_number %}
+{%- if card_style == '5' -%}
+  {{ 'ng-product-card.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 {%- if column_wrapper -%}<div class="sf-column">{%- endif -%}
   {%- case card_style -%}
     {%- when '1' -%}
@@ -89,6 +92,17 @@
       %}
     {%- when '4' -%}
       {% render 'product-card-4',
+        product: product,
+        card_sale_class: card_sale_class,
+        image_ratio: image_ratio,
+        show_vendor: show_vendor,
+        sold_out: sold_out,
+        quick_add_text: quick_add_text,
+        show_title: show_title,
+        sold_number: sold_number
+      %}
+    {%- when '5' -%}
+      {% render 'product-card-5',
         product: product,
         card_sale_class: card_sale_class,
         image_ratio: image_ratio,

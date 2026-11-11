@@ -1,0 +1,123 @@
+/* NextGen trust / value bar — horizontal icon + text */
+
+.ng-vp {
+	--ng-vp-ink: #231f20;
+	--ng-vp-muted: #6b6560;
+	--ng-vp-line: #ebe6dc;
+	--ng-vp-bar: #f4f1ea;
+	--ng-vp-accent: #d3b566;
+	background: transparent;
+	color: var(--ng-vp-ink);
+	padding: clamp(1.25rem, 3vw, 2rem) 0;
+}
+
+.ng-vp__bar {
+	border: 1px solid var(--ng-vp-bar);
+	border-radius: 1.25rem;
+	padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1rem, 2.5vw, 2rem);
+}
+
+.ng-vp__grid {
+	display: grid;
+	grid-template-columns: repeat(var(--ng-vp-cols, 4), minmax(0, 1fr));
+	gap: clamp(1rem, 2.5vw, 2rem);
+	align-items: center;
+}
+
+.ng-vp__card {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.875rem;
+	text-decoration: none;
+	color: inherit;
+	min-width: 0;
+	transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ng-vp__card:hover {
+	transform: translateY(-2px);
+}
+
+.ng-vp__icon {
+	flex: none;
+	width: 2.5rem;
+	height: 2.5rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--ng-vp-ink);
+}
+
+.ng-vp__icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+}
+
+.ng-vp__icon svg {
+	width: 1.625rem;
+	height: 1.625rem;
+	stroke-width: 1.6;
+}
+
+.ng-vp__content {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	text-align: left;
+}
+
+.ng-vp__title {
+	margin: 0;
+	font-size: 0.95rem;
+	font-weight: 700;
+	line-height: 1.3;
+	letter-spacing: -0.01em;
+	color: var(--ng-vp-ink);
+}
+
+.ng-vp__text {
+	margin: 0;
+	font-size: 0.8125rem;
+	line-height: 1.4;
+	color: var(--ng-vp-muted);
+}
+
+.ng-vp__text p {
+	margin: 0;
+}
+
+.ng-vp__text p + p {
+	margin-top: 0.2rem;
+}
+
+@media (max-width: 989.98px) {
+	.ng-vp__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.25rem 1.5rem;
+	}
+}
+
+@media (max-width: 549.98px) {
+	.ng-vp__bar {
+		border-radius: 1rem;
+		padding: 1.125rem 1rem;
+	}
+
+	.ng-vp__grid {
+		grid-template-columns: 1fr;
+		gap: 1.125rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ng-vp__card {
+		transition: none;
+	}
+
+	.ng-vp__card:hover {
+		transform: none;
+	}
+}

@@ -1,0 +1,135 @@
+{%- liquid
+  assign ng_uid = section.id | default: 'global'
+  assign form_id = 'ng-pcard-' | append: product.id | append: '-' | append: ng_uid
+  assign category_label = product.type
+  if category_label == blank and product.collections.size > 0
+    assign category_label = product.collections.first.title
+  endif
+  if image_ratio == blank or image_ratio == nil
+    assign image_ratio = '1/1'
+  endif
+
+  assign primary_image = product.featured_image
+  assign second_image = blank
+  if settings.show_second_img and product.images.size > 1 and product.images[1] != blank
+    assign second_image = product.images[1]
+  endif
+-%}
+
+<div
+  class="ng-pcard sf__pcard {{ card_sale_class | strip_newlines }} sf-prod__block sf__pcard-style-5{% if second_image != blank %} ng-pcard--has-hover-image{% endif %}"
+  data-view="card"
+  style="--ng-pc-ratio: {{ image_ratio }};"
+  {% if sold_number != blank %}data-sold-number="{{ sold_number }}"{% endif %}
+>
+  {%- form 'product', product, id: form_id, class: 'product-form form ng-pcard__form', novalidate: 'novalidate', data-product-id: product.id, data-product-handle: product.handle -%}
+    {% render 'product-card-variant-id-input', product: product %}
+
+    <div class="ng-pcard__media">
+      <a href="{{ product.url }}" class="ng-pcard__media-link" aria-label="{{ product.title | escape }}">
+        {% if primary_image != blank %}
+          <span class="ng-pcard__img ng-pcard__img--primary">
+            {{ primary_image | image_url: width: 800 | image_tag:
+              loading: 'lazy',
+              widths: '200, 300, 400, 600, 800',
+              sizes: '(max-width: 767px) 50vw, 20vw',
+              alt: primary_image.alt | default: product.title
+            }}
+          </span>
+          {%- if second_image != blank -%}
+            <span class="ng-pcard__img ng-pcard__img--secondary">
+              {{ second_image | image_url: width: 800 | image_tag:
+                loading: 'lazy',
+                widths: '200, 300, 400, 600, 800',
+                sizes: '(max-width: 767px) 50vw, 20vw',
+                alt: second_image.alt | default: product.title
+              }}
+            </span>
+          {%- endif -%}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </a>
+
+      <div class="ng-pcard__badge">
+        {% render 'product-card-sale-badges', product: product %}
+        {% render 'product-card-soldout-text', sold_out: sold_out %}
+      </div>
+
+      {%- if settings.show_wishlist_button -%}
+        <div class="ng-pcard__wish">
+          {% render 'wishlist-snippet', product: product, class_name: 'ng-pcard__wish-btn' %}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="ng-pcard__body">
+      {%- if show_title -%}
+        <h3 class="ng-pcard__title">
+          <a href="{{ product.url }}">{{ product.title }}</a>
+        </h3>
+      {%- endif -%}
+
+      {%- if category_label != blank -%}
+        <p class="ng-pcard__meta">{{ category_label }}</p>
+      {%- elsif show_vendor and product.vendor != blank -%}
+        <p class="ng-pcard__meta">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      {%- if settings.show_review_badge -%}
+        <div class="ng-pcard__reviews">
+          {% render 'product-reviews-app__badge', product: product %}
+        </div>
+      {%- endif -%}
+
+      <div class="ng-pcard__footer">
+        <div class="ng-pcard__price">
+          {% render 'product-prices', product: product, is_product_card: true %}
+        </div>
+
+        {%- if sold_out == false and settings.show_cart_button -%}
+          {%- if product.has_only_default_variant -%}
+            <button
+              type="submit"
+              name="add"
+              class="ng-pcard__cart add-to-cart sf__btn not-change relative"
+              aria-label="{{ 'products.product.add_to_cart' | t }}"
+              data-atc-text="{{ 'products.product.add_to_cart' | t }}"
+            >
+              {% render 'atc-spinner' %}
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 4h2l2.5 11h10L20 7H6.5"/>
+                <circle cx="9" cy="19" r="1.5"/>
+                <circle cx="17" cy="19" r="1.5"/>
+              </svg>
+              <span class="atc-text visually-hidden">{{ 'products.product.add_to_cart' | t }}</span>
+            </button>
+          {%- else -%}
+            {%- if settings.select_option_button_action == 'popup' -%}
+              <button
+                type="button"
+                class="ng-pcard__cart sf-pqv__button"
+                aria-label="{{ quick_add_text | strip_html }}"
+                data-product-handle="{{ product.handle }}"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 4h2l2.5 11h10L20 7H6.5"/>
+                  <circle cx="9" cy="19" r="1.5"/>
+                  <circle cx="17" cy="19" r="1.5"/>
+                </svg>
+              </button>
+            {%- else -%}
+              <a class="ng-pcard__cart" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 4h2l2.5 11h10L20 7H6.5"/>
+                  <circle cx="9" cy="19" r="1.5"/>
+                  <circle cx="17" cy="19" r="1.5"/>
+                </svg>
+              </a>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endform -%}
+</div>

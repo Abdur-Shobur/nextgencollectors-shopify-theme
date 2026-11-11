@@ -59,22 +59,15 @@
     if (!bar) return;
 
     var items = bar.querySelectorAll('[data-ng-offer-item]');
-    if (items.length <= 1) {
-      if (items[0]) items[0].classList.add('is-active');
-      return;
-    }
+    if (items.length) items[0].classList.add('is-active');
+    if (items.length <= 1) return;
 
     var intervalMs = parseInt(bar.getAttribute('data-rotate-interval'), 10) || 4000;
     var pauseOnHover = bar.getAttribute('data-pause-hover') === 'true';
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var desktopMq = window.matchMedia('(min-width: 768px)');
     var index = 0;
     var timer = null;
-
-    items.forEach(function (item, i) {
-      item.classList.toggle('is-active', i === 0);
-    });
-
-    if (reduceMotion) return;
 
     function show(next) {
       items[index].classList.remove('is-active');
@@ -86,11 +79,6 @@
       show((index + 1) % items.length);
     }
 
-    function start() {
-      stop();
-      timer = window.setInterval(tick, intervalMs);
-    }
-
     function stop() {
       if (timer) {
         window.clearInterval(timer);
@@ -98,7 +86,20 @@
       }
     }
 
+    function start() {
+      stop();
+      // Desktop only — mobile uses CSS marquee
+      if (!desktopMq.matches || reduceMotion) return;
+      timer = window.setInterval(tick, intervalMs);
+    }
+
     start();
+
+    if (typeof desktopMq.addEventListener === 'function') {
+      desktopMq.addEventListener('change', start);
+    } else if (typeof desktopMq.addListener === 'function') {
+      desktopMq.addListener(start);
+    }
 
     if (pauseOnHover) {
       bar.addEventListener('mouseenter', stop);

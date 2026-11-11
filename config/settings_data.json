@@ -259,6 +259,8 @@
           "show_offers": true,
           "offer_interval": 4000,
           "offer_pause_hover": true,
+          "color_offers_bg": "#d3b566",
+          "color_offers_text": "#ffffff",
           "color_cream": "#fbf8f1",
           "color_plum": "#3b2230",
           "color_gold": "#c8a55a",

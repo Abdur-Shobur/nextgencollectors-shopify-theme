@@ -1,7 +1,4 @@
 {{ 'ng-header.css' | asset_url | stylesheet_tag }}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap">
 
 {%- liquid
   assign show_offers = section.settings.show_offers
@@ -18,6 +15,8 @@
     --ng-gold: {{ section.settings.color_gold | default: '#c8a55a' }};
     --ng-gold-text: {{ section.settings.color_gold_text | default: '#8a6a1f' }};
     --ng-orange: {{ section.settings.color_orange | default: '#f7941d' }};
+    --ng-announce-bg: {{ section.settings.color_offers_bg | default: settings.color_primary | default: '#d3b566' }};
+    --ng-announce-text: {{ section.settings.color_offers_text | default: '#ffffff' }};
     --ng-logo-max-width: {{ logo_max }}px;
     --ng-logo-max-width-mobile: {{ logo_max_mobile }}px;
   }
@@ -36,7 +35,7 @@
 </script>
 
 <div
-  class="ng-header-root{% if cart.item_count > 0 %} cart-has-items{% endif %}"
+  class="ng-header-root{% if sticky %} is-sticky{% endif %}{% if cart.item_count > 0 %} cart-has-items{% endif %}"
   data-ng-header-root
   data-section-id="{{ section.id }}"
 >
@@ -55,7 +54,8 @@
         data-rotate-interval="{{ section.settings.offer_interval | default: 4000 }}"
         data-pause-hover="{{ section.settings.offer_pause_hover }}"
       >
-        <div class="ng-announce__track">
+        {%- comment -%} Desktop: fade rotator {%- endcomment -%}
+        <div class="ng-announce__track ng-announce__track--desktop container-fluid">
           {%- for block in section.blocks -%}
             {%- if block.type == 'offer' and block.settings.message != blank -%}
               <div class="ng-announce__item" data-ng-offer-item {{ block.shopify_attributes }}>
@@ -68,12 +68,33 @@
             {%- endif -%}
           {%- endfor -%}
         </div>
+
+        {%- comment -%} Mobile: continuous marquee (no line break) {%- endcomment -%}
+        <div class="ng-announce__marquee" aria-hidden="true">
+          <div class="ng-announce__marquee-track">
+            {%- for i in (1..2) -%}
+              <div class="ng-announce__marquee-group">
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'offer' and block.settings.message != blank -%}
+                    <span class="ng-announce__marquee-item">
+                      {%- if block.settings.link != blank -%}
+                        <a href="{{ block.settings.link }}" tabindex="-1">{{ block.settings.message }}</a>
+                      {%- else -%}
+                        {{ block.settings.message }}
+                      {%- endif -%}
+                    </span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
       </div>
     {%- endif -%}
   {%- endif -%}
 
-  <header class="ng-header{% if sticky %} is-sticky{% endif %}" id="ng-header">
-    <div class="ng-header__inner">
+  <header class="ng-header" id="ng-header">
+    <div class="ng-header__inner container-fluid">
       <a class="ng-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
         {%- if logo != blank -%}
           {{ logo | image_url: width: 400 | image_tag: loading: 'eager', alt: shop.name }}
@@ -419,7 +440,7 @@
       "id": "offer_interval",
       "label": "Rotate interval",
       "min": 2000,
-      "max": 10000,
+      "max": 9000,
       "step": 500,
       "default": 4000,
       "unit": "ms"
@@ -436,6 +457,18 @@
     },
     {
       "type": "color",
+      "id": "color_offers_bg",
+      "label": "Offers bar background",
+      "default": "#d3b566"
+    },
+    {
+      "type": "color",
+      "id": "color_offers_text",
+      "label": "Offers bar text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
       "id": "color_cream",
       "label": "Header background",
       "default": "#fbf8f1"
@@ -443,7 +476,7 @@
     {
       "type": "color",
       "id": "color_plum",
-      "label": "Offers / active nav",
+      "label": "Active nav",
       "default": "#3b2230"
     },
     {

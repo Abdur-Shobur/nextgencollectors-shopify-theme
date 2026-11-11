@@ -35,19 +35,35 @@
     {% endif %}
   {% endstyle %}
 {% endif %}
+{%- liquid
+  assign mobile_height = st.mobile_slideshow_height | default: 'adapt'
+  case mobile_height
+    when 'ratio_16_9'
+      assign mobile_ratio = '16 / 9'
+    when 'ratio_4_3'
+      assign mobile_ratio = '4 / 3'
+    when 'ratio_3_4'
+      assign mobile_ratio = '3 / 4'
+    when 'ratio_1_1'
+      assign mobile_ratio = '1 / 1'
+    else
+      assign mobile_ratio = 'auto'
+  endcase
+-%}
 <section
     id="sf__slideshow-{{ section.id }}"
-    class="relative {{ section.settings.custom_class }} slider-{{ section.id }} home-banner__slideshow {% if section.settings.dots_position != 'bottom' %}sf-slider__pagination--{{ section.settings.dots_position }}{% endif %}"
+    class="relative {{ section.settings.custom_class }} slider-{{ section.id }} home-banner__slideshow home-banner__slideshow--mobile-{{ mobile_height }} {% if section.settings.dots_position != 'bottom' %}sf-slider__pagination--{{ section.settings.dots_position }}{% endif %}"
     data-section-type="slider" data-section-id="{{ section.id }}"
     data-autoplay="{% if request.design_mode %}false{% else %}{{ st.autorotate }}{% endif %}"
     data-autoplay-speed="{{ st.autorotate_speed }}"
     data-enable-arrows="{{ st.show_arrows }}"
     data-enable-dots="{{ st.show_dots }}"
     data-slide-height="{{ section.settings.slideshow_height }}"
+    data-mobile-height="{{ mobile_height }}"
     {% if section.settings.slideshow_height == 'adapt' %}
     data-min-aspect-ratio="{{ min_aspect_ratio }}"
     {% endif %}
-    style="--data-autoplay-speed: {{ st.autorotate_speed }}s; --min-aspect-ratio: {{ min_aspect_ratio }}"
+    style="--data-autoplay-speed: {{ st.autorotate_speed }}s; --min-aspect-ratio: {{ min_aspect_ratio }}; --ng-banner-mobile-ratio: {{ mobile_ratio }};"
 >
     <div class="{{ section.settings.container }}">
         <div id="sf-slider-{{ section.id }}" class="swiper-container">
@@ -79,8 +95,10 @@
                     {% endif %}
 
                     {% assign bg_image = bs.background %}
+                    {% assign has_mobile_image = false %}
                     {% if bs.mb_background != blank %}
                         {% assign bg_image = bs.mb_background %}
+                        {% assign has_mobile_image = true %}
                     {% endif %}
 
                     {% assign video_urls = bs.video | newline_to_br | split: '<br />' %}
@@ -118,8 +136,8 @@
                               <a href="{{ image_link }}" class="sf-slider__link"></a>
                             {% endif %}
 
-                            {% comment %} Image on desktop {% endcomment %}
-                            <div class="hidden md:block">
+                            {% comment %} Desktop media {% endcomment %}
+                            <div class="hidden md:block h-full">
                                 {% if bs.background == blank and bs.video == blank %}
                                     <div class="sf__slide-image sf__slideshow-placeholder absolute inset-0 overflow-hidden">
                                         {% capture current %}{% cycle 1, 2 %}{% endcapture %}
@@ -128,12 +146,24 @@
                                 {% else %}
                                     {% if block.type == 'video_slide' %}
                                         {{ video_bg }}
+                                    {% elsif st.slideshow_height == 'adapt' %}
+                                        {%- if forloop.first -%}{%- assign banner_loading = 'eager' -%}{%- else -%}{%- assign banner_loading = 'lazy' -%}{%- endif -%}
+                                        {%- assign banner_alt = bs.title | default: shop.name -%}
+                                        <div class="sf__slide-image sf__slide-image--desktop relative h-full">
+                                            {{ bs.background | image_url: width: 2400 | image_tag:
+                                              loading: banner_loading,
+                                              sizes: '100vw',
+                                              widths: '750, 1100, 1500, 1780, 2000, 2400',
+                                              class: 'ng-banner-img ng-banner-img--desktop',
+                                              alt: banner_alt
+                                            }}
+                                        </div>
                                     {% else %}
                                         <div
                                             class="sf__slide-bg hidden md:block bg-cover bg-no-repeat bg-center lazyload{% unless forloop.first %} lazypreload{% endunless %} js"
-                                            data-bg="{{ bs.background | img_url: '300x300' }}"
+                                            data-bg="{{ bs.background | image_url: width: 600 }}"
                                             data-bgset="{% render 'bgset', image: bs.background %}"
-                                            data-parent-fit="contain"
+                                            data-parent-fit="cover"
                                             data-sizes="auto"
                                             style="background-position: {{ image_position | default: 'center' }};"
                                             data-image-loading
@@ -147,7 +177,7 @@
                                 {% endif %}
                             </div>
 
-                            {% comment %} Image on mobile {% endcomment %}
+                            {% comment %} Mobile media {% endcomment %}
                             <div class="md:hidden relative">
                                 {% if bg_image == blank and bs.video == blank %}
                                     {% capture current %}{% cycle 1, 2 %}{% endcapture %}
@@ -158,11 +188,19 @@
                                             {{ video_bg }}
                                         </div>
                                     {% else %}
-                                        <div class="sf__slide-image relative">
+                                        {%- if forloop.first -%}{%- assign banner_loading = 'eager' -%}{%- else -%}{%- assign banner_loading = 'lazy' -%}{%- endif -%}
+                                        {%- assign banner_alt = bs.title | default: shop.name -%}
+                                        <div class="sf__slide-image sf__slide-image--mobile relative{% if has_mobile_image %} sf__slide-image--has-mobile-src{% endif %}">
                                             {% if image_link != blank %}
                                               <a href="{{ image_link }}" class="sf-slider__link"></a>
                                             {% endif %}
-                                            {% render 'responsive-image', image: bg_image, image_class: '' %}
+                                            {{ bg_image | image_url: width: 1200 | image_tag:
+                                              loading: banner_loading,
+                                              sizes: '100vw',
+                                              widths: '375, 550, 750, 1100, 1200',
+                                              class: 'ng-banner-img ng-banner-img--mobile',
+                                              alt: banner_alt
+                                            }}
                                         </div>
                                     {% endif %}
                                 {% endif %}
@@ -228,7 +266,7 @@
             {% capture dotColor %}sf__dot-{{section.settings.dots_color}}{% endcapture %}
             {% if section.blocks.size > 1 %}
               {% if st.show_dots or st.show_arrows %}
-                {% render 'slider-controls', absolute: true, show_nav: st.show_arrows, nav_class: 'border border-1', dots_class: dotColor %}
+                {% render 'slider-controls', absolute: true, show_nav: st.show_arrows, container: section.settings.container, nav_class: 'border border-1', dots_class: dotColor %}
               {% endif %}
             {% endif %}
         </div>
@@ -354,6 +392,47 @@
             "content": "Mobile settings"
         },
         {
+            "type": "select",
+            "id": "mobile_slideshow_height",
+            "label": "Mobile slide height",
+            "default": "adapt",
+            "options": [
+                {
+                    "value": "adapt",
+                    "label": "Adapt to image (best with mobile image)"
+                },
+                {
+                    "value": "ratio_16_9",
+                    "label": "Landscape 16:9"
+                },
+                {
+                    "value": "ratio_4_3",
+                    "label": "Landscape 4:3"
+                },
+                {
+                    "value": "ratio_3_4",
+                    "label": "Portrait 3:4"
+                },
+                {
+                    "value": "ratio_1_1",
+                    "label": "Square 1:1"
+                },
+                {
+                    "value": "small",
+                    "label": "Small (40vh)"
+                },
+                {
+                    "value": "medium",
+                    "label": "Medium (50vh)"
+                },
+                {
+                    "value": "large",
+                    "label": "Large (60vh)"
+                }
+            ],
+            "info": "Use Adapt when you upload a dedicated mobile image per slide. Fixed ratios crop the image to fit."
+        },
+        {
             "type": "checkbox",
             "id": "use_content_above",
             "label": "Use content above the image",
@@ -382,13 +461,13 @@
                         "type": "image_picker",
                         "id": "background",
                         "label": "Image on desktop",
-                        "info": "1920 x 900px recommended"
+                        "info": "1920 x 800px recommended (wide landscape)"
                     },
                     {
                         "type": "image_picker",
                         "id": "mb_background",
                         "label": "Image on mobile",
-                        "info": "600 x 480px recommended"
+                        "info": "Upload a separate mobile banner for best results. 800 x 1000px (portrait) or 800 x 600px recommended. Falls back to desktop image if empty."
                     },
                     {
                         "type":"select",
@@ -732,7 +811,7 @@
                         "type": "image_picker",
                         "id": "mb_background",
                         "label": "Image on mobile",
-                        "info": "600 x 480px recommended"
+                        "info": "Upload a separate mobile banner for best results. 800 x 1000px (portrait) or 800 x 600px recommended."
                     },
                     {
                         "type": "header",

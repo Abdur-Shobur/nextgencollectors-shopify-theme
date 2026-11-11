@@ -1,0 +1,221 @@
+/* NextGen reviews — Let customers speak for us */
+
+.ng-reviews {
+  --ng-rv-ink: #231f20;
+  --ng-rv-muted: #6b6560;
+  --ng-rv-line: #e8e4dc;
+  --ng-rv-cream: #fbf8f1;
+  --ng-rv-sand: #f4f1ea;
+  --ng-rv-accent: #d3b566;
+  --ng-rv-star: #e6b422;
+  --ng-rv-card: #ffffff;
+  background: var(--ng-rv-bg, var(--ng-rv-cream));
+  color: var(--ng-rv-ink);
+  padding: clamp(2rem, 5vw, 3.5rem) 0;
+}
+
+.ng-reviews__header {
+  text-align: center;
+  max-width: 40rem;
+  margin: 0 auto 1.75rem;
+}
+
+.ng-reviews__eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ng-rv-muted);
+}
+
+.ng-reviews__title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.ng-reviews__subtitle {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ng-rv-muted);
+}
+
+.ng-reviews__track-wrap {
+  position: relative;
+}
+
+.ng-reviews__track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 0.25rem 0 0.75rem;
+}
+
+.ng-reviews__track::-webkit-scrollbar {
+  display: none;
+}
+
+.ng-reviews__card {
+  flex: 0 0 min(100%, 22rem);
+  scroll-snap-align: start;
+  background: var(--ng-rv-card);
+  border: 1px solid var(--ng-rv-line);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100%;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ng-reviews__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(43, 26, 34, 0.08);
+}
+
+.ng-reviews__stars {
+  display: flex;
+  gap: 0.2rem;
+  color: var(--ng-rv-star);
+}
+
+.ng-reviews__stars svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.ng-reviews__quote {
+  margin: 0;
+  font-size: 0.975rem;
+  line-height: 1.55;
+  color: var(--ng-rv-ink);
+  flex: 1;
+}
+
+.ng-reviews__author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--ng-rv-line);
+}
+
+.ng-reviews__avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--ng-rv-sand);
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--ng-rv-muted);
+}
+
+.ng-reviews__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ng-reviews__meta {
+  min-width: 0;
+}
+
+.ng-reviews__name {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ng-reviews__detail {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: var(--ng-rv-muted);
+  line-height: 1.3;
+}
+
+.ng-reviews__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ng-rv-ink);
+  padding: 0;
+}
+
+.ng-reviews__nav:hover {
+  color: var(--ng-rv-accent);
+}
+
+.ng-reviews__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.ng-reviews__nav--prev {
+  left: -0.25rem;
+}
+
+.ng-reviews__nav--next {
+  right: -0.25rem;
+}
+
+.ng-reviews__nav svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (min-width: 768px) {
+  .ng-reviews__card {
+    flex-basis: calc((100% - 2.5rem) / 3);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .ng-reviews__card {
+    flex-basis: min(85%, 20rem);
+  }
+
+  .ng-reviews__nav {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ng-reviews__track {
+    scroll-behavior: auto;
+  }
+
+  .ng-reviews__card {
+    transition: none;
+  }
+}

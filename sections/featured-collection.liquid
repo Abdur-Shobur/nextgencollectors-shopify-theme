@@ -51,6 +51,9 @@
 {% assign enable_flashsale = section.settings.enable_flashsale %}
 {% assign show_countdown = section.settings.show_countdown %}
 
+{%- if card_style == '5' -%}
+  {{ 'ng-product-card.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 <section
     id="sf__featured-collection-{{ section.id }}"
     data-section-type="featured-collection"
@@ -71,7 +74,7 @@
         data-infinite-load="{{ infinite_load }}"
         data-max-pages="{{ max_pages }}"
     {% endif %}
-    class="sf__featured-collection {{ section.settings.custom_class }}{% if section.settings.button_text == blank %} show__more-disabled{% endif %}"
+    class="sf__featured-collection {{ section.settings.custom_class }}{% if section.settings.button_text == blank %} show__more-disabled{% endif %}{% if card_style == '5' %} ng-fc--style-5{% endif %}"
     data-enable-flashsale="{{ enable_flashsale }}"
     data-enable-countdown="{{ show_countdown }}"
     data-collection-id="{{ collection.id }}"
@@ -102,6 +105,17 @@
             </div>
           </a>
 
+        </div>
+      {% elsif section.settings.header_layout == 'split' %}
+        <div class="ng-fc-header">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="ng-fc-header__title">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.button_text != blank -%}
+            <a class="ng-fc-header__link" href="{{ collection.url | default: routes.all_products_collection_url }}">
+              {{ section.settings.button_text }}
+            </a>
+          {%- endif -%}
         </div>
       {% else %}
         {% render 'index-section-header', section_settings: section.settings %}
@@ -208,6 +222,22 @@
             {
                 "value": "center",
                 "label": "Center"
+            }
+        ]
+    },
+    {
+        "type": "select",
+        "id": "header_layout",
+        "label": "Header layout",
+        "default": "default",
+        "options": [
+            {
+                "value": "default",
+                "label": "Default"
+            },
+            {
+                "value": "split",
+                "label": "Title left + View all right"
             }
         ]
     },
@@ -324,6 +354,10 @@
             {
                 "value": "4",
                 "label": "Style 4"
+            },
+            {
+                "value": "5",
+                "label": "Style 5 (NextGen card)"
             }
         ]
     },
