@@ -1,0 +1,1 @@
+# nextgencollectors-shopify-theme
