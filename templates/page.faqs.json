@@ -1,0 +1,95 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-faqs",
+      "blocks": {
+        "accordion_Wp8CUq": {
+          "type": "accordion",
+          "settings": {
+            "title": "1.Can I change or cancel my order once it has been placed?",
+            "content": "<p>We are unable to change or cancel an order once it has been placed.<br/></p>",
+            "open": false
+          }
+        },
+        "accordion_aQtqzd": {
+          "type": "accordion",
+          "settings": {
+            "title": "2.How long will my order take to arrive?",
+            "content": "<p>After your order has been processed, please allow 14-17 days for your order to arrive (varies by location).<br/><br/>(However, *PLEASE* make sure your shipping address information is entirely correct to ensure a faster, safer delivery!)</p>",
+            "open": false
+          }
+        },
+        "accordion_VejgYU": {
+          "type": "accordion",
+          "settings": {
+            "title": "3.How can I track my order?",
+            "content": "<p>Tracking will become available 2-3 days after your order has been placed.</p>",
+            "open": false
+          }
+        },
+        "accordion_Ear4Ec": {
+          "type": "accordion",
+          "settings": {
+            "title": "4.How long does it take for my order to be processed?",
+            "content": "<p>Orders are processed within 2-3 days.<br/><br/>*We do not process orders on weekends.*<br/></p>",
+            "open": false
+          }
+        },
+        "accordion_MNFH4q": {
+          "type": "accordion",
+          "settings": {
+            "title": "5.When will my order be shipped out?",
+            "content": "<p>Once you have placed your order, please allow 2-3 days for your order to be shipped out.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "accordion_Wp8CUq",
+        "accordion_aQtqzd",
+        "accordion_VejgYU",
+        "accordion_Ear4Ec",
+        "accordion_MNFH4q"
+      ],
+      "settings": {
+        "container": "container",
+        "menu": ""
+      }
+    },
+    "1761413220e73fdcaa": {
+      "type": "apps",
+      "blocks": {
+        "trusted_faq_faq_block_X9t4YF": {
+          "type": "shopify://apps/trusted-faq/blocks/faq-block/3c13bf97-def2-4442-b06f-a64e813a2392",
+          "settings": {
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "trusted_faq_faq_block_X9t4YF"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1761413220e73fdcaa"
+  ]
+}

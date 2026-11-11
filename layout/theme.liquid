@@ -1,0 +1,118 @@
+{%- capture body_classes -%}
+template-{{ template.name | handle }} {{ template.name }}-{{ template.suffix }} {{ template.name | append: '-' | append: handle }} {% if cart.item_count == 0 %}cart-empty{% endif %}
+{%- endcapture -%}
+
+{% liquid
+  assign enable_rtl = settings.enable_rtl
+  assign language_support_rtl = settings.language_support_rtl
+  if enable_rtl and language_support_rtl != blank
+    assign shop_locale = localization.language.iso_code
+    assign language_support_rtl_list = language_support_rtl | split: ','
+    assign is_rtl = language_support_rtl_list | where: shop_locale
+    if is_rtl.size > 0
+      assign enable_rtl = true
+    else
+      assign enable_rtl = false
+    endif
+  endif
+%}
+<!doctype html>
+<html
+  class="no-js supports-no-cookies"
+  lang="{{ request.locale.iso_code }}"
+  style="--sf-page-opacity: 0;"
+  data-template="{{ template.name }}"
+  {% if enable_rtl %}
+    dir="rtl"
+  {% endif %}
+>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+
+    {% render 'preload' %}
+    {% render 'SEO' %}
+    {% render 'critical-scripts' %}
+    {% render 'social-meta-tags' %}
+    {% render 'font-face' %}
+    {% render 'critical-css' %}
+    {% render 'style-tags' %}
+    {% render 'custom-code-head' %}
+
+    {% include 'limespot' %}
+    {% render 'ultimate-datalayer' %}
+
+    {% comment %} {% render 'content_for_header' %} {% endcomment %}
+    {{ content_for_header }}
+    {% render 'rafp-render' %}
+    <!-- roartheme: FontPicker app -->
+    {% include 'MonsterUpsell-shopify-prod-head' %}
+    {% render 'gsf-conversion-pixels' %}
+
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WXBH5PHS');</script>
+<!-- End Google Tag Manager -->
+
+  </head>
+
+  <body
+    id="sf-theme"
+    style="opacity: 0;"
+    class="{{ body_classes }} relative min-h-screen{% if customer %} customer-logged-in{% endif %}"
+    {% if template.name == 'product' %}
+      data-product-id="{{ product.id }}"
+    {% endif %}
+  >
+    {% render 'theme-data' %}
+    {% section 'header' %}
+
+    <main role="main" id="MainContent">
+      {% render 'scroll-top-button' %}
+      {{ content_for_layout }}
+<limespot></limespot>
+      <div id="cart-drawer-container"></div>
+    </main>
+
+    {% section 'ss-footer-4' %}
+    {% section 'mobile-sticky-bar' %}
+
+    {% render 'custom-code-body' %}
+    {% render 'foxkit-messenger' %}
+    {% render 'script-tags' %}
+    {% include 'elspw_include' %}
+    {% include 'MonsterUpsell-shopify-prod-body' %}
+    <!-- PF EDT START -->
+    <script type="text/javascript">
+      {%- if content_for_header contains 'shopify-product-customizer' -%}
+          {%- if product -%}
+              {%- if product.first_available_variant -%}
+                  var pfProductId = {{ product.metafields.printful.is_synced | json }};
+                  var pfEdt = {{ shop.metafields.printful.is_edt_enabled | json }};
+                  var pfEdtTextColor = {{ shop.metafields.printful.edt_text_color | json }};
+                  var pfEdtBackgroundColor = {{ shop.metafields.printful.edt_background_color | json }};
+                  var pfEdtBorderColor = {{ shop.metafields.printful.edt_border_color | json }};
+                  var pfEdtUseDefaultStyling = {{ shop.metafields.printful.edt_default_style | json }};
+                  var pfEdtTextAlignment = {{ shop.metafields.printful.edt_text_alignment | json }};
+                  var pfEdtFlags = {
+                      US: "{{ 'US.svg' | asset_url }}",CA: "{{ 'CA.svg' | asset_url }}",ES: "{{ 'ES.svg' | asset_url }}",LV: "{{ 'LV.svg' | asset_url }}",GB: "{{ 'GB.svg' | asset_url }}",DE: "{{ 'DE.svg' | asset_url }}",FR: "{{ 'FR.svg' | asset_url }}",AU: "{{ 'AU.svg' | asset_url }}",JP: "{{ 'JP.svg' | asset_url }}",NZ: "{{ 'NZ.svg' | asset_url }}",IT: "{{ 'IT.svg' | asset_url }}",BR: "{{ 'BR.svg' | asset_url }}",KR: "{{ 'KR.svg' | asset_url }}",NL: "{{ 'NL.svg' | asset_url }}",GB: "{{ 'GB.svg' | asset_url }}",US: "{{ 'US.svg' | asset_url }}",
+                  };
+              {%- else -%}
+                  var pfEdt = 0;
+              {%- endif -%}
+          {%- endif -%}
+      {%- endif -%}
+    </script>
+    <!-- PF EDT END -->
+
+    {% render 'globo.preorder.custom' %}
+    {% render 'gm-custom' %}
+    {%- capture productTemplate -%}{% render 'globo.filter.product', themeTranslation: shop.metafields.globoFilter.themeTranslation.value[request.locale.iso_code] %}{%- endcapture -%}{%- unless productTemplate contains 'Liquid error' -%}<script id="gspfProduct" type="template/html">{{- productTemplate | replace: "script>", "scripttag>" -}}</script>{%- endunless -%}
+  </body>
+</html>

@@ -1,0 +1,117 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-about-us",
+      "disabled": true,
+      "settings": {}
+    },
+    "d731caf0-d90f-4ebd-b20d-68c738cad948": {
+      "type": "image-with-text-2",
+      "settings": {
+        "container": "w-full",
+        "hero_size": "large",
+        "show_overlay": true,
+        "image": "shopify://shop_images/Untitled_design_68.png",
+        "bg_position": "center",
+        "image_link": "",
+        "parallax": false,
+        "content_in_container": false,
+        "content_position": "left middle",
+        "text_alignment": "left",
+        "text_size": "large",
+        "text_color": "white",
+        "title": "ABOUT US",
+        "subtitle": "",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "use_content_above": false,
+        "custom_class": ""
+      }
+    },
+    "ed537ab2-efba-427f-a2e6-26d7eb9c0560": {
+      "type": "custom-content",
+      "blocks": {
+        "template--15936555679883__ed537ab2-efba-427f-a2e6-26d7eb9c0560-text-1": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "subheading": "",
+            "text": "<p>Welcome to Wild Trail Wanderer, where the spirit of adventure meets the comfort of the great outdoors. Founded by a group of passionate outdoor enthusiasts, we understand the importance of having reliable and high-quality camping equipment to make your wilderness experience unforgettable.</p>",
+            "width": "100%",
+            "alignment": "center",
+            "align_text": "center",
+            "text_size": "medium",
+            "text_color": "white",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "sf__btn-primary",
+            "button_size": "",
+            "block_custom_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--15936555679883__ed537ab2-efba-427f-a2e6-26d7eb9c0560-text-1"
+      ],
+      "custom_css": [
+        "P {color: white;}"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "background_color": "#4c5c4e",
+        "gap": 30,
+        "use_scroll_mobile": false,
+        "gap_mobile": 16,
+        "custom_class": ""
+      }
+    },
+    "image_with_text_E7mmxL": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "container": "container-fluid",
+        "background_color": "rgba(0,0,0,0)",
+        "item_gap": 100,
+        "item_gap_mobile": 30,
+        "image": "shopify://shop_images/8.png",
+        "link": "",
+        "layout": "right",
+        "image_column_size": "6",
+        "hover_effect": false,
+        "title": "",
+        "sub_title": "",
+        "text": "<p>To us, nature is not just a setting, unimportant set dressing we act within. Nature is a gift, granted to each and every person from the moment they take their first step. From the grand spectacles of our National Parks, to the subtle beauty of every pond, creek, and forest, the love that embodies our natural world exists all around us, inspiring us every day.</p><p></p><p>Just as nature is a gift, we hope to give fellow nature lovers the gift of tangible expertise. Within this store, you will find tested, quality products made of the finest materials, ready for your next adventure. Whether you’re an avid angler, a weekend camper, a hiking enthusiast, or just planning your next escape into the outdoors, we have what you need to enhance your experience. </p><p></p><p>More than just providing your average outdoors goods, we strive to give you eccentric, yet highly practical products you’ll only ever see here. Through looking at the past, present, and future of outdoor recreation, we strive to create unique products for wholly unique experiences. </p>",
+        "text_size": "medium",
+        "content_alignment": "center",
+        "button_label": "FIND YOUR TRAIL",
+        "button_link": "shopify://collections/all",
+        "button_style": "sf__btn-primary",
+        "button_size": "",
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "d731caf0-d90f-4ebd-b20d-68c738cad948",
+    "ed537ab2-efba-427f-a2e6-26d7eb9c0560",
+    "image_with_text_E7mmxL"
+  ]
+}

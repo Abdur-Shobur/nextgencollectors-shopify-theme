@@ -1,0 +1,75 @@
+{% assign bg_color = section.settings.bg_color %}
+
+<section
+  class="sf-product__section sf-product__section-tabs"
+  data-section-type="tabs"
+  data-section-id="{{ section.id }}"
+  style="background-color: {{ bg_color }}"
+>
+  <div class="{{ section.settings.container }}">
+    <div class="sf-tabs sf-tabs--responsive sf-pdt__accordion">
+      {%- comment -%} Render our custom tabs snippet {%- endcomment -%}
+      {% render 'ngc-custom-tabs' %}
+    </div>
+  </div>
+</section>
+
+<script>
+  window.themeScriptURLs.tabs.required = true
+</script>
+
+{% schema %}
+{
+  "name": "Product tabs",
+  "settings": [
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container type",
+      "default": "container",
+      "options": [
+        { "value": "container", "label": "Fixed width" },
+        { "value": "container-fluid", "label": "Stretched width" },
+        { "value": "container-narrow", "label": "Narrow width" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color"
+    },
+    {
+      "type": "checkbox",
+      "id": "default_open",
+      "label": "Default open first tab on mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "shared_tab_enabled",
+      "label": "Show shared tab on all products",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shared_tab_header",
+      "label": "Shared tab header",
+      "default": "More Info"
+    },
+    {
+      "type": "richtext",
+      "id": "shared_tab_content",
+      "label": "Shared tab content",
+      "default": "<p>Here’s some info that’s the same on every product.</p>"
+    }
+  ],
+  "blocks": [],
+  "max_blocks": 1,
+  "presets": [
+    {
+      "name": "Product tabs",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}

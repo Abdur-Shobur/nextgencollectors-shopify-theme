@@ -1,0 +1,207 @@
+{% comment %}
+    Renders a product form
+
+    Accepts:
+    - section_id: {String} Identifier of the section (required)
+    - product: {Object} Product Liquid object (required)
+    - current_variant: {String} Current (required)
+    - enable_dynamic_checkout: {Boolean} Show the dynamic checkout button (optional)
+    - show_quantity_selector: {Boolean} Show the quantity selector (optional)
+    - show_instant_quantity: {Boolean} Show instant quantity buttons after submitting the form (optional)
+
+    Usage:
+    {% render 'product-form',
+      section_id: section.id,
+      product: product,
+      current_variant: product.selected_or_first_available_variant,
+      enable_dynamic_checkout: section.settings.enable_dynamic_checkout,
+      show_quantity_selector: section.settings.show_quantity_selector,
+    %}
+{% endcomment %}
+
+{%- capture form_id -%}product-form-{{product.id}}__{{ "now" | date: "%L" }}{%- endcapture -%}
+{% if enableCardButton == nil %}
+    {% assign enableCardButton = true %}
+{% endif %}
+
+{%- form 'product', product, class: 'product-form form', novalidate: 'novalidate', data-product-id: product.id, data-product-handle: product.handle, id: form_id -%}
+    <div class="form__error-message-wrapper hidden" data-error-message-wrapper role="alert">
+        <span class="hidden">{{ 'general.accessibility.error' | t }} </span>
+        <span class="form__error-message"
+              data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
+    </div>
+
+    <!-- existing variant id input (keeps theme behaviour) -->
+    <input hidden name="id" required value="{{ product.selected_or_first_available_variant.id }}">
+
+    {%- comment -%}
+      Hidden line-item property to carry preorder date from product/variant metafield
+      into the order. Value stored as ISO YYYY-MM-DD (or empty string if no date).
+      Namespace/key used in this example: product.metafields.preorder.release_date
+      Change the namespace/key if you used a different definition.
+    {%- endcomment -%}
+    <input
+      type="hidden"
+      name="properties[Preorder date]"
+      id="preorder-date-property"
+      value="{{ product.metafields.preorder.release_date | date: '%Y-%m-%d' | default: '' }}" />
+
+    <!-- Visible preorder date for customers (will be populated/updated by JS) -->
+    <div id="preorder-date-display" class="preorder-date text-sm mt-2" aria-live="polite" style="display:none;"></div>
+
+    {%- unless product.has_only_default_variant -%}
+      <div class="product-options">
+        {% render 'product-option', product: product %}
+      </div>
+    {%- endunless -%}
+
+    <div class="product-form__actions" data-cart-actions>
+      {% if show_quantity_selector == true %}
+        <label class="prod__option-label prod__option-label__quantity font-medium hidden md:block">
+          {{ 'products.product.quantity' | t }}
+        </label>
+      {% endif %}
+      <div class="flex flex-wrap items-end">
+        {% if show_quantity_selector == true %}
+          <div class="form__input-wrapper form__input-wrapper--select mr-5 w-32" data-quantity-input-wrapper>
+            <label class="prod__option-label font-medium md:hidden mb-4">
+              {{ 'products.product.quantity' | t }}
+            </label>
+            {% render 'product-qty-input' %}
+          </div>
+        {% endif %}
+        {% if enableCardButton %}
+          {% assign btn_class = 'sf__btn-primary' %}
+          {% if enable_dynamic_checkout %}
+            {% assign btn_class = 'sf__btn-secondary' %}
+          {% endif %}
+          {% if section.settings.hide_atc_button != true %}
+            {% render 'product-atc', class: btn_class, product: product %}
+          {% endif %}
+          {% if section.settings.show_atwl and section.settings.layout == 'layout-7' %}
+            <div class="ml-2 hidden md:block">{% render 'tooltip', type: 'wishlist', class_name: 'sf__tooltip-top' %}</div>
+          {% endif %}
+        {% endif %}
+        {% if enable_dynamic_checkout %}
+          <div class="prod__dynamic_checkout buy-one-click{% if section.settings.hide_atc_button != true %} w-full mt-4{% else %} flex-1{% endif %}">
+            {{ form | payment_button }}
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+    <div class="prod__form-error mt-4"></div>
+
+    {%- comment -%}
+      Variant -> preorder date mapping rendered for JS lookup.
+      We render as JSON: "variant_id": "YYYY-MM-DD" or "".
+      If the date is product-level only, the hidden input above already contains it,
+      but the mapping will still safely provide variant-specific values if present.
+    {%- endcomment -%}
+    <script type="text/javascript">
+      window.variantPreorderDates = {
+        {%- for variant in product.variants -%}
+          "{{ variant.id }}": {% if variant.metafields.preorder.release_date %}"{{ variant.metafields.preorder.release_date | date: '%Y-%m-%d' }}"{% else %}""{% endif %}{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      };
+    </script>
+
+    <script type="text/javascript">
+      (function () {
+        // Helpers
+        function safeGet(id) { return document.getElementById(id); }
+        function formatIsoToAustralian(iso) {
+          if (!iso) return '';
+          var parts = iso.split('-');
+          if (parts.length !== 3) return iso;
+          return parts[2] + '-' + parts[1] + '-' + parts[0];
+        }
+
+        var propInput = safeGet('preorder-date-property');
+        var displayEl = safeGet('preorder-date-display');
+        var mapping = window.variantPreorderDates || {};
+
+        function setPreorderForVariantId(variantId) {
+          if (!propInput) return;
+          var val = mapping[String(variantId)];
+          // Update hidden property (ISO format or empty)
+          propInput.value = (val && val !== "null") ? val : '';
+
+          // Update visible display
+          if (displayEl) {
+            var iso = propInput.value || '';
+            if (iso) {
+              displayEl.textContent = 'Estimated dispatch: ' + formatIsoToAustralian(iso);
+              displayEl.style.display = 'block';
+            } else {
+              displayEl.textContent = '';
+              displayEl.style.display = 'none';
+            }
+          }
+        }
+
+        // Attempt 1: select[name="id"] (standard Shopify)
+        var variantSelect = document.querySelector('select[name="id"]');
+        if (variantSelect) {
+          setPreorderForVariantId(variantSelect.value);
+          variantSelect.addEventListener('change', function (e) {
+            setPreorderForVariantId(e.target.value);
+          });
+          return;
+        }
+
+        // Attempt 2: input[name="id"] (some themes update value programmatically)
+        var variantInput = document.querySelector('input[name="id"]');
+        if (variantInput) {
+          setPreorderForVariantId(variantInput.value);
+
+          // Watch for attribute changes (MutationObserver) or fallback to polling
+          try {
+            var observer = new MutationObserver(function(mutations) {
+              mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+                  setPreorderForVariantId(variantInput.value);
+                }
+              });
+            });
+            observer.observe(variantInput, { attributes: true, attributeFilter: ['value'] });
+          } catch (err) {
+            var lastVal = variantInput.value;
+            setInterval(function () {
+              if (variantInput.value !== lastVal) {
+                lastVal = variantInput.value;
+                setPreorderForVariantId(lastVal);
+              }
+            }, 500);
+          }
+
+          return;
+        }
+
+        // Attempt 3: clickable swatches/buttons with data-variant-id attribute
+        document.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-variant-id]');
+          if (btn) {
+            var vid = btn.getAttribute('data-variant-id');
+            if (vid) setPreorderForVariantId(vid);
+          }
+        });
+
+        // Safety: initial populate from existing hidden input or mapping for selected variant
+        try {
+          var initialId = (variantSelect && variantSelect.value) || (variantInput && variantInput.value) || propInput.value || '';
+          if (initialId) setPreorderForVariantId(initialId);
+          else if (propInput && propInput.value) {
+            // show product-level date if set server-side
+            if (displayEl && propInput.value) {
+              displayEl.textContent = 'Estimated dispatch: ' + formatIsoToAustralian(propInput.value);
+              displayEl.style.display = 'block';
+            }
+          }
+        } catch (err) {
+          // silently fail safe
+        }
+      })();
+    </script>
+
+{%- endform -%}

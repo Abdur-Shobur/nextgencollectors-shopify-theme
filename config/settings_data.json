@@ -1,0 +1,651 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "favicon": "shopify://shop_images/fav_1.png",
+    "container_width": 1430,
+    "container_fluid_width": 1620,
+    "container_fluid_offset": 35,
+    "color_primary": "#d3b566",
+    "color_main_bg": "#ffffff",
+    "color_field_bg": "#ffffff",
+    "color_body_text": "#4e4e4e",
+    "color_heading_text": "#4e4e4e",
+    "color_sub_text": "#4e4e4e",
+    "color_text_link": "#4e4e4e",
+    "color_text_link_hover": "#d3b566",
+    "color_btn_bg": "#d3b566",
+    "color_btn_bg_hover": "#d2bd83",
+    "color_btn_text": "#ffffff",
+    "color_btn_text_hover": "#ffffff",
+    "product_title_color": "#4e4e4e",
+    "prod_regular_price_color": "#4e4e4e",
+    "prod_desc_color": "#4e4e4e",
+    "color_annoucement_bg": "#d3b566",
+    "color_annoucement_text": "#ffffff",
+    "color_topbar_bg": "#445045",
+    "color_topbar_text": "#ffffff",
+    "color_header_bg": "#ffffff",
+    "color_header_link": "#4e4e4e",
+    "color_header_transparent": "#fff",
+    "color_cart_wishlist_count": "#ffffff",
+    "bg_cart_wishlist_count": "#d3b566",
+    "color_menu_bar_bg": "#ffffff",
+    "color_menu_bar_text": "#000000",
+    "color_footer_bg": "#f5f5f5",
+    "color_footer_text": "#4e4e4e",
+    "color_footer_subtext": "#4e4e4e",
+    "color_footer_link": "#4e4e4e",
+    "color_footer_link_hover": "#d3b566",
+    "color_footer_bg_mb": "#f5f5f5",
+    "color_footer_bottom_bg": "#f5f5f5",
+    "color_footer_bottom_text": "#4e4e4e",
+    "color_footer_bottom_bg_mb": "#f5f5f5",
+    "color_border": "#000000",
+    "img_overlay_opacity": 19,
+    "tooltip_text_color": "#000000",
+    "type_base_font": "avenir_next_n5",
+    "use_custom_font_body": false,
+    "custom_body_font": "https://cdn.shopify.com/s/files/1/0731/0891/4396/files/ProximaNova-Regular.otf?v=1733322268",
+    "custom_body_weight": "500",
+    "type_base_size": 16,
+    "type_base_line_height": 22,
+    "type_header_font": "avenir_next_n6",
+    "use_custom_font_heading": false,
+    "custom_heading_font": "https://cdn.shopify.com/s/files/1/0731/0891/4396/files/Proxima_Nova_Bold.otf?v=1733322268",
+    "custom_heading_weight": "600",
+    "type_header_base_size": 36,
+    "type_header_spacing": 0,
+    "btn_uppercase_text": true,
+    "btn_base_size": 16,
+    "btn_border_radius": 0,
+    "btn_weight": "600",
+    "pcard_layout": "1",
+    "pcard_alignment": "center",
+    "pcard_image_ratio": "1/1",
+    "show_swatch_option": false,
+    "show_wishlist_button": false,
+    "show_compare_button": false,
+    "on_sale_badge": "show_percentage",
+    "show_badge_sale": true,
+    "uppercase_prd_name": true,
+    "variant_option_design_default": "dropdown",
+    "variant_option_title1": "Размер",
+    "variant_option_design1": "button",
+    "variant_option_design2": "dropdown",
+    "product_colors": "red: #FF6961,\nyellow: #FDDA76,\nblack: #000000,\nblack band: #000000,\nblue: #8DB4D2,\ngreen: #C1E1C1,\npurple: #B19CD9,\nsilver: #EEEEEF,\nwhite: #FFFFFF,\nbrown: #836953,\nlight brown: #B5651D,\ndark turquoise: #23cddc,\norange: #FFB347,\ntan: #E9D1BF,\nviolet: #B490B0,\npink: #FFD1DC,\ngrey: #E0E0E0,\nsky: #96BDC6,\npale leaf: #CCD4BF,\nlight blue: #b1c5d4,\ndark grey: #aca69f,\nbeige: #EBE6DB,\nbeige band: #EED9C4,\ndark blue: #063e66,\ncream: #FFFFCC,\nlight pink: #FBCFCD,\nmint: #bedce3,\ndark gray: #3A3B3C,\nrosy brown: #c4a287,\nlight grey:#D3D3D3,\ncopper: #B87333,\nrose gold: #ECC5C0,\nnight blue: #151B54,\ncoral: #FF7F50,\nlight purple: #C6AEC7",
+    "filter_color1": "gingham",
+    "filter_color2": "flannel",
+    "contact_phone_number": "",
+    "contact_email": "",
+    "social_twitter_link": "",
+    "social_facebook_link": "",
+    "social_pinterest_link": "",
+    "social_instagram_link": "",
+    "social_youtube_link": "",
+    "social_linkedin_link": "",
+    "enable_cart_drawer": true,
+    "cart_estimate_shipping": false,
+    "search_by_body": false,
+    "popular_search_queries": "Gold bar, Silver Coins, Perth Mint, Ramint",
+    "wishlist_page": "",
+    "product_compare_page": "",
+    "gm_api": "",
+    "instagram_token": "",
+    "custom_css": ".sf__footer-block-newsletter .sf__footer-block-title {\n  font-size: 36px;\n  line-height: 52px;\n  margin-bottom: 4px;\n  font-weight: 400;\n}\n.sf__index-instagram .section-my {\n  margin-bottom: 0;\n}\n.sf-footer .sf__footer-form-newsletter input.form-control {\n  background: #fff;\n}\n.sf-footer .sf__newsletter-block-desc {\n  margin-bottom: 28px;\n}\n.sf__index-testimonial .testimonial__item .testimonial__author {\n  font-weight: 500;\n  margin-bottom: 20px;\n}\n.sf__footer-block-our_store .social-media-links {\n  margin: 0px -28px;\n  margin-top: 25px;\n}\n.sf__footer-block-our_store .social-media-links a {\n  padding: 0 20px;\n}\n@media (max-width: 1279px) {\n  .sf__index-collection-list .rte br,\n  .sf__index-collection-list .section__description {\n    display: none;\n  }\n  .sf__index-collection-list .section__heading {\n    text-align: center;\n  }\n  .sf__footer-block-newsletter .sf__footer-block-title {\n    font-size: 24px;\n    line-height: 34px;\n  }\n  .sf-footer .sf__newsletter-block-desc {\n    margin-bottom: 0;\n  }\n  .sf__footer-block-our_store .social-media-links a {\n    padding: 0 15px;\n  }\n  .sf__footer-block-our_store .social-media-links {\n    margin: 0px -22px;\n  }\n}\n.sf-footer .sf__footer-form-newsletter input.form-control {\n  border: 1px solid #d4d4d4;\n}\n.sf__index-collection-list .collection-card__info h3 a {\n  transition: all 0.3s;\n}\n.sf__index-collection-list .collection-card__info h3:hover a {\n  color: #999999;\n}\n@media (min-width: 1280px) {\n  .sf__index-collection-list .section__heading {\n    font-size: 42px;\n    line-height: 56px;\n  }\n  .sf__index-collection-list .collection-card--hover-scaling-up:hover .collection-card__image {\n    transform: scale(1.2) translateZ(0);\n  }\n}\n@media (min-width: 1280px) and (max-width: 1535px) {\n  .sf__index-collection-list .sf-column {\n    padding: 0 15px 30px;\n  }\n  .sf__index-collection-list .sf-grid {\n    margin: 0 -15px -30px;\n  }\n}\n@media (max-width: 576px) {\n  .sf__index-slideshow .sf__mobile-button,\n  .sf__index-featured-collection a.sf__btn {\n    width: 100%;\n  }\n  .sf__index-collection-list .sf__ms-wrapper:not(.swiper-container-initialized) .sf-column {\n    width: 42vw !important;\n  }\n  .sf__index-collection-list .collection-card__info h3 a {\n    font-size: 16px;\n  }\n  .sf__index-testimonial .section__heading {\n    text-align: center;\n  }\n}",
+    "review_app": "judge",
+    "checkout_logo_image": "shopify://shop_images/logo_2_f4c05d9f-b2a4-4273-b842-909492b35bab.png",
+    "checkout_logo_position": "center",
+    "checkout_logo_size": "large",
+    "checkout_body_background_color": "#c7b2ab",
+    "checkout_sidebar_background_color": "#c7b2ab",
+    "checkout_accent_color": "#4c5c4e",
+    "checkout_button_color": "#4c5c4e",
+    "sale_popup_collection": "sale",
+    "size_chart": "size-guide",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "offer_shipping": {
+            "type": "offer",
+            "settings": {
+              "message": "Free Standard Shipping on all orders over $100 (Australia Orders Only)",
+              "link": "shopify://pages/free-shipping-promotions-policy"
+            }
+          },
+          "offer_releases": {
+            "type": "offer",
+            "settings": {
+              "message": "New releases drop weekly — shop Latest Releases"
+            }
+          },
+          "nav_home": {
+            "type": "nav_link",
+            "settings": {
+              "label": "Home",
+              "link": "/"
+            }
+          },
+          "nav_latest": {
+            "type": "nav_link",
+            "settings": {
+              "label": "Latest Releases"
+            }
+          },
+          "mega_buy": {
+            "type": "mega_buy",
+            "settings": {
+              "label": "Buy",
+              "metal_heading": "Shop by metal",
+              "metal_1_title": "Gold Collectables",
+              "metal_1_swatch": "gold",
+              "metal_1_link_1_label": "Gold Collectables Coins",
+              "metal_1_link_2_label": "Gold Proof Coins",
+              "metal_2_title": "Silver Collectables",
+              "metal_2_swatch": "silver",
+              "metal_2_link_1_label": "All Silver Collectables",
+              "metal_2_link_2_label": "American Eagles Coins",
+              "metal_2_link_3_label": "Mexican Libertads Coins",
+              "metal_3_title": "Copper",
+              "metal_3_swatch": "copper",
+              "metal_3_link_1_label": "Shop all Copper",
+              "mint_heading": "Shop by mint",
+              "mint_1_mark": "G",
+              "mint_1_label": "Germania Mint",
+              "mint_2_mark": "M",
+              "mint_2_label": "La Casa de Moneda de México",
+              "mint_3_mark": "X",
+              "mint_3_label": "Mint XXI",
+              "mint_4_mark": "S",
+              "mint_4_label": "Scottsdale Mint",
+              "mint_5_mark": "T",
+              "mint_5_label": "T&S",
+              "mint_6_mark": "P",
+              "mint_6_label": "The Perth Mint",
+              "mint_7_mark": "R",
+              "mint_7_label": "The Royal Australian Mint",
+              "mint_8_mark": "U",
+              "mint_8_label": "US Mint",
+              "mint_9_mark": "C",
+              "mint_9_label": "United Crypto States",
+              "series_heading": "Silver series",
+              "series_1_label": "Christmas American Silver Eagles Coins",
+              "series_2_label": "Germania Mint – Rune Series",
+              "series_3_label": "Germania Mint – Norns Coins",
+              "series_4_label": "Mint XXI Coins",
+              "series_5_label": "Scottsdale Mint Coins",
+              "series_6_label": "T&S Coins",
+              "series_7_label": "The Perth Mint Coins",
+              "series_8_label": "The Royal Australian Mint Coins",
+              "series_9_label": "United Crypto States Coins"
+            }
+          },
+          "nav_copper": {
+            "type": "nav_dropdown",
+            "settings": {
+              "label": "Copper",
+              "link_1_label": "Shop all Copper",
+              "link_2_label": "Copper Bars"
+            }
+          },
+          "mega_aus": {
+            "type": "mega_feature",
+            "settings": {
+              "label": "Australian Coins",
+              "links_heading": "Australian Coins",
+              "link_1_label": "Uncirculated $2 Coins - Bundle Page",
+              "link_2_label": "Uncirculated $2 Coins",
+              "link_3_label": "Bluey 2026 5 Coin Folder",
+              "link_4_label": "C-Mint Cards",
+              "featured_heading": "Featured",
+              "featured_1_title": "Uncirculated $2 Coins - Bundle Page"
+            }
+          },
+          "mega_acc": {
+            "type": "mega_feature",
+            "settings": {
+              "label": "Accessories",
+              "links_heading": "Accessories",
+              "link_1_label": "$2 - Display Cases",
+              "link_2_label": "Archival Flips",
+              "link_3_label": "Coin Stands",
+              "link_4_label": "Coin Capsules (Round)",
+              "link_5_label": "Coin Tubes",
+              "link_6_label": "Coin Displays",
+              "link_7_label": "Rectangular Bar Capsules",
+              "featured_heading": "Featured",
+              "featured_1_title": "Display Cases",
+              "featured_2_title": "Rectangular Bar Capsules",
+              "featured_3_title": "Round Coin Capsules"
+            }
+          },
+          "nav_sale": {
+            "type": "nav_sale",
+            "settings": {
+              "label": "Black Friday Sales 2026"
+            }
+          }
+        },
+        "block_order": [
+          "offer_shipping",
+          "offer_releases",
+          "nav_home",
+          "nav_latest",
+          "mega_buy",
+          "nav_copper",
+          "mega_aus",
+          "mega_acc",
+          "nav_sale"
+        ],
+        "custom_css": [],
+        "settings": {
+          "logo": "shopify://shop_images/NextGen2.webp",
+          "logo_max_width": 160,
+          "mobile_logo_max_width": 125,
+          "header_sticky": true,
+          "show_search_icon": true,
+          "show_account_icon": true,
+          "show_cart_icon": true,
+          "show_wishlist_icon": false,
+          "show_compare_icon": false,
+          "show_offers": true,
+          "offer_interval": 4000,
+          "offer_pause_hover": true,
+          "color_cream": "#fbf8f1",
+          "color_plum": "#3b2230",
+          "color_gold": "#c8a55a",
+          "color_gold_text": "#8a6a1f",
+          "color_orange": "#f7941d"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "9812ebf9-2562-4a16-b628-e5ba5074e9a0": {
+            "type": "custom_text",
+            "settings": {
+              "title": "",
+              "image": "shopify://shop_images/NextGen2.webp",
+              "image_max": "190px",
+              "description": "",
+              "width": "25%",
+              "order_first": false,
+              "open_default": false
+            }
+          },
+          "966c4d07-49ca-4b79-b5c6-fb53cd1f37cc": {
+            "type": "menu",
+            "settings": {
+              "menu": "footer",
+              "title": "INFO",
+              "width": "25%",
+              "order_first": false,
+              "open_default": false
+            }
+          },
+          "cc11eb1d-dc60-4d21-910d-c6984c37864f": {
+            "type": "menu",
+            "settings": {
+              "menu": "policies",
+              "title": "POLICIES",
+              "width": "25%",
+              "order_first": false,
+              "open_default": false
+            }
+          },
+          "menu_X3mdHL": {
+            "type": "menu",
+            "settings": {
+              "menu": "main-menu",
+              "title": "COMPLIANCE",
+              "width": "25%",
+              "order_first": false,
+              "open_default": false
+            }
+          },
+          "custom_html_nF6A6L": {
+            "type": "custom_html",
+            "settings": {
+              "title": "<h5>Company & Contact</h5>",
+              "html": "<ul>\n  <li><a href=\"/pages/about-us\">About Us</a></li>\n  <li><a href=\"/pages/contact-us\">Contact Us</a></li>\n  <li><strong>Email Support:</strong> <a href=\"mailto:support@nextgencollectors.com\">support@nextgencollectors.com</a></li>\n  <li>\n    <strong>Mailing Address:</strong>\n    <address style=\"display: inline;\">\n      PO BOX 97, WOODRIDGE QLD 4114\n    </address>\n  </li>\n</ul>",
+              "width": "16%",
+              "order_first": false,
+              "open_default": false
+            }
+          }
+        },
+        "block_order": [
+          "9812ebf9-2562-4a16-b628-e5ba5074e9a0",
+          "966c4d07-49ca-4b79-b5c6-fb53cd1f37cc",
+          "cc11eb1d-dc60-4d21-910d-c6984c37864f",
+          "menu_X3mdHL",
+          "custom_html_nF6A6L"
+        ],
+        "custom_css": [],
+        "settings": {
+          "design": "footer-1",
+          "container": "container-fluid",
+          "bordered": true,
+          "copyright": "© NEXTGEN COLLECTORS",
+          "show_currency_selector": false,
+          "show_language_selector": false,
+          "show_social_links": false,
+          "show_payment_icons": true,
+          "payment_icons_width": 300
+        }
+      },
+      "annoucement": {
+        "type": "annoucement",
+        "settings": {
+          "show_announcement": true,
+          "homepage_only": false,
+          "show_close": false,
+          "message": "Free Standard Shipping on all orders over $100 (Australia Orders Only)",
+          "message_link": "shopify://pages/free-shipping-promotions-policy",
+          "show_divider": false
+        }
+      },
+      "mobile-sticky-bar": {
+        "type": "mobile-sticky-bar",
+        "settings": {
+          "show_mobile_sticky": false,
+          "show_home_icon": true,
+          "show_collection_icon": true,
+          "show_cart_icon": true,
+          "show_search_icon": true,
+          "show_account_icon": false,
+          "show_wishlist_icon": false
+        }
+      },
+      "metal-price-bar": {
+        "type": "metal-price-bar",
+        "settings": {
+          "metal_price_bar_bg_color": "#f5f5f5",
+          "metal_price_bar_text_color": "#333333"
+        }
+      },
+      "ss-footer-4": {
+        "type": "ss-footer-4",
+        "blocks": {
+          "tab_mQDzb8": {
+            "type": "tab",
+            "settings": {
+              "icon": "mobile",
+              "icon_hide": false,
+              "title": "Secure Payment Methods",
+              "text": "<p>We accept <strong>AfterPay, Visa, MasterCard, American Express</strong>, <strong>PayPal</strong>, <strong>Apple Pay</strong>, <strong>Google Pay</strong>, <strong>UnionPay</strong>, <strong>Shop Pay</strong>, <strong>PayID</strong>, and <strong>Bank Transfer</strong>. </p>"
+            }
+          },
+          "tab_zKTGHU": {
+            "type": "tab",
+            "settings": {
+              "icon": "airplane",
+              "icon_hide": false,
+              "title": "Shipping & Delivery",
+              "text": "<p><strong>Domestic:</strong> Australia Post Standard (approx. 3–7 business days) or Express (1–3 business days). Tracking included and Signature on Delivery Optional.</p>"
+            }
+          },
+          "tab_BGAkne": {
+            "type": "tab",
+            "settings": {
+              "icon": "return",
+              "icon_hide": false,
+              "title": "Returns & Refunds",
+              "text": "<p>We stand behind the quality of our products. If an item is faulty, defective, unsafe, or not as described, you may be entitled to a repair, replacement, or refund under Australian Consumer Law. See our detailed <a>Returns Policy</a> for more info.</p>"
+            }
+          }
+        },
+        "block_order": [
+          "tab_mQDzb8",
+          "tab_zKTGHU",
+          "tab_BGAkne"
+        ],
+        "settings": {
+          "logo": "shopify://shop_images/NextGen2_48484811_copy.jpg",
+          "logo_width": 300,
+          "logo_width_mobile": 220,
+          "first_menu_title": "Policies & Compliance",
+          "first_menu": "policies-compliance",
+          "second_menu_title": "Additional Information",
+          "second_menu": "shop-services",
+          "title_custom": false,
+          "title_font": "josefin_sans_n4",
+          "title_size": 16,
+          "title_size_mobile": 16,
+          "title_height": 130,
+          "link_custom": false,
+          "link_font": "josefin_sans_n4",
+          "link_size": 16,
+          "link_size_mobile": 16,
+          "link_height": 200,
+          "use_newsletter": true,
+          "newsletter": "<p>Sign up to get insider deals, new arrival alerts, and collector insights straight to your inbox.</p>",
+          "newsletter_custom": false,
+          "newsletter_font": "josefin_sans_n4",
+          "newsletter_size": 16,
+          "newsletter_size_mobile": 16,
+          "newsletter_height": 150,
+          "input_padding_vertical": 16,
+          "input_padding_horizontal": 10,
+          "input_radius": 0,
+          "input_border_thickness": 1,
+          "input_placeholder": "Email Address",
+          "input_custom": false,
+          "input_font": "josefin_sans_n4",
+          "input_size": 16,
+          "input_size_mobile": 16,
+          "input_height": 100,
+          "submit": "Submit",
+          "submit_custom": false,
+          "submit_font": "josefin_sans_n4",
+          "submit_size": 20,
+          "submit_size_mobile": 16,
+          "submit_height": 100,
+          "submit_padding_vertical": 14,
+          "submit_padding_horizontal": 16,
+          "submit_radius": 0,
+          "submit_border_thickness": 1,
+          "submit_full": false,
+          "title": "",
+          "second_title": "Get In Touch",
+          "main_title_custom": false,
+          "main_title_font": "josefin_sans_n4",
+          "main_title_size": 30,
+          "main_title_size_mobile": 30,
+          "main_title_height": 130,
+          "text": "<p>NextGen Collectors is your trusted online-only source for numismatic collectable coins, and Australian currency—offering competitive prices and strict authenticity by sourcing from Authorised distributors of world mints.</p>",
+          "second_text": "<ul><li>Email Us:<br/><a href=\"mailto:support@nextgencollectors.com\">info@nextgencollectors.com</a> (General inquiries)</li><li>_________________________________</li><li>Mailing Address:<br/>NextGen Collectors<br/>PO BOX 97 WOODRIDGE<br/>QLD 4114 Australia</li><li>_________________________________</li><li><h6>Contact Us Page:<br/><a href=\"/pages/contact-us\" title=\"Contact Us\">Click Here</a></h6></li></ul>",
+          "text_custom": false,
+          "text_font": "josefin_sans_n4",
+          "text_size": 14,
+          "text_size_mobile": 16,
+          "text_height": 130,
+          "copy": "<p>All Rights Reserved © NextGen Collectors 2025  |  <a href=\"/pages/terms-and-conditions\" title=\"Terms and Conditions\">Terms & Conditions </a> |  <a href=\"/pages/privacy-policy\" title=\"Privacy Policy\">Privacy Policy </a> |  <a href=\"/pages/contact-us\" title=\"Contact Us\">Contact Us</a></p>",
+          "copy_custom": false,
+          "copy_font": "josefin_sans_n4",
+          "copy_size": 16,
+          "copy_size_mobile": 14,
+          "copy_height": 130,
+          "icon_size": 24,
+          "icon_size_mobile": 20,
+          "tabs_title_custom": false,
+          "tabs_title_font": "josefin_sans_n4",
+          "tabs_title_size": 17,
+          "tabs_title_size_mobile": 17,
+          "tabs_title_height": 130,
+          "tabs_text_custom": false,
+          "tabs_text_font": "josefin_sans_n4",
+          "tabs_text_size": 16,
+          "tabs_text_size_mobile": 16,
+          "tabs_text_height": 130,
+          "use_payments": true,
+          "newsletter_color": "#ffffff",
+          "input_border_color": "#ffffff",
+          "input_color": "#000000",
+          "input_placeholder_color": "#cecece",
+          "submit_color": "#000000",
+          "submit_hover_color": "#ffffff",
+          "submit_bg_color": "#ffffff",
+          "submit_bg_hover_color": "#e6e6e6",
+          "submit_border_color": "#ffffff",
+          "submit_border_hover_color": "#e6e6e6",
+          "title_color": "#ffffff",
+          "link_color": "#ffffff",
+          "link_hover_color": "#ffffff",
+          "tabs_title_color": "#ffffff",
+          "tabs_text_color": "#ffffff",
+          "tabs_border_color": "#ffffff",
+          "text_color": "#ffffff",
+          "main_title_color": "#ffffff",
+          "copy_color": "#ffffff",
+          "background_color": "#616161",
+          "background_gradient": "",
+          "border_color": "#ffffff",
+          "margin_top": 0,
+          "margin_bottom": 0,
+          "padding_top": 36,
+          "padding_bottom": 36,
+          "padding_horizontal": 5,
+          "padding_horizontal_mobile": 1.5,
+          "full_width": false,
+          "content_width": 100,
+          "border_thickness": 0,
+          "lazy": true
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "13549935337288218858": {
+        "type": "shopify://apps/labeler-product-labels/blocks/app-embed/38a5b8ec-f58a-4fa4-8faa-69ddd0f10a60",
+        "disabled": false,
+        "settings": {}
+      },
+      "15255627403292782234": {
+        "type": "shopify://apps/easy-tabs-product-tabs/blocks/easytabs-embed-product-widget/118e2a90-d31f-4cdf-b5c9-747e2bddd19a",
+        "disabled": false,
+        "settings": {
+          "placement_selector": "",
+          "multiple_widgets": false
+        }
+      },
+      "6097499278999377719": {
+        "type": "shopify://apps/globo-mega-menu/blocks/app-embed/7a00835e-fe40-45a5-a615-2eb4ab697b58",
+        "disabled": false,
+        "settings": {}
+      },
+      "15181020662106344915": {
+        "type": "shopify://apps/judge-me-reviews/blocks/popup_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      },
+      "12120936241911852800": {
+        "type": "shopify://apps/judge-me-reviews/blocks/reviews_tab/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {
+          "position": "right"
+        }
+      },
+      "14171380182093092491": {
+        "type": "shopify://apps/trusted-faq/blocks/product-faq-embed/3c13bf97-def2-4442-b06f-a64e813a2392",
+        "disabled": false,
+        "settings": {
+          "css_selector": "",
+          "custom_css": ""
+        }
+      },
+      "10405695140724852225": {
+        "type": "shopify://apps/trusted-faq/blocks/flyout-embed/3c13bf97-def2-4442-b06f-a64e813a2392",
+        "disabled": false,
+        "settings": {}
+      },
+      "13768625480086291342": {
+        "type": "shopify://apps/forms/blocks/forms/8744a304-fcb1-4347-b211-bb6b4759a76a",
+        "disabled": false,
+        "settings": {}
+      },
+      "5439026248262864547": {
+        "type": "shopify://apps/preorder-globo/blocks/app-embed/e547a0ad-8212-4bcc-b02f-761faa9b8af2",
+        "disabled": false,
+        "settings": {}
+      },
+      "14710812113501315912": {
+        "type": "shopify://apps/kor-order-limit-quantity/blocks/app-embed/143c1e59-4c01-4de6-ad3e-90b86ada592d",
+        "disabled": false,
+        "settings": {}
+      },
+      "1967102994182284862": {
+        "type": "shopify://apps/paypal-pay-later-messaging/blocks/messaging/7f4cb7b9-066b-479a-a35c-56c0fddabee5",
+        "disabled": false,
+        "settings": {
+          "advanced_settings": false,
+          "product_locator": "",
+          "cart_locator": "",
+          "cart_drawer_locator": ""
+        }
+      },
+      "5059203847231188605": {
+        "type": "shopify://apps/smart-filter-search/blocks/app-embed/5cc1944c-3014-4a2a-af40-7d65abc0ef73",
+        "disabled": false,
+        "settings": {
+          "productGridSelector": "",
+          "useCustomQuickviewTemplate": false,
+          "customCss": "",
+          "customProductTemplateLoader": "",
+          "customTreeTemplateLoader": "",
+          "customSortTemplateLoader": "",
+          "customSearchTemplateLoader": "",
+          "themeInfo": "{{theme.id}}"
+        }
+      },
+      "16605207545338212596": {
+        "type": "shopify://apps/aov-ai-bundle/blocks/aov-offer/0335d423-143c-4ad7-b224-99a1db74a9ee",
+        "disabled": false,
+        "settings": {}
+      },
+      "5918445685253060206": {
+        "type": "shopify://apps/bundler/blocks/bundler-script-append/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+        "disabled": false,
+        "settings": {}
+      },
+      "1513253815146976218": {
+        "type": "shopify://apps/omnisend-email-marketing-sms/blocks/app-embed/44704aa2-794f-4c5d-8c8e-039c841158e9",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product",
+          "settings": {}
+        }
+      },
+      "content_for_index": [
+        "featured-collection",
+        "featured-product"
+      ]
+    }
+  }
+}

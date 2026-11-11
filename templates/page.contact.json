@@ -1,0 +1,81 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-contact",
+      "settings": {
+        "container": "container"
+      }
+    },
+    "contact-form": {
+      "type": "contact-form",
+      "blocks": {
+        "textblock_wPBz3M": {
+          "type": "textblock",
+          "settings": {
+            "title": "Contact information",
+            "content": "<ul><li><strong>Email Us:</strong><br/><a href=\"mailto:support@nextgencollectors.com\">Info@nextgencollectors.com</a> (General inquiries)</li><li></li></ul>"
+          }
+        },
+        "textblock_r3NddG": {
+          "type": "textblock",
+          "settings": {
+            "title": "",
+            "content": "<ul><li><strong>Mailing Address:</strong><br/><em>NextGen Collectors<br/>PO BOX 97 WOODRIDGE<br/>QLD 4114 Australia</em></li></ul>"
+          }
+        },
+        "text-block-1": {
+          "type": "textblock",
+          "disabled": true,
+          "settings": {
+            "title": "Address",
+            "content": ""
+          }
+        },
+        "text-block-2": {
+          "type": "textblock",
+          "disabled": true,
+          "settings": {
+            "title": "Information",
+            "content": ""
+          }
+        },
+        "text-block-3": {
+          "type": "socialmedia",
+          "disabled": true,
+          "settings": {
+            "title": "Social Media"
+          }
+        }
+      },
+      "block_order": [
+        "textblock_wPBz3M",
+        "textblock_r3NddG",
+        "text-block-1",
+        "text-block-2",
+        "text-block-3"
+      ],
+      "settings": {
+        "container": "container",
+        "title": "Send us an enquiry",
+        "description": "<p>If you’ve got any questions for us, don't hesitate to contact us!</p>",
+        "show_name": true,
+        "show_phone": true,
+        "show_email": true,
+        "show_message": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "contact-form"
+  ]
+}

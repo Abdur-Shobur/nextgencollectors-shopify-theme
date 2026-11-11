@@ -1,0 +1,1314 @@
+{{ 'ng-header.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap">
+
+{%- liquid
+  assign show_offers = section.settings.show_offers
+  assign sticky = section.settings.header_sticky
+  assign logo = section.settings.logo
+  assign logo_max = section.settings.logo_max_width | default: 160
+  assign logo_max_mobile = section.settings.mobile_logo_max_width | default: 125
+-%}
+
+<style>
+  .ng-header-root {
+    --ng-cream: {{ section.settings.color_cream | default: '#fbf8f1' }};
+    --ng-plum: {{ section.settings.color_plum | default: '#3b2230' }};
+    --ng-gold: {{ section.settings.color_gold | default: '#c8a55a' }};
+    --ng-gold-text: {{ section.settings.color_gold_text | default: '#8a6a1f' }};
+    --ng-orange: {{ section.settings.color_orange | default: '#f7941d' }};
+    --ng-logo-max-width: {{ logo_max }}px;
+    --ng-logo-max-width-mobile: {{ logo_max_mobile }}px;
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  {% if logo %}
+    "logo": {{ logo | image_url: width: logo.width | json }},
+  {% endif %}
+  "url": {{ shop.url | json }}
+}
+</script>
+
+<div
+  class="ng-header-root{% if cart.item_count > 0 %} cart-has-items{% endif %}"
+  data-ng-header-root
+  data-section-id="{{ section.id }}"
+>
+  {%- if show_offers -%}
+    {%- assign offer_count = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'offer' and block.settings.message != blank -%}
+        {%- assign offer_count = offer_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if offer_count > 0 -%}
+      <div
+        class="ng-announce"
+        data-ng-offers
+        data-rotate-interval="{{ section.settings.offer_interval | default: 4000 }}"
+        data-pause-hover="{{ section.settings.offer_pause_hover }}"
+      >
+        <div class="ng-announce__track">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'offer' and block.settings.message != blank -%}
+              <div class="ng-announce__item" data-ng-offer-item {{ block.shopify_attributes }}>
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}">{{ block.settings.message }}</a>
+                {%- else -%}
+                  {{ block.settings.message }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <header class="ng-header{% if sticky %} is-sticky{% endif %}" id="ng-header">
+    <div class="ng-header__inner">
+      <a class="ng-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+        {%- if logo != blank -%}
+          {{ logo | image_url: width: 400 | image_tag: loading: 'eager', alt: shop.name }}
+        {%- else -%}
+          <span class="ng-logo__name">NEXTGEN</span>
+          <span class="ng-logo__sub">COLLECTORS</span>
+        {%- endif -%}
+      </a>
+
+      <nav class="ng-nav" id="ng-nav" aria-label="Main">
+        <ul class="ng-nav__list">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'nav_link' -%}
+                {%- if block.settings.label != blank -%}
+                  <li class="ng-nav__item" {{ block.shopify_attributes }}>
+                    <a class="ng-nav__link" href="{{ block.settings.link | default: '#' }}">{{ block.settings.label }}</a>
+                  </li>
+                {%- endif -%}
+
+              {%- when 'nav_sale' -%}
+                {%- if block.settings.label != blank -%}
+                  <li class="ng-nav__item" {{ block.shopify_attributes }}>
+                    <a class="ng-nav__link ng-nav__link--sale" href="{{ block.settings.link | default: '#' }}">{{ block.settings.label }}</a>
+                  </li>
+                {%- endif -%}
+
+              {%- when 'nav_dropdown' -%}
+                {%- if block.settings.label != blank -%}
+                  <li class="ng-nav__item ng-nav__item--has-menu ng-nav__item--dropdown" {{ block.shopify_attributes }}>
+                    <button
+                      class="ng-nav__link"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="ng-dd-{{ block.id }}"
+                      data-ng-trigger
+                    >
+                      {{ block.settings.label }}
+                      <svg class="ng-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="ng-dropdown" id="ng-dd-{{ block.id }}">
+                      <ul class="ng-dropdown__panel">
+                        {%- for i in (1..8) -%}
+                          {%- assign label_key = 'link_' | append: i | append: '_label' -%}
+                          {%- assign url_key = 'link_' | append: i | append: '_url' -%}
+                          {%- assign item_label = block.settings[label_key] -%}
+                          {%- assign item_url = block.settings[url_key] -%}
+                          {%- if item_label != blank -%}
+                            <li><a href="{{ item_url | default: '#' }}">{{ item_label }}</a></li>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  </li>
+                {%- endif -%}
+
+              {%- when 'mega_buy' -%}
+                {%- if block.settings.label != blank -%}
+                  <li class="ng-nav__item ng-nav__item--has-menu" {{ block.shopify_attributes }}>
+                    <button
+                      class="ng-nav__link"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="ng-mega-{{ block.id }}"
+                      data-ng-trigger
+                    >
+                      {{ block.settings.label }}
+                      <svg class="ng-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="ng-mega" id="ng-mega-{{ block.id }}">
+                      <div class="ng-mega__panel">
+                        <div class="ng-mega__cols">
+                          <section aria-labelledby="ng-metal-{{ block.id }}">
+                            <h2 class="ng-eyebrow" id="ng-metal-{{ block.id }}">{{ block.settings.metal_heading | default: 'Shop by metal' }}</h2>
+                            <div class="ng-metals">
+                              {%- for m in (1..3) -%}
+                                {%- assign m_title = 'metal_' | append: m | append: '_title' -%}
+                                {%- assign m_url = 'metal_' | append: m | append: '_url' -%}
+                                {%- assign m_swatch = 'metal_' | append: m | append: '_swatch' -%}
+                                {%- assign title_val = block.settings[m_title] -%}
+                                {%- if title_val != blank -%}
+                                  <div class="ng-metal">
+                                    <span class="ng-metal__swatch ng-metal__swatch--{{ block.settings[m_swatch] | default: 'gold' }}" aria-hidden="true"></span>
+                                    <div class="ng-metal__body">
+                                      <a class="ng-metal__title" href="{{ block.settings[m_url] | default: '#' }}">{{ title_val }}</a>
+                                      <ul class="ng-metal__links">
+                                        {%- for l in (1..3) -%}
+                                          {%- assign l_label = 'metal_' | append: m | append: '_link_' | append: l | append: '_label' -%}
+                                          {%- assign l_url = 'metal_' | append: m | append: '_link_' | append: l | append: '_url' -%}
+                                          {%- if block.settings[l_label] != blank -%}
+                                            <li><a href="{{ block.settings[l_url] | default: '#' }}">{{ block.settings[l_label] }}</a></li>
+                                          {%- endif -%}
+                                        {%- endfor -%}
+                                      </ul>
+                                    </div>
+                                  </div>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </div>
+                          </section>
+
+                          <section aria-labelledby="ng-mint-{{ block.id }}">
+                            <h2 class="ng-eyebrow" id="ng-mint-{{ block.id }}">{{ block.settings.mint_heading | default: 'Shop by mint' }}</h2>
+                            <ul class="ng-mints">
+                              {%- for n in (1..9) -%}
+                                {%- assign mint_label = 'mint_' | append: n | append: '_label' -%}
+                                {%- assign mint_url = 'mint_' | append: n | append: '_url' -%}
+                                {%- assign mint_mark = 'mint_' | append: n | append: '_mark' -%}
+                                {%- if block.settings[mint_label] != blank -%}
+                                  <li>
+                                    <a class="ng-mint" href="{{ block.settings[mint_url] | default: '#' }}">
+                                      {%- assign mark_val = block.settings[mint_mark] -%}
+                                      {%- if mark_val == blank -%}
+                                        {%- assign mark_val = block.settings[mint_label] | slice: 0 -%}
+                                      {%- endif -%}
+                                      <span class="ng-mint__mark" aria-hidden="true">{{ mark_val }}</span>
+                                      {{ block.settings[mint_label] }}
+                                    </a>
+                                  </li>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </ul>
+                          </section>
+                        </div>
+
+                        {%- assign has_series = false -%}
+                        {%- for n in (1..9) -%}
+                          {%- assign s_label = 'series_' | append: n | append: '_label' -%}
+                          {%- if block.settings[s_label] != blank -%}
+                            {%- assign has_series = true -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+
+                        {%- if has_series -%}
+                          <div class="ng-series">
+                            <h2 class="ng-eyebrow" id="ng-series-{{ block.id }}">{{ block.settings.series_heading | default: 'Silver series' }}</h2>
+                            <ul class="ng-chips" aria-labelledby="ng-series-{{ block.id }}">
+                              {%- for n in (1..9) -%}
+                                {%- assign s_label = 'series_' | append: n | append: '_label' -%}
+                                {%- assign s_url = 'series_' | append: n | append: '_url' -%}
+                                {%- if block.settings[s_label] != blank -%}
+                                  <li><a class="ng-chip" href="{{ block.settings[s_url] | default: '#' }}">{{ block.settings[s_label] }}</a></li>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </ul>
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </li>
+                {%- endif -%}
+
+              {%- when 'mega_feature' -%}
+                {%- if block.settings.label != blank -%}
+                  <li class="ng-nav__item ng-nav__item--has-menu" {{ block.shopify_attributes }}>
+                    <button
+                      class="ng-nav__link"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="ng-mega-{{ block.id }}"
+                      data-ng-trigger
+                    >
+                      {{ block.settings.label }}
+                      <svg class="ng-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="ng-mega" id="ng-mega-{{ block.id }}">
+                      <div class="ng-mega__panel">
+                        <div class="ng-mega__cols ng-mega__cols--feature">
+                          <section aria-labelledby="ng-feat-links-{{ block.id }}">
+                            <h2 class="ng-eyebrow" id="ng-feat-links-{{ block.id }}">{{ block.settings.links_heading | default: block.settings.label }}</h2>
+                            <ul class="ng-linklist">
+                              {%- for i in (1..8) -%}
+                                {%- assign label_key = 'link_' | append: i | append: '_label' -%}
+                                {%- assign url_key = 'link_' | append: i | append: '_url' -%}
+                                {%- if block.settings[label_key] != blank -%}
+                                  <li><a href="{{ block.settings[url_key] | default: '#' }}">{{ block.settings[label_key] }}</a></li>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </ul>
+                          </section>
+                          <section aria-labelledby="ng-feat-products-{{ block.id }}">
+                            <h2 class="ng-eyebrow" id="ng-feat-products-{{ block.id }}">{{ block.settings.featured_heading | default: 'Featured' }}</h2>
+                            <ul class="ng-products">
+                              {%- for i in (1..3) -%}
+                                {%- assign f_title = 'featured_' | append: i | append: '_title' -%}
+                                {%- assign f_url = 'featured_' | append: i | append: '_url' -%}
+                                {%- assign f_image = 'featured_' | append: i | append: '_image' -%}
+                                {%- if block.settings[f_title] != blank -%}
+                                  <li>
+                                    <a class="ng-product" href="{{ block.settings[f_url] | default: '#' }}">
+                                      <span class="ng-product__media">
+                                        {%- if block.settings[f_image] != blank -%}
+                                          {{ block.settings[f_image] | image_url: width: 400 | image_tag: loading: 'lazy', alt: block.settings[f_title] }}
+                                        {%- else -%}
+                                          <span>{{ block.settings[f_title] | truncate: 24 }}</span>
+                                        {%- endif -%}
+                                      </span>
+                                      <span class="ng-product__title">{{ block.settings[f_title] }}</span>
+                                    </a>
+                                  </li>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </ul>
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                {%- endif -%}
+            {%- endcase -%}
+          {%- endfor -%}
+        </ul>
+      </nav>
+
+      <div class="ng-actions">
+        {%- if section.settings.show_search_icon -%}
+          <button class="ng-icon-btn" type="button" aria-label="Search products" data-open-search-popup>
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          </button>
+        {%- endif -%}
+
+        {%- if section.settings.show_account_icon -%}
+          {%- if shop.customer_accounts_enabled or shop.customer_accounts_optional -%}
+            <a
+              class="ng-icon-btn"
+              href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+              aria-label="{% if customer %}Account{% else %}Sign in{% endif %}"
+            >
+              <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.show_cart_icon -%}
+          <a
+            class="ng-icon-btn sf-cart-icon cart-icon"
+            href="{{ routes.cart_url }}"
+            aria-label="Cart"
+          >
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.5 11h10L20 7H6.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>
+            <span class="sf-cart-count ng-cart-count">{{ cart.item_count }}</span>
+          </a>
+        {%- endif -%}
+
+        <button class="ng-icon-btn ng-nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="ng-nav" id="ng-nav-toggle">
+          <svg class="ng-icon-menu" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="ng-icon-close" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  {% render 'search-popup', header_settings: section.settings %}
+</div>
+
+<script src="{{ 'ng-header.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "label": "Logo max width (desktop)",
+      "min": 80,
+      "max": 280,
+      "step": 5,
+      "default": 160,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_logo_max_width",
+      "label": "Logo max width (mobile)",
+      "min": 60,
+      "max": 200,
+      "step": 5,
+      "default": 125,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "header_sticky",
+      "label": "Sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search_icon",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_icon",
+      "label": "Show account",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_icon",
+      "label": "Show cart",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist_icon",
+      "label": "Show wishlist in search popup",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_icon",
+      "label": "Show compare in search popup",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Offers bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_offers",
+      "label": "Show offers bar",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "offer_interval",
+      "label": "Rotate interval",
+      "min": 2000,
+      "max": 10000,
+      "step": 500,
+      "default": 4000,
+      "unit": "ms"
+    },
+    {
+      "type": "checkbox",
+      "id": "offer_pause_hover",
+      "label": "Pause rotation on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "color_cream",
+      "label": "Header background",
+      "default": "#fbf8f1"
+    },
+    {
+      "type": "color",
+      "id": "color_plum",
+      "label": "Offers / active nav",
+      "default": "#3b2230"
+    },
+    {
+      "type": "color",
+      "id": "color_gold",
+      "label": "Gold accent",
+      "default": "#c8a55a"
+    },
+    {
+      "type": "color",
+      "id": "color_gold_text",
+      "label": "Gold text",
+      "default": "#8a6a1f"
+    },
+    {
+      "type": "color",
+      "id": "color_orange",
+      "label": "Sale / cart badge",
+      "default": "#f7941d"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "offer",
+      "name": "Offer message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "message",
+          "label": "Message",
+          "default": "Free Standard Shipping on all orders over $100 (Australia Orders Only)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "nav_link",
+      "name": "Nav link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Home"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "nav_sale",
+      "name": "Sale link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Black Friday Sales 2026"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "nav_dropdown",
+      "name": "Dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Copper"
+        },
+        {
+          "type": "text",
+          "id": "link_1_label",
+          "label": "Link 1 label"
+        },
+        {
+          "type": "url",
+          "id": "link_1_url",
+          "label": "Link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_2_label",
+          "label": "Link 2 label"
+        },
+        {
+          "type": "url",
+          "id": "link_2_url",
+          "label": "Link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_3_label",
+          "label": "Link 3 label"
+        },
+        {
+          "type": "url",
+          "id": "link_3_url",
+          "label": "Link 3 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_4_label",
+          "label": "Link 4 label"
+        },
+        {
+          "type": "url",
+          "id": "link_4_url",
+          "label": "Link 4 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_5_label",
+          "label": "Link 5 label"
+        },
+        {
+          "type": "url",
+          "id": "link_5_url",
+          "label": "Link 5 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_6_label",
+          "label": "Link 6 label"
+        },
+        {
+          "type": "url",
+          "id": "link_6_url",
+          "label": "Link 6 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_7_label",
+          "label": "Link 7 label"
+        },
+        {
+          "type": "url",
+          "id": "link_7_url",
+          "label": "Link 7 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_8_label",
+          "label": "Link 8 label"
+        },
+        {
+          "type": "url",
+          "id": "link_8_url",
+          "label": "Link 8 URL"
+        }
+      ]
+    },
+    {
+      "type": "mega_buy",
+      "name": "Mega: Buy (metals/mints)",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Nav label",
+          "default": "Buy"
+        },
+        {
+          "type": "text",
+          "id": "metal_heading",
+          "label": "Metals heading",
+          "default": "Shop by metal"
+        },
+        {
+          "type": "header",
+          "content": "Metal 1"
+        },
+        {
+          "type": "text",
+          "id": "metal_1_title",
+          "label": "Title",
+          "default": "Gold Collectables"
+        },
+        {
+          "type": "url",
+          "id": "metal_1_url",
+          "label": "URL"
+        },
+        {
+          "type": "select",
+          "id": "metal_1_swatch",
+          "label": "Swatch",
+          "options": [
+            { "value": "gold", "label": "Gold" },
+            { "value": "silver", "label": "Silver" },
+            { "value": "copper", "label": "Copper" }
+          ],
+          "default": "gold"
+        },
+        {
+          "type": "text",
+          "id": "metal_1_link_1_label",
+          "label": "Child link 1",
+          "default": "Gold Collectables Coins"
+        },
+        {
+          "type": "url",
+          "id": "metal_1_link_1_url",
+          "label": "Child link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "metal_1_link_2_label",
+          "label": "Child link 2",
+          "default": "Gold Proof Coins"
+        },
+        {
+          "type": "url",
+          "id": "metal_1_link_2_url",
+          "label": "Child link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "metal_1_link_3_label",
+          "label": "Child link 3"
+        },
+        {
+          "type": "url",
+          "id": "metal_1_link_3_url",
+          "label": "Child link 3 URL"
+        },
+        {
+          "type": "header",
+          "content": "Metal 2"
+        },
+        {
+          "type": "text",
+          "id": "metal_2_title",
+          "label": "Title",
+          "default": "Silver Collectables"
+        },
+        {
+          "type": "url",
+          "id": "metal_2_url",
+          "label": "URL"
+        },
+        {
+          "type": "select",
+          "id": "metal_2_swatch",
+          "label": "Swatch",
+          "options": [
+            { "value": "gold", "label": "Gold" },
+            { "value": "silver", "label": "Silver" },
+            { "value": "copper", "label": "Copper" }
+          ],
+          "default": "silver"
+        },
+        {
+          "type": "text",
+          "id": "metal_2_link_1_label",
+          "label": "Child link 1",
+          "default": "All Silver Collectables"
+        },
+        {
+          "type": "url",
+          "id": "metal_2_link_1_url",
+          "label": "Child link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "metal_2_link_2_label",
+          "label": "Child link 2",
+          "default": "American Eagles Coins"
+        },
+        {
+          "type": "url",
+          "id": "metal_2_link_2_url",
+          "label": "Child link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "metal_2_link_3_label",
+          "label": "Child link 3",
+          "default": "Mexican Libertads Coins"
+        },
+        {
+          "type": "url",
+          "id": "metal_2_link_3_url",
+          "label": "Child link 3 URL"
+        },
+        {
+          "type": "header",
+          "content": "Metal 3"
+        },
+        {
+          "type": "text",
+          "id": "metal_3_title",
+          "label": "Title",
+          "default": "Copper"
+        },
+        {
+          "type": "url",
+          "id": "metal_3_url",
+          "label": "URL"
+        },
+        {
+          "type": "select",
+          "id": "metal_3_swatch",
+          "label": "Swatch",
+          "options": [
+            { "value": "gold", "label": "Gold" },
+            { "value": "silver", "label": "Silver" },
+            { "value": "copper", "label": "Copper" }
+          ],
+          "default": "copper"
+        },
+        {
+          "type": "text",
+          "id": "metal_3_link_1_label",
+          "label": "Child link 1",
+          "default": "Shop all Copper"
+        },
+        {
+          "type": "url",
+          "id": "metal_3_link_1_url",
+          "label": "Child link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "metal_3_link_2_label",
+          "label": "Child link 2"
+        },
+        {
+          "type": "url",
+          "id": "metal_3_link_2_url",
+          "label": "Child link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "metal_3_link_3_label",
+          "label": "Child link 3"
+        },
+        {
+          "type": "url",
+          "id": "metal_3_link_3_url",
+          "label": "Child link 3 URL"
+        },
+        {
+          "type": "header",
+          "content": "Mints"
+        },
+        {
+          "type": "text",
+          "id": "mint_heading",
+          "label": "Mints heading",
+          "default": "Shop by mint"
+        },
+        {
+          "type": "text",
+          "id": "mint_1_mark",
+          "label": "Mint 1 mark",
+          "default": "G"
+        },
+        {
+          "type": "text",
+          "id": "mint_1_label",
+          "label": "Mint 1 label",
+          "default": "Germania Mint"
+        },
+        {
+          "type": "url",
+          "id": "mint_1_url",
+          "label": "Mint 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "mint_2_mark",
+          "label": "Mint 2 mark",
+          "default": "M"
+        },
+        {
+          "type": "text",
+          "id": "mint_2_label",
+          "label": "Mint 2 label",
+          "default": "La Casa de Moneda de México"
+        },
+        {
+          "type": "url",
+          "id": "mint_2_url",
+          "label": "Mint 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "mint_3_mark",
+          "label": "Mint 3 mark",
+          "default": "X"
+        },
+        {
+          "type": "text",
+          "id": "mint_3_label",
+          "label": "Mint 3 label",
+          "default": "Mint XXI"
+        },
+        {
+          "type": "url",
+          "id": "mint_3_url",
+          "label": "Mint 3 URL"
+        },
+        {
+          "type": "text",
+          "id": "mint_4_mark",
+          "label": "Mint 4 mark",
+          "default": "S"
+        },
+        {
+          "type": "text",
+          "id": "mint_4_label",
+          "label": "Mint 4 label",
+          "default": "Scottsdale Mint"
+        },
+        {
+          "type": "url",
+          "id": "mint_4_url",
+          "label": "Mint 4 URL"
+        },
+        {
+          "type": "text",
+          "id": "mint_5_mark",
+          "label": "Mint 5 mark",
+          "default": "T"
+        },
+        {
+          "type": "text",
+          "id": "mint_5_label",
+          "label": "Mint 5 label",
+          "default": "T&S"
+        },
+        {
+          "type": "url",
+          "id": "mint_5_url",
+          "label": "Mint 5 URL"
+        },
+        {
+          "type": "text",
+          "id": "mint_6_mark",
+          "label": "Mint 6 mark",
+          "default": "P"
+        },
+        {
+          "type": "text",
+          "id": "mint_6_label",
+          "label": "Mint 6 label",
+          "default": "The Perth Mint"
+        },
+        {
+          "type": "url",
+          "id": "mint_6_url",
+          "label": "Mint 6 URL"
+        },
+        {
+          "type": "text",
+          "id": "mint_7_mark",
+          "label": "Mint 7 mark",
+          "default": "R"
+        },
+        {
+          "type": "text",
+          "id": "mint_7_label",
+          "label": "Mint 7 label",
+          "default": "The Royal Australian Mint"
+        },
+        {
+          "type": "url",
+          "id": "mint_7_url",
+          "label": "Mint 7 URL"
+        },
+        {
+          "type": "text",
+          "id": "mint_8_mark",
+          "label": "Mint 8 mark",
+          "default": "U"
+        },
+        {
+          "type": "text",
+          "id": "mint_8_label",
+          "label": "Mint 8 label",
+          "default": "US Mint"
+        },
+        {
+          "type": "url",
+          "id": "mint_8_url",
+          "label": "Mint 8 URL"
+        },
+        {
+          "type": "text",
+          "id": "mint_9_mark",
+          "label": "Mint 9 mark",
+          "default": "C"
+        },
+        {
+          "type": "text",
+          "id": "mint_9_label",
+          "label": "Mint 9 label",
+          "default": "United Crypto States"
+        },
+        {
+          "type": "url",
+          "id": "mint_9_url",
+          "label": "Mint 9 URL"
+        },
+        {
+          "type": "header",
+          "content": "Series chips"
+        },
+        {
+          "type": "text",
+          "id": "series_heading",
+          "label": "Series heading",
+          "default": "Silver series"
+        },
+        {
+          "type": "text",
+          "id": "series_1_label",
+          "label": "Series 1",
+          "default": "Christmas American Silver Eagles Coins"
+        },
+        {
+          "type": "url",
+          "id": "series_1_url",
+          "label": "Series 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "series_2_label",
+          "label": "Series 2",
+          "default": "Germania Mint – Rune Series"
+        },
+        {
+          "type": "url",
+          "id": "series_2_url",
+          "label": "Series 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "series_3_label",
+          "label": "Series 3",
+          "default": "Germania Mint – Norns Coins"
+        },
+        {
+          "type": "url",
+          "id": "series_3_url",
+          "label": "Series 3 URL"
+        },
+        {
+          "type": "text",
+          "id": "series_4_label",
+          "label": "Series 4",
+          "default": "Mint XXI Coins"
+        },
+        {
+          "type": "url",
+          "id": "series_4_url",
+          "label": "Series 4 URL"
+        },
+        {
+          "type": "text",
+          "id": "series_5_label",
+          "label": "Series 5",
+          "default": "Scottsdale Mint Coins"
+        },
+        {
+          "type": "url",
+          "id": "series_5_url",
+          "label": "Series 5 URL"
+        },
+        {
+          "type": "text",
+          "id": "series_6_label",
+          "label": "Series 6",
+          "default": "T&S Coins"
+        },
+        {
+          "type": "url",
+          "id": "series_6_url",
+          "label": "Series 6 URL"
+        },
+        {
+          "type": "text",
+          "id": "series_7_label",
+          "label": "Series 7",
+          "default": "The Perth Mint Coins"
+        },
+        {
+          "type": "url",
+          "id": "series_7_url",
+          "label": "Series 7 URL"
+        },
+        {
+          "type": "text",
+          "id": "series_8_label",
+          "label": "Series 8",
+          "default": "The Royal Australian Mint Coins"
+        },
+        {
+          "type": "url",
+          "id": "series_8_url",
+          "label": "Series 8 URL"
+        },
+        {
+          "type": "text",
+          "id": "series_9_label",
+          "label": "Series 9",
+          "default": "United Crypto States Coins"
+        },
+        {
+          "type": "url",
+          "id": "series_9_url",
+          "label": "Series 9 URL"
+        }
+      ]
+    },
+    {
+      "type": "mega_feature",
+      "name": "Mega: Links + featured",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Nav label",
+          "default": "Australian Coins"
+        },
+        {
+          "type": "text",
+          "id": "links_heading",
+          "label": "Links heading",
+          "default": "Australian Coins"
+        },
+        {
+          "type": "text",
+          "id": "link_1_label",
+          "label": "Link 1",
+          "default": "Uncirculated $2 Coins - Bundle Page"
+        },
+        {
+          "type": "url",
+          "id": "link_1_url",
+          "label": "Link 1 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_2_label",
+          "label": "Link 2",
+          "default": "Uncirculated $2 Coins"
+        },
+        {
+          "type": "url",
+          "id": "link_2_url",
+          "label": "Link 2 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_3_label",
+          "label": "Link 3",
+          "default": "Bluey 2026 5 Coin Folder"
+        },
+        {
+          "type": "url",
+          "id": "link_3_url",
+          "label": "Link 3 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_4_label",
+          "label": "Link 4",
+          "default": "C-Mint Cards"
+        },
+        {
+          "type": "url",
+          "id": "link_4_url",
+          "label": "Link 4 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_5_label",
+          "label": "Link 5"
+        },
+        {
+          "type": "url",
+          "id": "link_5_url",
+          "label": "Link 5 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_6_label",
+          "label": "Link 6"
+        },
+        {
+          "type": "url",
+          "id": "link_6_url",
+          "label": "Link 6 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_7_label",
+          "label": "Link 7"
+        },
+        {
+          "type": "url",
+          "id": "link_7_url",
+          "label": "Link 7 URL"
+        },
+        {
+          "type": "text",
+          "id": "link_8_label",
+          "label": "Link 8"
+        },
+        {
+          "type": "url",
+          "id": "link_8_url",
+          "label": "Link 8 URL"
+        },
+        {
+          "type": "header",
+          "content": "Featured cards"
+        },
+        {
+          "type": "text",
+          "id": "featured_heading",
+          "label": "Featured heading",
+          "default": "Featured"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_1_image",
+          "label": "Featured 1 image"
+        },
+        {
+          "type": "text",
+          "id": "featured_1_title",
+          "label": "Featured 1 title",
+          "default": "Uncirculated $2 Coins - Bundle Page"
+        },
+        {
+          "type": "url",
+          "id": "featured_1_url",
+          "label": "Featured 1 URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_2_image",
+          "label": "Featured 2 image"
+        },
+        {
+          "type": "text",
+          "id": "featured_2_title",
+          "label": "Featured 2 title"
+        },
+        {
+          "type": "url",
+          "id": "featured_2_url",
+          "label": "Featured 2 URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_3_image",
+          "label": "Featured 3 image"
+        },
+        {
+          "type": "text",
+          "id": "featured_3_title",
+          "label": "Featured 3 title"
+        },
+        {
+          "type": "url",
+          "id": "featured_3_url",
+          "label": "Featured 3 URL"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "offer",
+        "settings": {
+          "message": "Free Standard Shipping on all orders over $100 (Australia Orders Only)"
+        }
+      },
+      {
+        "type": "offer",
+        "settings": {
+          "message": "New releases drop weekly — shop Latest Releases"
+        }
+      },
+      {
+        "type": "nav_link",
+        "settings": {
+          "label": "Home"
+        }
+      },
+      {
+        "type": "nav_link",
+        "settings": {
+          "label": "Latest Releases"
+        }
+      },
+      {
+        "type": "mega_buy",
+        "settings": {
+          "label": "Buy"
+        }
+      },
+      {
+        "type": "nav_dropdown",
+        "settings": {
+          "label": "Copper",
+          "link_1_label": "Shop all Copper",
+          "link_2_label": "Copper Bars"
+        }
+      },
+      {
+        "type": "mega_feature",
+        "settings": {
+          "label": "Australian Coins",
+          "links_heading": "Australian Coins",
+          "link_1_label": "Uncirculated $2 Coins - Bundle Page",
+          "link_2_label": "Uncirculated $2 Coins",
+          "link_3_label": "Bluey 2026 5 Coin Folder",
+          "link_4_label": "C-Mint Cards",
+          "featured_1_title": "Uncirculated $2 Coins - Bundle Page"
+        }
+      },
+      {
+        "type": "mega_feature",
+        "settings": {
+          "label": "Accessories",
+          "links_heading": "Accessories",
+          "link_1_label": "$2 - Display Cases",
+          "link_2_label": "Archival Flips",
+          "link_3_label": "Coin Stands",
+          "link_4_label": "Coin Capsules (Round)",
+          "link_5_label": "Coin Tubes",
+          "link_6_label": "Coin Displays",
+          "link_7_label": "Rectangular Bar Capsules",
+          "featured_1_title": "Display Cases",
+          "featured_2_title": "Rectangular Bar Capsules",
+          "featured_3_title": "Round Coin Capsules"
+        }
+      },
+      {
+        "type": "nav_sale",
+        "settings": {
+          "label": "Black Friday Sales 2026"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}

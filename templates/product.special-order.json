@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "text_alignment": "left",
+        "hide_current": false,
+        "hide_on_mb": false
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "judge_me_reviews_preview_badge_JwdBNW": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_saving": false
+          }
+        },
+        "92dd1c9d-f248-4679-b6cf-b7884aa035ce": {
+          "type": "visitors",
+          "disabled": true,
+          "settings": {
+            "live_views_text": "",
+            "live_views_range": "20-30",
+            "live_view_duration": "10",
+            "live_view_icon_blinks": true
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "de2e4bc6-df41-449a-b1c4-5d31a346fb6e": {
+          "type": "shipping",
+          "disabled": true,
+          "settings": {
+            "show_delivery_times": true,
+            "deliver_text": "Доставка между:",
+            "deliver_days": "7-10",
+            "show_shipping_text": true,
+            "shipping_text": "<p><strong>Безплатна доставка:  </strong>за поръчки над 100 лв</p>"
+          }
+        },
+        "addons": {
+          "type": "addons",
+          "settings": {
+            "show_atcp": false,
+            "show_ask_a_question": true,
+            "show_social": true
+          }
+        },
+        "custom_text_rQNJm4": {
+          "type": "custom_text",
+          "settings": {
+            "content": "<p><em><strong>Special Order items are products we don’t stock but can source from our domestic suppliers.</strong></em></p><p>Please note availability cannot be guaranteed. We’ll coordinate with our suppliers to source the item and update you on its status.<br/></p>"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_atc_button": true,
+            "show_dynamic_checkout": true
+          }
+        },
+        "f010c172-8b98-42b3-8c56-7358f2df885b": {
+          "type": "description",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title",
+        "judge_me_reviews_preview_badge_JwdBNW",
+        "price",
+        "92dd1c9d-f248-4679-b6cf-b7884aa035ce",
+        "variant_picker",
+        "de2e4bc6-df41-449a-b1c4-5d31a346fb6e",
+        "addons",
+        "custom_text_rQNJm4",
+        "buy_buttons",
+        "f010c172-8b98-42b3-8c56-7358f2df885b"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "layout": "layout-6",
+        "show_atwl": false,
+        "enable_history_state": true,
+        "show_featured_media": true,
+        "show_zoom_button": true,
+        "enable_video_autoplay": false,
+        "show_nav_media_mobile": false,
+        "show_pagination_mobile": true,
+        "use_sticky_atc": true,
+        "use_sticky_atc_on_mobile": true,
+        "enable_dynamic_checkout": true,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    },
+    "product-details-tabs": {
+      "type": "product-details-tabs",
+      "disabled": true,
+      "settings": {
+        "container": "container",
+        "bg_color": "",
+        "default_open": true,
+        "shared_tab_enabled": true,
+        "shared_tab_header": "More Info",
+        "shared_tab_content": "<p>Here’s some info that’s the same on every product.</p>"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "container": "container",
+        "heading": "You Might Also Like",
+        "limit": 8,
+        "columns": 4,
+        "column_gap": 30,
+        "enable_slider": true
+      }
+    },
+    "recent-viewed-products": {
+      "type": "recent-viewed-products",
+      "settings": {
+        "container": "container",
+        "heading": "Recently Viewed Products",
+        "limit": 8,
+        "columns": 4,
+        "column_gap": 30,
+        "enable_slider": true
+      }
+    },
+    "174889257642fe7f23": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_w8yPAC": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_w8yPAC"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "product-details-tabs",
+    "product-recommendations",
+    "recent-viewed-products",
+    "174889257642fe7f23"
+  ]
+}

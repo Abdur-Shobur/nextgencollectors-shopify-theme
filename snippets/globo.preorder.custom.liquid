@@ -1,0 +1,93 @@
+<script>
+     const preorderCustom = {
+      render: function(){
+          this.initSelectors()
+          this.handleEvents()
+      },
+      initSelectors: function(){
+          window.GloboPreorderParams = window.GloboPreorderParams || {};
+          window.GloboPreorderParams.selectors = window.GloboPreorderParams.selectors || {};
+          window.GloboPreorderParams.selectors.productPositionMessage = ".product-form__actions";
+          window.GloboPreorderParams.selectors.productAddToCartTextElement = ".atc-text";
+          window.GloboPreorderParams.selectors.collectionAddToCartTextElement = ".atc-text";
+          window.GloboPreorderParams.selectors.collectionProductForm = "form.spf-product__form";
+          window.GloboPreorderParams.selectors.collectionAddToCartBtn = 'button[type="submit"]';
+          window.GloboPreorderParams.selectors.quickViewActivator = ".sf__tooltip-item, .open-quick-view";
+          window.GloboPreorderParams.selectors.quickViewProductForm = ".sf-modal.sf-modal__wrapper.fixed form.product-form, #gfqv-modal form.gfqv-product-form";    
+      },
+      handleEvents: function(){
+          const app = this;
+
+          document.addEventListener('globo.preorder.show.preorder', e => {
+              const {form, profile } = e.detail;
+
+              const preorderBtn = form.querySelector('.gPreorderBtn')
+
+              preorderBtn.innerHTML = profile.message.preorderText;
+
+              const color = Globo.Preorder.settings.settings.colorButton
+              if(form.classList.contains('spf-product__form')){
+                  preorderBtn.setAttribute('style', `color: ${color.preorderTextColor} !important; background: ${color.preorderBackgroundColor} !important; border: 1px solid ${color.preorderBorderColor} !important;`)
+              }
+          })
+
+          window.addEventListener('load', () => {
+              if(window?.Globo?.Preorder){
+                  window.Globo.Preorder.initPreorder()
+              }
+              setTimeout(() => {
+                  app.handleQuickview()
+              }, 1000)
+          })
+
+      },
+      handleQuickview: function(){
+          const app = this;
+          const quickViewActivators = document.querySelectorAll(window.GloboPreorderParams.selectors.quickViewActivator)
+
+          if(quickViewActivators.length){
+              quickViewActivators.forEach(quickViewActivator => {
+                  ['click'].forEach(action => {
+                      quickViewActivator.addEventListener(action, (e) => {
+                          app.initCollectionQuickview(e.target)
+                      })
+                  })
+              })
+          }
+      },
+      initCollectionQuickview: function(e) {
+          const t = Globo.Preorder;
+          let o = e.closest("[preorder-product-element]")
+            , r = o.getAttribute("preorder-product-element")
+            , s = !1;
+          if ("handle" == r) {
+              let e = o.getAttribute("d-handle");
+              s = t.settings.products.find((t => t.handle == e))
+          } else if ("id" == r || "form" == r) {
+              let e = o.getAttribute("d-id");
+              s = t.settings.products.find((t => t.id.toString() == e.toString()))
+          }
+          if (s) {
+              let e = null
+                , o = 0;
+              e = setInterval((function() {
+                  o++,
+                  t.settings.selectors.quickViewProductForm && document.querySelectorAll(t.settings.selectors.quickViewProductForm).length && setTimeout((function() {
+                      let e = document.querySelector(t.settings.selectors.quickViewProductForm);
+                      if (e) {
+                          e.classList.add(t.settings.classes.quickviewPreOrderForm),
+                          e.setAttribute("data-preorder-product-id", s.id);
+                          let o = t.settings.selectors.productAddToCartBtn.find((t => e.querySelector(t)));
+                          t.initProductPreorder(s, e, t.settings.selectors.productVariantActivator, t.settings.selectors.productVariantSelector, t.settings.selectors.productQuantitySelector, o, t.settings.selectors.productAddToCartTextElement, t.settings.selectors.paymentButton)
+                      }
+                      o = 21
+                  }
+                  ), 500),
+                  o > 20 && clearInterval(e)
+              }
+              ), 300)
+          }
+      }
+  }
+  preorderCustom.render()
+</script>

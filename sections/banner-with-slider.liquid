@@ -1,0 +1,181 @@
+{% assign bg_color = section.settings.background_color %}
+{% assign has_bg = false %}
+
+{% unless bg_color == "rgba(0,0,0,0)" or bg_color == blank %}
+  {% assign has_bg = true %}
+{% endunless %}
+
+{%- capture container -%}{{ section.settings.container }} {% if has_bg == false %}section-my{% else %}section-py{% endif %}{%- endcapture -%}
+
+<section
+  id="sf__img-width-slider-{{ section.id }}"
+  class="slider-{{ section.id }} sf__banner-with-slider {{ section.settings.custom_class }}"
+  data-section-type="banner-with-slider"
+  data-section-id="{{ section.id }}"
+  data-autoplay="true"
+  data-timeout="{{ section.settings.autorotate_speed | times: 1000 }}"
+  data-effect="{{ section.settings.slide_effect }}"
+  {% if has_bg %}
+    data-bg="{{ bg_color | color_to_hsl }}"
+  {% endif %}
+  style="background-color: {{ bg_color }}; --items: 1;"
+>
+  <div class="{{ container }}">
+    {% render 'index-section-header', section_settings: section.settings %}
+
+    <div class="sm:grid sm:grid-cols-4{% if section.settings.container != 'w-full' %} -mx-4{% endif %} sm:mx-0">
+
+      {%- comment -%} Left static banner {%- endcomment -%}
+      <div class="hidden sm:block relative sm:col-start-1 sm:col-end-3 lg:col-start-1 lg:col-end-1 overflow-hidden sf__hover-scale-up">
+        <a href="{{ section.settings.button_link_1 }}" class="w-full h-full block">
+          {% if section.settings.banner_image_1 %}
+            {% render 'responsive-image', image: section.settings.banner_image_1, wrapper_class: 'w-full h-full' %}
+          {% else %}
+            <div class="sf__placeholder-wrapper h-full w-full sf-image--loaded">
+              {{ 'collection-4' | placeholder_svg_tag: 'sf__placeholder-svg sf__placeholder-svg-no-border w-full h-full object-cover' }}
+            </div>
+          {% endif %}
+        </a>
+        <div class="absolute z-10 bottom-6 left-1/2 -translate-x-1/2">
+          {% if section.settings.button_text_1 != blank %}
+            <a href="{{ section.settings.button_link_1 }}" class="sf__btn {{ section.settings.button_style_1 }} {{ section.settings.button_size_1 }}">{{ section.settings.button_text_1 }}</a>
+          {% endif %}
+        </div>
+      </div>
+
+      {%- comment -%} Main slider {%- endcomment -%}
+      <div class="overflow-hidden h-full w-full sm:col-start-1 sm:col-end-5 order-first lg:col-start-2 lg:col-end-4 lg:order-none">
+        <div class="relative h-full">
+          <div class="sf-slider-{{ section.id }} swiper-container swiper--equal-height">
+            <div class="swiper-wrapper">
+              {% for block in section.blocks %}
+                {% assign link = block.settings.button_link | default: "" %}
+                {% if link != "" %}
+                  <a href="{{ link }}" class="swiper-slide-linked">
+                {% endif %}
+
+                <div {{ block.shopify_attributes }} data-slide="{{ forloop.index0 }}" class="relative swiper-slide w-full h-full sf-bg-lazy">
+                  {% if block.settings.item_image != blank %}
+                    {% render 'responsive-image', image: block.settings.item_image, wrapper_class: 'w-full h-full' %}
+                  {% else %}
+                    {% capture placeholder %}{% cycle 1, 2, 3 %}{% endcapture %}
+                    {{ 'collection-' | append: placeholder | placeholder_svg_tag: 'sf__placeholder-svg w-full h-full object-cover' }}
+                  {% endif %}
+                  <div class="sf__slide-block flex sf__slide-block--{{ block.settings.content_position | replace: ' ', '-' }} absolute inset-0 w-full 2xl:p-24 lg:p-12 sm:p-10 p-4">
+                    <div class="sf__slide-content text-{{ block.settings.text_alignment }} text-{{ block.settings.content_text_color }}">
+                      {% if block.settings.subheading != blank %}
+                        <p class="sf__content-subheading">{{ block.settings.subheading }}</p>
+                      {% endif %}
+                      {% if block.settings.heading != blank %}
+                        <h3 class="sf__content-heading">{{ block.settings.heading }}</h3>
+                      {% endif %}
+                      {% if block.settings.description != blank %}
+                        <div class="rte sf__content-description text-color-subtext">{{ block.settings.description }}</div>
+                      {% endif %}
+                      {% if block.settings.button_text != blank %}
+                        <span class="xl:mt-12 lg:mt-10 mt-5 inline-block sf__btn {{ block.settings.button_style }} {{ block.settings.button_size }}">
+                          {{ block.settings.button_text }}
+                        </span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+                {% if link != "" %}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="absolute left-0 w-full bottom-0 pb-5 z-10">
+            {% render 'slider-controls', absolute: true, show_nav: false, dots_class: 'sf__dot-dark' %}
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} Right static banners {%- endcomment -%}
+      <div class="hidden sm:block sm:col-start-3 sm:col-end-5 lg:col-start-4 lg:col-end-5">
+        {% for i in (2..3) %}
+          {% assign link_key   = "button_link_"  | append: i %}
+          {% assign image_key  = "banner_image_"  | append: i %}
+          {% assign text_key   = "button_text_"   | append: i %}
+          {% assign style_key  = "button_style_"  | append: i %}
+          {% assign size_key   = "button_size_"   | append: i %}
+
+          {% if section.settings[image_key] %}
+            <div class="relative overflow-hidden sf__hover-scale-up mt-4">
+              <a href="{{ section.settings[link_key] | default: '#' }}" class="w-full block">
+                {% render 'responsive-image', image: section.settings[image_key], wrapper_class: 'w-full h-full' %}
+              </a>
+              {% if section.settings[text_key] != blank %}
+                <div class="absolute z-10 bottom-6 left-1/2 -translate-x-1/2">
+                  <a href="{{ section.settings[link_key] }}" class="sf__btn {{ section.settings[style_key] }} {{ section.settings[size_key] }}">
+                    {{ section.settings[text_key] }}
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {%- comment -%} Mobile cards at bottom {%- endcomment -%}
+      <div class="sf__ms sm:hidden mt-4">
+        <div class="sf__ms-wrapper grid sf-grid pl-4" style="--column-gap: 1rem;">
+          {% for i in (2..1) %}
+            {% assign link_key  = "button_link_"  | append: i %}
+            {% assign img_key   = "banner_image_"  | append: i %}
+            {% assign txt_key   = "button_text_"   | append: i %}
+
+            {% if section.settings[img_key] %}
+              <div class="sf-column">
+                <div class="banner-w-slider__card">
+                  <a href="{{ section.settings[link_key] | default: '#' }}" class="banner-w-slider__inner block">
+                    <div class="banner-w-slider__img">
+                      {% render 'responsive-image', image: section.settings[img_key], wrapper_class: 'w-full h-full' %}
+                    </div>
+                    {% if section.settings[txt_key] != blank %}
+                      <h4 class="banner-w-slider__card-title mt-2 text-base">{{ section.settings[txt_key] }}</h4>
+                    {% endif %}
+                  </a>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+          {% if section.settings.banner_image_1 %}
+            <div class="sf-column">
+              <div class="banner-w-slider__card">
+                <a href="{{ section.settings.button_link_1 }}" class="banner-w-slider__inner block">
+                  <div class="banner-w-slider__img">
+                    {% render 'responsive-image', image: section.settings.banner_image_1, wrapper_class: 'w-full h-full' %}
+                  </div>
+                  {% if section.settings.button_text_1 != blank %}
+                    <h4 class="banner-w-slider__card-title mt-2 text-base">{{ section.settings.button_text_1 }}</h4>
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Image with slider",
+    "settings": [
+      /* … your existing JSON schema here … */
+    ],
+    "blocks": [
+      /* … */
+    ],
+    "presets": [
+      /* … */
+    ]
+  }
+{% endschema %}

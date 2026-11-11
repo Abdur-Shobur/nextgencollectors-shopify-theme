@@ -1,0 +1,404 @@
+<!-- This section is designed and built by Luna Templates. Find more at https://lunatemplates.co -->
+<section class="section {{ section.settings.css_class }} is-width-wide" id="section-{{ section.id }}">
+<div class="lunatemplates-parallax lunatemplates-parallax--{{ section.id }} {% if section.settings.parallax_on %}LT-parallax-on {% endif %}">
+<div class="lunatemplates-parallax-text-container {% if section.settings.image_height == '50' %}parallax-small {% endif %}{% if section.settings.border_radius == 'rounded' %}parallax-round{% endif %}">
+{% if section.settings.title != blank %}
+<{{ section.settings.heading_tag }}>{{ section.settings.title }}</{{ section.settings.heading_tag }}>
+{% endif %}
+{% if section.settings.content != blank %}
+{{ section.settings.content }}
+{% endif %}
+{% if section.settings.link_text != blank %}
+<div class="luna-btn-container">
+<a href="{{ section.settings.link_url }}" class="luna-btn">{{ section.settings.link_text }}</a>
+</div>
+{% endif %}
+</div>
+</div>
+</section>
+{%- style -%}
+
+.lunatemplates-parallax--{{ section.id }} {
+	height: {{ section.settings.image_height }}vh;
+background-position: {{ section.settings.image_position }};
+}
+
+.lunatemplates-parallax--{{ section.id }} {{ section.settings.heading_tag }}, .lunatemplates-parallax--{{ section.id }} p, .lunatemplates-parallax--{{ section.id }} a {
+ color: {{ section.settings.color_text }} !important;	
+}
+
+.lunatemplates-parallax--{{ section.id }} {{ section.settings.heading_tag }} {
+font-size: {{ section.settings.font_size_desktop }}px;
+}
+
+.lunatemplates-parallax--{{ section.id }} {
+background-image: url('{{ section.settings.image_bg | img_url: '2000x' }}');
+}
+
+.lunatemplates-parallax--{{ section.id }} .lunatemplates-parallax-text-container {
+background-color: {{ section.settings.color_bg	}};
+}
+#section-{{ section.id }} .luna-btn {
+ padding: 0.5rem 2rem;
+margin-top: 20px;
+background-color: {{ section.settings.color_btn_fill }};
+ border: 1px solid {{ section.settings.color_btn_border }};
+ color: {{ section.settings.color_btn_text }} !important;
+font-size: {{ section.settings.font_size_btn_desktop }}px;
+ transition: background-color 0.5s;
+text-decoration: none;
+}
+#section-{{ section.id }} .luna-btn:hover {
+background-color: {{ section.settings.color_btn_fill_hover }};
+ border: 1px solid {{ section.settings.color_btn_border_hover }};
+ color: {{ section.settings.color_btn_text_hover }} !important;
+ transition: background-color 0.5s;
+}
+{% if section.settings.btn_shape == 'oval' %}
+#section-{{ section.id }} .luna-btn {
+ padding: 20px 40px;
+border-radius: 50%;
+}
+{% endif %}
+{% if section.settings.btn_shape == 'rounded' %}
+#section-{{ section.id }} .luna-btn {
+border-radius: 50px;
+}
+{% endif %}
+
+.luna-btn-container {
+	padding: 20px 0;
+}
+
+.lunatemplates-parallax {{ section.settings.heading_tag }} {
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-bottom: 10px;
+}
+@media (min-width: 750px) and (max-width: 1200px) {
+	.lunatemplates-parallax--{{ section.id }} {{ section.settings.heading_tag }} {
+font-size: calc(({{ section.settings.font_size_desktop }}px + {{ section.settings.font_size_mobile }}px)*0.5) !important; 
+}
+}
+@media screen and (max-width: 749px) {
+ .lunatemplates-parallax--{{ section.id }} {{ section.settings.heading_tag }} {
+font-size: {{ section.settings.font_size_mobile }}px;
+}
+#section-{{ section.id }} .luna-btn {
+font-size: {{ section.settings.font_size_btn_mobile }}px;
+}
+}
+{{ section.settings.custom_css }}
+{%- endstyle -%}
+<style>
+.lunatemplates-parallax {
+background-size: cover;
+ position: relative;
+min-height: 320px;
+}
+
+.LT-parallax-on {
+background-attachment: fixed;
+}
+
+.lunatemplates-parallax {{ section.settings.heading_tag }}, .lunatemplates-parallax p, .lunatemplates-parallax .luna-btn-container {
+text-align: center;
+}
+
+.lunatemplates-parallax-text-container {
+ margin: 0;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+-ms-transform: translate(-50%, -50%);
+ transform: translate(-50%, -50%);
+ padding: 50px;
+}
+
+.lunatemplates-parallax-text-container.parallax-round {
+border-radius: 30px;
+}
+@media only screen and (hover: none) and (pointer: coarse){
+	.LT-parallax-on {
+background-attachment: scroll;
+}
+}
+@media only screen and (max-width: 749px) {
+	.lunatemplates-parallax-text-container {
+ padding: 20px;
+ width: 70%;
+}
+}
+</style>
+{% schema %}
+{
+"name": "💫 Parallax image & text",
+"class": "index-section index-section--flush",
+"settings": [
+{
+"type": "header",
+"content": "Background"
+},
+{
+"type": "image_picker",
+"id": "image_bg",
+"label": "Image",
+"info": "A width of 2000px .jpg is recommended"
+},
+{
+"type": "select",
+"id": "image_height",
+"label": "Image Height",
+"options": [
+{
+"value": "50",
+"label": "Small"
+},
+{
+"value": "75",
+"label": "Medium"
+},
+{
+"value": "100",
+"label": "Large"
+}
+],
+"default": "75"
+},
+{
+"type": "select",
+"id": "image_position",
+"label": "Image Position",
+"options": [
+{
+"value": "top",
+"label": "Top"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "bottom",
+"label": "Bottom"
+}
+],
+"default": "center"
+},
+{
+"type": "checkbox",
+"id": "parallax_on",
+"label": "Enable parallax effect (Desktop only)",
+"default": true
+},
+{
+"type": "header",
+"content": "Text Box"
+},
+{
+"type": "color",
+"id": "color_bg",
+"label": "Background",
+"default": "#ffffff",
+"info": "For a transparent background, delete the color code."
+},
+{
+"type": "color",
+"id": "color_text",
+"label": "Text",
+"default": "#000"
+},
+{
+"type": "select",
+"id": "heading_tag",
+"label": "Heading Tag",
+"options": [
+{
+"value": "h1",
+"label": "Heading 1"
+},
+{
+"value": "h2",
+"label": "Heading 2"
+},
+{
+"value": "h3",
+"label": "Heading 3"
+},
+{
+"value": "h4",
+"label": "Heading 4"
+},
+{
+"value": "h5",
+"label": "Heading 5"
+},
+{
+"value": "h6",
+"label": "Heading 6"
+}
+],
+"default": "h3"
+},
+{
+"type": "range",
+"id": "font_size_desktop",
+"label": "Heading Font Size (Desktop)",
+"default":80,
+"min": 14,
+"max": 160,
+"step": 2,
+"unit": "px"
+},
+{
+"type": "range",
+"id": "font_size_mobile",
+"label": "Heading Font Size (Mobile)",
+"default": 60,
+"min": 30,
+"max": 80,
+"step": 2,
+"unit": "px"
+},
+{
+"type": "select",
+"id": "border_radius",
+"label": "Text Box Shape",
+"options": [
+{
+"value": "rounded",
+"label": "Rounded"
+},
+{
+"value": "square",
+"label": "Square"
+}
+],
+"default": "rounded"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Heading",
+"default": "Your Heading"
+},
+{
+"type": "richtext",
+"id": "content",
+"label": "Text",
+"default": "<p>Add your own custom content</p>"
+},
+{
+"type": "text",
+"id": "link_text",
+"label": "Link text"
+},
+{
+"type": "url",
+"id": "link_url",
+"label": "Link URL"
+},
+{
+"type": "header",
+"content": "Button Styles"
+},
+{
+"type": "select",
+"id": "btn_shape",
+"label": "Button Shape",
+"options": [
+{
+"value": "rounded",
+"label": "Rounded"
+},
+{
+"value": "oval",
+"label": "Oval"
+},
+{
+"value": "square",
+"label": "Square"
+}
+],
+"default": "square"
+},
+{
+"type": "color",
+"id": "color_btn_fill",
+"label": "Button Fill Color",
+"default": "#fff"
+},
+{
+"type": "color",
+"id": "color_btn_border",
+"label": "Button Border Color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "color_btn_text",
+"label": "Button Text Color",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "color_btn_fill_hover",
+"label": "Button Fill Color (Hover)",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "color_btn_border_hover",
+"label": "Button Border Color (Hover)",
+"default": "#000"
+},
+{
+"type": "color",
+"id": "color_btn_text_hover",
+"label": "Button Text Color (Hover)",
+"default": "#fff"
+},
+{
+"type": "range",
+"id": "font_size_btn_desktop",
+"label": "Button Font Size (Desktop)",
+"default": 16,
+"min": 12,
+"max": 40,
+"step": 2,
+"unit": "px"
+},
+{
+"type": "range",
+"id": "font_size_btn_mobile",
+"label": "Button Font Size (Mobile)",
+"default": 14,
+"min": 10,
+"max": 40,
+"step": 2,
+"unit": "px"
+},
+{
+"type": "header",
+"content": "Advanced"
+},
+{
+"type": "text",
+"id": "css_class",
+"label": "CSS Class"
+},
+{
+"type": "textarea",
+"id": "custom_css",
+"label": "Custom CSS",
+"info": "Write your css here. Use !important when necessary."
+}
+],
+"presets": [
+{
+"name": "💫 Parallax image with text box",
+"category": "Luna Templates"
+}
+]
+}
+{% endschema %}

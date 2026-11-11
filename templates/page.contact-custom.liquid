@@ -1,0 +1,29 @@
+{{ form }}
+  {{ form.errors }}
+  <div class="field">
+    <label for="ContactFormName">Name</label>
+    <input type="text" id="ContactFormName" name="contact[name]" value="{{ form.name }}" />
+  </div>
+
+  <div class="field">
+    <label for="ContactFormEmail">Email</label>
+    <input type="email" id="ContactFormEmail" name="contact[email]" value="{{ form.email }}" />
+  </div>
+
+  <div class="field">
+    <label for="ContactFormMessage">Message</label>
+    <textarea rows="5" id="ContactFormMessage" name="contact[body]"></textarea>
+  </div>
+
+  <button type="submit">Send</button>
+{{ endform }}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{{ form 'contact' }}"
+  to: "{{ form }}"
+  position: 0..10
+{% endcomment %}

@@ -1,0 +1,215 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-page-header",
+      "settings": {
+        "container": "container-fluid",
+        "layout": "without_breadcrumb",
+        "header_height": "medium",
+        "text_alignment": "center",
+        "vertical_alignment": "center",
+        "text_color": "dark",
+        "bg_color": "#ffffff",
+        "enable_parallax": false,
+        "upper_title": true,
+        "show_desc": true,
+        "collection_all_desc": ""
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "26ef6509-772d-4c44-bd90-efc089bd9355": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "button",
+            "title": "Size",
+            "filtergroup": "XS,S,M,L,XL",
+            "show_label": false,
+            "use_accordion": false,
+            "open_filtergroup": true
+          }
+        },
+        "e12de6da-eab8-4abe-967c-06d0d959a18a": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "color",
+            "title": "Colors",
+            "filtergroup": "Blue, Red, White ,Black ,Pink ,Silver,Purple,Brown,Yellow,Grey,Green,Tan,Violet,Dark Grey,Beige,Light Blue, Dark Blue, Light Grey, Light Pink, Mint, Rose Gold, Night Blue, Copper, Coral, Rosy Brown",
+            "show_label": false,
+            "use_accordion": false,
+            "open_filtergroup": true
+          }
+        },
+        "fa31a837-9c99-4c92-8cfe-0527ffbe7b15": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "default",
+            "title": "Prices",
+            "filtergroup": "$0-$50,$50-$100,$100-$150,$150-$200,$200-$300,$300-$400",
+            "show_label": false,
+            "use_accordion": false,
+            "open_filtergroup": true
+          }
+        },
+        "4903963a-90f0-4fe1-be23-ee4f8749e483": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "inrow",
+            "title": "Brands",
+            "filtergroup": "Minimog,Retrolie,Abby,Brook,Learts,Vagabond",
+            "show_label": false,
+            "use_accordion": false,
+            "open_filtergroup": true
+          }
+        },
+        "00b3badd-1613-4230-85d8-f87f04306aaa": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "inrow",
+            "title": "Tags",
+            "filtergroup": "Dress,Tops,Shirts,Fashion,Hats,Sandal,Belt,Bags,Snacker,Denim,Minimog,Vagabond,Sunglasses, Beachwear,Vintage",
+            "show_label": false,
+            "use_accordion": true,
+            "open_filtergroup": true
+          }
+        },
+        "8df597c5-85f7-4c37-8ccd-b2fb8da27650": {
+          "type": "collections",
+          "settings": {
+            "title": "Collections",
+            "menu": "",
+            "show_image": false,
+            "use_accordion": true,
+            "open_filtergroup": true
+          }
+        }
+      },
+      "block_order": [
+        "26ef6509-772d-4c44-bd90-efc089bd9355",
+        "e12de6da-eab8-4abe-967c-06d0d959a18a",
+        "fa31a837-9c99-4c92-8cfe-0527ffbe7b15",
+        "4903963a-90f0-4fe1-be23-ee4f8749e483",
+        "00b3badd-1613-4230-85d8-f87f04306aaa",
+        "8df597c5-85f7-4c37-8ccd-b2fb8da27650"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "grid_layout": "grid",
+        "grid_columns": "4",
+        "show_columns_switcher": false,
+        "show_sorting": false,
+        "show_filter": false,
+        "filters_type": "storefront_filters",
+        "sidebar": "leftColumn",
+        "sidebar_title": "Filters",
+        "limit_height_widget": false,
+        "limit_height": 300,
+        "change_product_variant_on_fitlering": false,
+        "show_product_count": false,
+        "collapsed_groups": "Vendor",
+        "pagination_limit": 24,
+        "paginate_type": "paginate"
+      }
+    },
+    "175732201585a6c6ed": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_8CqQzx": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_8CqQzx"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "custom_class": ""
+      }
+    },
+    "17748452077efbfcdf": {
+      "type": "apps",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "custom_class": ""
+      }
+    },
+    "ss_simple_faq_CRYX6G": {
+      "type": "ss-simple-faq",
+      "blocks": {
+        "text_Nq6iMf": {
+          "type": "text",
+          "settings": {
+            "question": "Are silver coins worth collecting?",
+            "answer": "<p>Silver coins are highly popular among collectors due to their design, collectability, and limited releases. Many collectors focus on building sets or acquiring specific series over time.</p>"
+          }
+        },
+        "text_wdEmhd": {
+          "type": "text",
+          "settings": {
+            "question": "What makes silver coins collectable?",
+            "answer": "<p>Silver coins become collectable based on factors like design, mintage, series, and demand. Coins from well-known series or limited releases are often more sought after.</p>"
+          }
+        },
+        "text_bhUe8w": {
+          "type": "text",
+          "settings": {
+            "question": "What purity are silver coins?",
+            "answer": "<p>Most modern silver coins are struck in .999 or .9999 fine silver, depending on the mint and release.</p>"
+          }
+        },
+        "text_egMRJP": {
+          "type": "text",
+          "settings": {
+            "question": "Should I store silver coins in capsules?",
+            "answer": "<p>Yes. Using coin capsules is strongly recommended. They protect coins from scratches, handling damage, and exposure to air, helping maintain their condition.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_Nq6iMf",
+        "text_wdEmhd",
+        "text_bhUe8w",
+        "text_egMRJP"
+      ],
+      "name": "SS - FAQ #1",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "icon_color": "#ffffff",
+        "hover_color": "#ffffff",
+        "question_color": "#000000",
+        "background_color": "#d4af37",
+        "answer_color": "#000000",
+        "answer_bg_color": "#ffffff",
+        "questions-font-size": 1.5
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "main",
+    "175732201585a6c6ed",
+    "17748452077efbfcdf",
+    "ss_simple_faq_CRYX6G"
+  ]
+}

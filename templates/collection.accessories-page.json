@@ -1,0 +1,231 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "collection-header": {
+      "type": "collection-page-header",
+      "settings": {
+        "container": "container-fluid",
+        "layout": "without_breadcrumb",
+        "header_height": "medium",
+        "text_alignment": "center",
+        "vertical_alignment": "center",
+        "text_color": "dark",
+        "bg_color": "#ffffff",
+        "enable_parallax": false,
+        "upper_title": true,
+        "show_desc": true,
+        "collection_all_desc": ""
+      }
+    },
+    "main": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "26ef6509-772d-4c44-bd90-efc089bd9355": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "button",
+            "title": "Size",
+            "filtergroup": "XS,S,M,L,XL",
+            "show_label": false,
+            "use_accordion": false,
+            "open_filtergroup": true
+          }
+        },
+        "e12de6da-eab8-4abe-967c-06d0d959a18a": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "color",
+            "title": "Colors",
+            "filtergroup": "Blue, Red, White ,Black ,Pink ,Silver,Purple,Brown,Yellow,Grey,Green,Tan,Violet,Dark Grey,Beige,Light Blue, Dark Blue, Light Grey, Light Pink, Mint, Rose Gold, Night Blue, Copper, Coral, Rosy Brown",
+            "show_label": false,
+            "use_accordion": false,
+            "open_filtergroup": true
+          }
+        },
+        "fa31a837-9c99-4c92-8cfe-0527ffbe7b15": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "default",
+            "title": "Prices",
+            "filtergroup": "$0-$50,$50-$100,$100-$150,$150-$200,$200-$300,$300-$400",
+            "show_label": false,
+            "use_accordion": false,
+            "open_filtergroup": true
+          }
+        },
+        "4903963a-90f0-4fe1-be23-ee4f8749e483": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "inrow",
+            "title": "Brands",
+            "filtergroup": "Minimog,Retrolie,Abby,Brook,Learts,Vagabond",
+            "show_label": false,
+            "use_accordion": false,
+            "open_filtergroup": true
+          }
+        },
+        "00b3badd-1613-4230-85d8-f87f04306aaa": {
+          "type": "filter",
+          "settings": {
+            "design_filtergroup": "inrow",
+            "title": "Tags",
+            "filtergroup": "Dress,Tops,Shirts,Fashion,Hats,Sandal,Belt,Bags,Snacker,Denim,Minimog,Vagabond,Sunglasses, Beachwear,Vintage",
+            "show_label": false,
+            "use_accordion": true,
+            "open_filtergroup": true
+          }
+        },
+        "8df597c5-85f7-4c37-8ccd-b2fb8da27650": {
+          "type": "collections",
+          "settings": {
+            "title": "Collections",
+            "menu": "",
+            "show_image": false,
+            "use_accordion": true,
+            "open_filtergroup": true
+          }
+        }
+      },
+      "block_order": [
+        "26ef6509-772d-4c44-bd90-efc089bd9355",
+        "e12de6da-eab8-4abe-967c-06d0d959a18a",
+        "fa31a837-9c99-4c92-8cfe-0527ffbe7b15",
+        "4903963a-90f0-4fe1-be23-ee4f8749e483",
+        "00b3badd-1613-4230-85d8-f87f04306aaa",
+        "8df597c5-85f7-4c37-8ccd-b2fb8da27650"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "grid_layout": "grid",
+        "grid_columns": "4",
+        "show_columns_switcher": false,
+        "show_sorting": false,
+        "show_filter": false,
+        "filters_type": "storefront_filters",
+        "sidebar": "leftColumn",
+        "sidebar_title": "Filters",
+        "limit_height_widget": false,
+        "limit_height": 300,
+        "change_product_variant_on_fitlering": false,
+        "show_product_count": false,
+        "collapsed_groups": "Vendor",
+        "pagination_limit": 24,
+        "paginate_type": "paginate"
+      }
+    },
+    "175732201585a6c6ed": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_8CqQzx": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_8CqQzx"
+      ],
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "custom_class": ""
+      }
+    },
+    "17748452077efbfcdf": {
+      "type": "apps",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "custom_class": ""
+      }
+    },
+    "ss_simple_faq_CRYX6G": {
+      "type": "ss-simple-faq",
+      "blocks": {
+        "text_Nq6iMf": {
+          "type": "text",
+          "settings": {
+            "question": "What accessories do I need for coin collecting?",
+            "answer": "<p>At a minimum, most collectors use coin capsules to protect coins from scratches and air exposure. As collections grow, many also add storage boxes and display stands to organise and showcase their coins.</p>"
+          }
+        },
+        "text_wdEmhd": {
+          "type": "text",
+          "settings": {
+            "question": "Are coin capsules necessary?",
+            "answer": "<p>Yes. Coin capsules are one of the most important accessories for collectors. They help prevent physical damage, reduce exposure to air, and maintain the coin’s condition over time.</p>"
+          }
+        },
+        "text_bhUe8w": {
+          "type": "text",
+          "settings": {
+            "question": "What size coin capsule do I need?",
+            "answer": "<p>The size depends on the coin. Most silver coins (like 1oz silver coins) fit standard capsule sizes, but it’s always best to check the coin’s diameter to ensure a proper fit.</p>"
+          }
+        },
+        "text_egMRJP": {
+          "type": "text",
+          "settings": {
+            "question": "How should I store my coin collection?",
+            "answer": "<p>Coins should be stored in a cool, dry environment, ideally inside capsules and placed in a storage box or case. This reduces exposure to moisture, air, and handling damage.</p>"
+          }
+        },
+        "text_qqH8bh": {
+          "type": "text",
+          "settings": {
+            "question": "Can coin accessories increase the value of my collection?",
+            "answer": "<p>While accessories don’t increase the intrinsic value of a coin, they help preserve its condition, which is critical for maintaining long-term value and collectability. And you can also display your coins for friends and family to see.</p>"
+          }
+        },
+        "text_QKYzpd": {
+          "type": "text",
+          "settings": {
+            "question": "What are the best accessories for beginners?",
+            "answer": "<p>For beginners, we recommend starting with:</p><ul><li>Coin capsules</li><li>A simple storage box</li><li>A display stand (optional)</li></ul><p>This provides a strong foundation for protecting and enjoying your collection</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_Nq6iMf",
+        "text_wdEmhd",
+        "text_bhUe8w",
+        "text_egMRJP",
+        "text_qqH8bh",
+        "text_QKYzpd"
+      ],
+      "name": "SS - FAQ #1",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "icon_color": "#ffffff",
+        "hover_color": "#ffffff",
+        "question_color": "#000000",
+        "background_color": "#d4af37",
+        "answer_color": "#000000",
+        "answer_bg_color": "#ffffff",
+        "questions-font-size": 1.5
+      }
+    }
+  },
+  "order": [
+    "collection-header",
+    "main",
+    "175732201585a6c6ed",
+    "17748452077efbfcdf",
+    "ss_simple_faq_CRYX6G"
+  ]
+}

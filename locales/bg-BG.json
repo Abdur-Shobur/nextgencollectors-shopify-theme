@@ -1,0 +1,595 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "video": {
+      "close": "",
+      "pause": "",
+      "resume": "",
+      "play": ""
+    },
+    "collection_template": {
+      "apply": "",
+      "clear": "",
+      "clear_all": "",
+      "empty": "",
+      "from": "",
+      "filter_and_sort": "",
+      "filter_by_label": "",
+      "filter_button": "",
+      "filters_selected": {
+        "one": "",
+        "other": ""
+      },
+      "max_price": "",
+      "product_count": {
+        "one": "",
+        "other": ""
+      },
+      "product_count_simple": {
+        "one": "",
+        "other": ""
+      },
+      "reset": "",
+      "sort_button": "",
+      "sort_by_label": "",
+      "title": "",
+      "to": "",
+      "use_fewer_filters_html": ""
+    }
+  },
+  "general": {
+    "404": {
+      "title": "",
+      "button": "",
+      "subtext": ""
+    },
+    "accessibility": {
+      "skip_to_content": "",
+      "close_modal": "",
+      "unit_price_separator": "",
+      "error": "",
+      "link_messages": {
+        "new_window": "",
+        "external": "",
+        "new_window_and_external": ""
+      },
+      "refresh_page": "",
+      "selection_help": ""
+    },
+    "meta": {
+      "tags": "",
+      "page": ""
+    },
+    "time": {
+      "days": "",
+      "hrs": "",
+      "hours": "",
+      "mins": "",
+      "minutes": "",
+      "secs": "",
+      "seconds": ""
+    },
+    "breadcrumbs": {
+      "home": "",
+      "home_link_title": ""
+    },
+    "password_page": {
+      "opening_soon": "",
+      "spread_the_word": "",
+      "login_form_heading": "",
+      "login_form_password_label": "",
+      "login_form_password_placeholder": "",
+      "login_form_submit": "",
+      "signup_form_heading": "",
+      "signup_form_email_label": "",
+      "signup_form_email_placeholder": "",
+      "signup_form_submit": "",
+      "signup_form_success": "",
+      "admin_link_html": "",
+      "password_link": "",
+      "powered_by_shopify_html": ""
+    },
+    "social": {
+      "share_on_facebook": "",
+      "share_on_twitter": "",
+      "share_on_pinterest": "",
+      "alt_text": {
+        "share_on_facebook": "",
+        "share_on_twitter": "",
+        "share_on_pinterest": ""
+      }
+    },
+    "search": {
+      "title": "",
+      "placeholder": "",
+      "placeholder_short": "",
+      "popular_searches": "",
+      "results_for": "",
+      "more_results": "",
+      "submit": "",
+      "heading": {
+        "one": "Резултати: \"{{ terms }}\"",
+        "other": "Резултати: \"{{ terms }}\""
+      },
+      "results_with_count": {
+        "one": "Намерени {{ count }} резултата за \"{{ terms }}\"",
+        "other": "Намерени {{ count }} резултата за \"{{ terms }}\""
+      },
+      "no_results": "",
+      "no_results_html": ""
+    },
+    "newsletter_form": {
+      "newsletter_email": "Абонирай се!",
+      "email_placeholder": "Имейл",
+      "confirmation": "Благодарим!",
+      "submit": "Абонирай се!"
+    },
+    "payment": {
+      "options": "Начини на плащане"
+    },
+    "notifications": {
+      "item_added": "Продуктът е успешно добавен в количката",
+      "required_field": "Моля попълнете полетата (*) преди да добавите в количката!"
+    },
+    "foxkit": {
+      "add": "Добави",
+      "show_more": "Покажи повече",
+      "show_less": "Покажи по-малко"
+    }
+  },
+  "blogs": {
+    "general": {
+      "author_by_html": "",
+      "on": "",
+      "comment": "",
+      "no_article": ""
+    },
+    "article": {
+      "by_author": "",
+      "posted_in": "",
+      "tags": "",
+      "share": "",
+      "read_more": "",
+      "back_to_blog": "",
+      "title_result": "",
+      "related_title": "",
+      "next_post": "",
+      "previous_post": ""
+    },
+    "fields": {
+      "name": "",
+      "email": "",
+      "message": ""
+    },
+    "comments": {
+      "title": "",
+      "sub_title": "",
+      "name": "",
+      "email": "",
+      "message": "",
+      "post": "",
+      "website": "",
+      "reply": "",
+      "at_time": "",
+      "moderated": "",
+      "success_moderated": "",
+      "success": "",
+      "comments_with_count": {
+        "one": "",
+        "other": ""
+      }
+    }
+  },
+  "sidebar": {
+    "filtres_title": "",
+    "back": "",
+    "clear_all": "",
+    "text_remove_parameter": "",
+    "empty_search_parameter_html": ""
+  },
+  "cart": {
+    "form": {
+      "name": "",
+      "email": "",
+      "phone": "",
+      "message": "",
+      "send": "",
+      "post_success": ""
+    },
+    "general": {
+      "title": "",
+      "summary": "",
+      "remove": "",
+      "note": "",
+      "drawer_note": "",
+      "add_note": "",
+      "drawer_gift": "",
+      "shipping": "",
+      "drawer_coupon": "",
+      "subtotal": "",
+      "taxes_and_shipping_at_checkout": "",
+      "taxes_and_shipping_policy_at_checkout_html": "",
+      "taxes_included_but_shipping_at_checkout": "",
+      "taxes_included_and_shipping_policy_html": "",
+      "update": "",
+      "enter_discount_code": "",
+      "instruction_for_seller": "",
+      "checkout": "",
+      "viewcart": "",
+      "empty": "",
+      "cookies_required": "",
+      "continue_browsing_html": "",
+      "continue_shopping": "",
+      "item_quantity": "",
+      "savings": "",
+      "coupon_title": "",
+      "gift_title": "",
+      "estimate_shipping_title": "",
+      "estimate_shipping_button": "",
+      "note_title": "",
+      "cancel": "",
+      "save": "",
+      "zipcode_validate": "",
+      "shipping_rates_result": "",
+      "no_found_shipping_rate": "",
+      "recommend_title": ""
+    },
+    "label": {
+      "product": "",
+      "price": "",
+      "quantity": "",
+      "qty": "",
+      "total": "",
+      "discounted_price": "",
+      "original_price": "",
+      "regular_total": "",
+      "discounted_total": "",
+      "product_details": ""
+    }
+  },
+  "collections": {
+    "general": {
+      "no_matches": "",
+      "link_title": "",
+      "collection_items": ""
+    },
+    "sidebar": {
+      "filtres_title": "",
+      "back": "",
+      "filter_by": "",
+      "clear_all": "",
+      "text_remove_parameter": "",
+      "empty_search_parameter_html": ""
+    },
+    "toolbar": {
+      "filter": "",
+      "sort_by_title": "",
+      "grid_amount_title": "",
+      "items": "",
+      "button_show_more": "",
+      "button_show_more_disabled": "",
+      "all": "",
+      "show_filter": "",
+      "view_layout": "",
+      "view_list": "",
+      "grid_2cloumns": "",
+      "grid_3cloumns": "",
+      "grid_4cloumns": "",
+      "grid_5cloumns": ""
+    },
+    "sorting": {
+      "title": "",
+      "featured": "",
+      "best_selling": "",
+      "az": "",
+      "za": "",
+      "price_ascending": "",
+      "price_descending": "",
+      "date_ascending": "",
+      "date_descending": ""
+    },
+    "paginate": {
+      "load_more": ""
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Име",
+      "email": "Имейл",
+      "phone": "Телефон",
+      "message": "Съобщение",
+      "send": "Изпрати",
+      "post_success": "Благодарим ви, че се свързахте с нас! Ще ви отговорим възможно най-бързо!",
+      "save_infor_message": "Запази информация"
+    },
+    "ask-form": {
+      "heading": "Имаш въпрос?",
+      "name": "Име",
+      "email": "Имейл",
+      "phone": "Телефон",
+      "message": "Съобщение",
+      "required-fields": "Задължителни полета",
+      "send": "Изпрати",
+      "post_success": "Благодарим ви, че се свързахте с нас! Ще ви отговорим възможно най-бързо!"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "",
+      "page_title": "",
+      "dashboard": "",
+      "addresses": "",
+      "wishlist": "",
+      "log_out": "",
+      "details": "",
+      "name": "",
+      "email": "",
+      "view_addresses": "",
+      "return": ""
+    },
+    "activate_account": {
+      "title": "",
+      "subtext": "",
+      "password": "",
+      "password_confirm": "",
+      "submit": "",
+      "cancel": ""
+    },
+    "addresses": {
+      "title": "",
+      "your_addresses": "",
+      "default": "",
+      "add_new": "",
+      "edit_address": "",
+      "name": "",
+      "first_name": "",
+      "last_name": "",
+      "company": "",
+      "address1": "",
+      "address2": "",
+      "city": "",
+      "country": "",
+      "province": "",
+      "zip": "",
+      "phone": "",
+      "set_default": "",
+      "add": "",
+      "update": "",
+      "cancel": "",
+      "edit": "",
+      "delete": "",
+      "delete_confirm": ""
+    },
+    "login": {
+      "title": "",
+      "email": "",
+      "password": "",
+      "forgot_password": "",
+      "sign_in": "",
+      "sign_out": "",
+      "new_customer": "",
+      "register": "",
+      "cancel": "",
+      "guest_title": "",
+      "guest_continue": ""
+    },
+    "orders": {
+      "title": "",
+      "order_number": "",
+      "date": "",
+      "payment_status": "",
+      "fulfillment_status": "",
+      "total": "",
+      "make_your_first_order": "",
+      "none": ""
+    },
+    "order": {
+      "title": "",
+      "date": "",
+      "cancelled": "",
+      "cancelled_reason": "",
+      "billing_address": "",
+      "fulfilled_at_html": "",
+      "payment_status": "",
+      "shipping_address": "",
+      "fulfillment_status": "",
+      "discounts": "",
+      "shipping": "",
+      "tax": "",
+      "product": "",
+      "sku": "",
+      "price": "",
+      "quantity": "",
+      "total": "",
+      "fulfilled_at": "",
+      "track_shipment": "",
+      "tracking_url": "",
+      "tracking_company": "",
+      "tracking_number": "",
+      "subtotal": "",
+      "discount": ""
+    },
+    "recover_password": {
+      "title": "",
+      "email": "",
+      "submit": "",
+      "cancel": "",
+      "subtext": "",
+      "success": ""
+    },
+    "reset_password": {
+      "title": "",
+      "subtext": "",
+      "password": "",
+      "password_confirm": "",
+      "submit": ""
+    },
+    "register": {
+      "title": "",
+      "description": "",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "password": "",
+      "submit": "",
+      "cancel": ""
+    }
+  },
+  "homepage": {
+    "onboarding": {
+      "blog_title": "",
+      "blog_excerpt": "",
+      "blog_author": "",
+      "product_title": "",
+      "product_description": "",
+      "collection_title": "",
+      "no_content": "",
+      "blog_readmore": ""
+    }
+  },
+  "layout": {
+    "back_to_shopping": "",
+    "back": "",
+    "wishlist": {
+      "title": "Любими",
+      "no_products": ""
+    },
+    "compare": {
+      "title": "",
+      "no_products": ""
+    },
+    "cart": {
+      "title": "",
+      "items_count": {
+        "one": "",
+        "other": ""
+      }
+    },
+    "customer": {
+      "account": "",
+      "logged_in_as_html": "",
+      "log_out": "",
+      "log_in": "",
+      "create_account": ""
+    },
+    "footer": {
+      "social_platform": "",
+      "copyright": "",
+      "payment_methods": "",
+      "mobile_menu": {
+        "home": "",
+        "wishlist": "",
+        "compare": "",
+        "account": ""
+      }
+    }
+  },
+  "pages": {
+    "find_a_store": ""
+  },
+  "products": {
+    "product": {
+      "regular_price": "",
+      "sold_out": "",
+      "availability": "",
+      "brand": "",
+      "colors": "",
+      "in_stock": "",
+      "out_of_stock": "",
+      "unavailable": "",
+      "on_sale": "",
+      "on_sale_from_html": "",
+      "from_text_html": "",
+      "quantity": "",
+      "add_to_cart": "",
+      "add_to_wishlist": "",
+      "remove_from_wishlist": "",
+      "add_to_compare": "",
+      "add_a_question": "",
+      "remove_from_compare": "",
+      "quick_add": "",
+      "zoom_in": "",
+      "quick_view": "",
+      "show_options": "",
+      "collection": "",
+      "decrease_quantity": "",
+      "decrease_quantity_instant": "",
+      "increase_quantity": "",
+      "increase_quantity_instant": "",
+      "include_taxes": "",
+      "item_added_to_cart": {
+        "single": "",
+        "multi": ""
+      },
+      "quantity_indicator": {
+        "single": "",
+        "multi": ""
+      },
+      "preorder": "",
+      "product_quantity": "",
+      "product_quantity_instant": "",
+      "product_added_to_cart_title": "",
+      "product_updated_cart": "",
+      "product_removed_cart": "",
+      "product_recommendation_heading": "",
+      "product_details_table_heading": "",
+      "product_reviews_heading": "",
+      "quantity_minimum_message": "",
+      "not_enough_items_message": "",
+      "sale_price": "",
+      "see_more_options": "",
+      "sold_out_items_message": "",
+      "shipping_policy_html": "",
+      "view_details": "",
+      "vendor": "",
+      "type": "",
+      "sku": "",
+      "collections": "",
+      "no_collections": "",
+      "social_share": "",
+      "copy_link": "",
+      "unit_price_label": "",
+      "size_guide": "",
+      "estimation_text": "",
+      "save_html": "",
+      "recently_viewed_products": "",
+      "select_options": "",
+      "sold": "",
+      "available": "",
+      "saving_html": "",
+      "xr_button": "",
+      "xr_button_label": ""
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "",
+      "subtext": "",
+      "gift_card_code": "",
+      "shop_link": "",
+      "remaining_html": "",
+      "add_to_apple_wallet": "",
+      "qr_image_alt": "",
+      "copy_code": "",
+      "expired": "",
+      "copy_code_success": "",
+      "print_gift_card": ""
+    }
+  },
+  "date_formats": {
+    "month_day_year": ""
+  },
+  "accessibility": {
+    "link_messages": {
+      "new_window": ""
+    }
+  }
+}

@@ -1,0 +1,264 @@
+<!-- [Live Gold Price Editor] Display a Metal Price Bar at the top of the page -->
+
+<script>
+  const metalPriceConfig = {{ shop.metafields.DI-GoldPrice.metal_prices.value }};
+  console.log(metalPriceConfig);
+</script>
+
+<style>
+   .gpe-metal-price-bar {
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+     background-color: {{ section.settings.metal_price_bar_bg_color }};
+     color: {{ section.settings.metal_price_bar_text_color }};
+     padding-top: 8px;
+     padding-bottom: 8px;
+     font-family: "Helvetica Neue", Arial, sans-serif;
+     border-bottom: 0.1rem solid rgba(var(--color-foreground),.08);
+   }
+
+   .gpe-metal-price-bar .gpe-metal-type-container {
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+     align-items: center;
+   }
+
+   .gpe-metal-type-container {
+     padding-left: 32px;
+     padding-right: 32px;
+   }
+
+   .gpe-metal-type {
+     display: inline;
+     font-weight: 600;
+     font-size: 14px;
+   }
+
+   .gpe-metal-price {
+     display: inline;
+     font-weight: 600;
+     font-size: 14px;
+     padding-left: 12px;
+   }
+
+   .gpe-seperator {
+     display: none;
+   }
+
+   .gpe-price-increase {
+     font-size: 12px;
+     color: #7ec65f;
+   }
+
+   .gpe-triangle-up {
+       display: inline-block;
+       width: 0;
+       height: 0;
+       border-left: 4px solid transparent;
+       border-right: 4px solid transparent;
+       border-bottom: 8px solid #7ec65f;
+   }
+
+   .gpe-price-decrease {
+     font-size: 12px;
+     color: #d06969;
+   }
+
+   .gpe-triangle-down {
+       display: inline-block;
+       width: 0;
+       height: 0;
+       border-left: 4px solid transparent;
+       border-right: 4px solid transparent;
+       border-top: 8px solid #d06969;
+   }
+
+   @media(max-width: 576px) {
+     .gpe-metal-price-bar {
+       padding-top: 6px;
+       padding-bottom: 6px;
+       justify-content: space-evenly;
+     }
+
+     .gpe-metal-type-container {
+       padding-left: 0px;
+       padding-right: 0px;
+     }
+
+     .gpe-metal-price-bar .gpe-metal-type-container {
+       flex-direction: column;
+     }
+
+     .gpe-metal-type {
+       display: block;
+       font-size: 12px;
+     }
+
+     .gpe-metal-price {
+       display: block;
+       padding-left: 0;
+      text-align: center;
+     }
+
+     .gpe-seperator {
+       display: none;
+     }
+
+     .gpe-price-difference {
+       display: flex;
+       justify-content: center;
+     }
+
+  .gpe-hide-on-mobile {
+    display: none !important;
+  }
+   }
+</style>
+
+<!-- Display Metal Price in Grams -->
+<div class="gpe-metal-price-bar">
+  <div class="gpe-metal-type-container">
+    <strong class="gpe-metal-type">Gold <span class="gpe-seperator">:</span></strong>
+    <span class="gpe-metal-price">
+      {{- shop.metafields['DI-GoldPrice'].metal_prices.value.gold_price_24k | times: 31.1034768 | times: 100 | money -}}
+      /Oz
+      <span class="gpe-price-difference"
+        >(
+        {% if shop.metafields['DI-GoldPrice'].metal_prices.value.gold_price_change_oz contains '+' %}
+          <span class="gpe-price-increase">
+            <span class="gpe-triangle-up"></span>
+            {{ shop.metafields['DI-GoldPrice'].metal_prices.value.gold_price_change_oz | strip }}
+          </span>
+        {% else %}
+          <span class="gpe-price-decrease">
+            <span class="gpe-triangle-down"></span>
+            {{ shop.metafields['DI-GoldPrice'].metal_prices.value.gold_price_change_oz | strip }}
+          </span>
+        {% endif -%}
+        )
+      </span>
+
+      &nbsp;
+      {{- shop.metafields['DI-GoldPrice'].metal_prices.value.gold_price_24k | times: 100 | money -}}
+      /gram
+    </span>
+  </div>
+
+  <div class="gpe-metal-type-container">
+    <strong class="gpe-metal-type">Silver <span class="gpe-seperator">:</span></strong>
+    <span class="gpe-metal-price">
+      {{- shop.metafields['DI-GoldPrice'].metal_prices.value.silver_price | times: 31.1034768 | times: 100 | money -}}
+      /Oz
+      <span class="gpe-price-difference"
+        >(
+        {% if shop.metafields['DI-GoldPrice'].metal_prices.value.silver_price_change_oz contains '+' %}
+          <span class="gpe-price-increase">
+            <span class="gpe-triangle-up"></span>
+            {{ shop.metafields['DI-GoldPrice'].metal_prices.value.silver_price_change_oz | strip }}
+          </span>
+        {% else %}
+          <span class="gpe-price-decrease">
+            <span class="gpe-triangle-down"></span>
+            {{ shop.metafields['DI-GoldPrice'].metal_prices.value.silver_price_change_oz | strip }}
+          </span>
+        {% endif %}
+        )</span
+      >
+      &nbsp;
+      {{- shop.metafields['DI-GoldPrice'].metal_prices.value.silver_price | times: 100 | money -}}
+      /gram
+    </span>
+  </div>
+
+  <div class="gpe-metal-type-container">
+    <strong class="gpe-metal-type">Platinum <span class="gpe-seperator">:</span></strong>
+    <span class="gpe-metal-price">
+      {{- shop.metafields['DI-GoldPrice'].metal_prices.value.platinum_price | times: 31.1034768 | times: 100 | money -}}
+      /Oz
+      <span class="gpe-price-difference"
+        >(
+        {% if shop.metafields['DI-GoldPrice'].metal_prices.value.platinum_price_change_oz contains '+' %}
+          <span class="gpe-price-increase">
+            <span class="gpe-triangle-up"></span>
+            {{ shop.metafields['DI-GoldPrice'].metal_prices.value.platinum_price_change_oz | strip }}
+          </span>
+        {% else %}
+          <span class="gpe-price-decrease">
+            <span class="gpe-triangle-down"></span>
+            {{ shop.metafields['DI-GoldPrice'].metal_prices.value.platinum_price_change_oz | strip }}
+          </span>
+        {% endif %}
+        )</span
+      >
+
+      &nbsp;
+      {{- shop.metafields['DI-GoldPrice'].metal_prices.value.platinum_price | times: 100 | money -}}
+      /gram
+    </span>
+  </div>
+
+  <div class="gpe-metal-type-container gpe-hide-on-mobile">
+    <strong class="gpe-metal-type">Palladium <span class="gpe-seperator">:</span></strong>
+    <span class="gpe-metal-price">
+      {{-
+        shop.metafields['DI-GoldPrice'].metal_prices.value.palladium_price
+        | times: 31.1034768
+        | times: 100
+        | money
+      -}}
+      /Oz
+      <span class="gpe-price-difference"
+        >(
+        {% if shop.metafields['DI-GoldPrice'].metal_prices.value.palladium_price_change_oz contains '+' %}
+          <span class="gpe-price-increase">
+            <span class="gpe-triangle-up"></span>
+            {{ shop.metafields['DI-GoldPrice'].metal_prices.value.palladium_price_change_oz | strip }}
+          </span>
+        {% else %}
+          <span class="gpe-price-decrease">
+            <span class="gpe-triangle-down"></span>
+            {{ shop.metafields['DI-GoldPrice'].metal_prices.value.palladium_price_change_oz | strip }}
+          </span>
+        {% endif -%}
+        )</span
+      >
+
+      &nbsp;
+      {{- shop.metafields['DI-GoldPrice'].metal_prices.value.palladium_price | times: 100 | money -}}
+      /gram
+    </span>
+  </div>
+</div>
+
+{% schema %}
+{
+    "name": "Metal Price Bar",
+    "settings": [
+       {
+        "type": "color",
+        "id": "metal_price_bar_bg_color",
+        "label": "Background Color",
+        "default": "#484848"
+      },
+      {
+        "type": "color",
+        "id": "metal_price_bar_text_color",
+        "label": "Text Color",
+        "default": "#ffffff"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Metal Price Bar"
+      }
+    ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

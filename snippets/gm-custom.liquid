@@ -1,0 +1,56 @@
+<script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous"
+></script>
+
+<script>
+  var check = false;
+  var ga_interval = setInterval(checkApp, 100);
+  
+  function checkApp() {
+  	if (typeof GloboMenuConfig == 'object' && $('.gm-menu').length) {
+  		check = true;
+  		clearInterval(ga_interval);
+  	}
+  	if (check) {
+         $('.gm-menu:not(.gm-menu-mobile) > .gm-item.gm-level-0.gm-has-submenu:not(.show-first)').hover(function(e){
+          e.stopPropagation();
+          e.preventDefault();
+            if(!$(this).hasClass('gm-active')){
+              e.preventDefault();
+              $(this).addClass('gm-active');
+              $(this).closest('.gm-item').find('.gm-submenu').find('.gm-tab-contents > .gm-tab-content').removeClass('gm-active');
+              $(this).closest('.gm-item').find('.gm-submenu').find('.gm-tab-links > .gm-item').removeClass('gm-active');
+            }else{
+              $(this).removeClass('gm-active');
+            }
+          });
+        
+  		$('.gm-menu:not(.gm-menu-mobile) .gm-tab-links > .gm-item.gm-has-submenu > .gm-target').hover(function(o) {
+  			var item = $(o.currentTarget).closest(".gm-item");
+  			var links = $(o.currentTarget).closest(".gm-tab-links");
+  			var tabs = $(o.currentTarget)
+  				.closest(".gm-tabs")
+  				.find(" > .gm-tab-contents");
+  			var index = links.find(".gm-item").index(item);
+  			if (!item.hasClass("gm-active")) {
+  				o.preventDefault();
+  				o.stopPropagation();
+      			item.addClass("gm-active")
+  					.siblings()
+  					.removeClass("gm-active");
+  				tabs.find(" > .gm-tab-content")
+  					.eq(index)
+  					.addClass("gm-active")
+  					.siblings()
+      				.removeClass("gm-active");
+                  tabs.find(".gm-tab-links > .gm-item")
+      				.removeClass("gm-active");
+                  tabs.find(".gm-tab-contents > .gm-tab-content")
+      				.removeClass("gm-active");
+  			}
+  		});
+  	}
+  }
+</script>

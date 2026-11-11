@@ -1,0 +1,40 @@
+{%- comment -%}
+  Include this snippet within your existing product details section (e.g., product-details-tabs.liquid) where you want the tabs to appear.
+  Usage: `{% render 'ngc-custom-tabs' %}`
+{%- endcomment -%}
+
+<!-- NGC Custom Tabs: auto-generate tabs from <h5>Title</h5> blocks in product.description -->
+{% assign desc_raw = product.description | strip_newlines %}
+{% assign desc_parts = desc_raw | split: '<h5>' %}
+
+<div class="ngc-tabs-container">
+  <ul class="ngc-tabs-nav" role="tablist">
+    {% if settings.shared_tab_enabled %}  {# inherited from section settings #}
+      <li class="ngc-tab-header active" data-index="shared" role="tab">
+        {{ settings.shared_tab_header }}
+      </li>
+    {% endif %}
+    {% for part in desc_parts offset:1 %}
+      {% assign split_pair = part | split: '</h5>' %}
+      {% assign tab_title = split_pair[0] | strip %}
+      <li class="ngc-tab-header{% if forloop.first and settings.shared_tab_enabled == false %} active{% endif %}" data-index="tab-{{ forloop.index0 }}" role="tab">
+        {{ tab_title }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div class="ngc-tabs-panels">
+    {% if settings.shared_tab_enabled %}
+      <div class="ngc-tab-panel active" data-panel="shared" role="tabpanel">
+        {{ settings.shared_tab_content }}
+      </div>
+    {% endif %}
+    {% for part in desc_parts offset:1 %}
+      {% assign split_pair = part | split: '</h5>' %}
+      {% assign tab_content = split_pair[1] %}
+      <div class="ngc-tab-panel{% if forloop.first and settings.shared_tab_enabled == false %} active{% endif %}" data-panel="tab-{{ forloop.index0 }}" role="tabpanel">
+        {{ tab_content }}
+      </div>
+    {% endfor %}
+  </div>
+</div>
