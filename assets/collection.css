@@ -39,9 +39,20 @@
 }
 .collection-header__description {
   margin-top: 0.5rem !important;
-  max-width: 42rem;
+  max-width: var(--ng-coll-desc-max, 720px);
+  width: 100%;
+}
+.collection-header .text-center .collection-header__description {
   margin-left: auto;
   margin-right: auto;
+}
+.collection-header .text-left .collection-header__description {
+  margin-left: 0;
+  margin-right: auto;
+}
+.collection-header .text-right .collection-header__description {
+  margin-left: auto;
+  margin-right: 0;
 }
 .collection-header__description p:last-child {
   margin-bottom: 0;

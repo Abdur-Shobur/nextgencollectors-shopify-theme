@@ -31,12 +31,20 @@
   {% assign wrapper_height = 100 | divided_by: min_aspect_ratio %}
 {%- endif -%}
 
+{%- liquid
+  assign desc_max_width = section.settings.desc_max_width | default: 720
+  if section.settings.desc_max_width_enable == false
+    assign desc_max_width = 'none'
+  else
+    assign desc_max_width = desc_max_width | append: 'px'
+  endif
+-%}
 <div
     data-section-type="collection-header"
     data-section-id="{{ section.id }}"
     data-enable-parallax="{{ enable_parallax }}"
     class="collection-header overflow-hidden collection-header--{{ header_height }} flex items-{{ section.settings.vertical_alignment }} justify-center relative{{ custom_class }}"
-    style="--bg-color: {{ section.settings.bg_color | default: 'transparent' }}; {% if bg_image != blank %}--bg-image: url({{ bg_image | img_url: 'master' }}){% endif %};{% if header_height == 'adapt' %}height: {{- wrapper_height -}}vw{% endif %}"
+    style="--bg-color: {{ section.settings.bg_color | default: 'transparent' }}; --ng-coll-desc-max: {{ desc_max_width }}; {% if bg_image != blank %}--bg-image: url({{ bg_image | img_url: 'master' }}){% endif %};{% if header_height == 'adapt' %}height: {{- wrapper_height -}}vw{% endif %}"
 >
     <div class="collection-header__bg absolute -inset-0 bg-color bg-no-repeat bg-cover bg-center pointer-events-none {% if enable_parallax %} bg-fixed{% endif %}"></div>
     <div class="{{ section.settings.container }} text-{{ text_alignment }}">
@@ -220,6 +228,23 @@
         "id": "show_desc",
         "label": "Show description",
         "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "desc_max_width_enable",
+        "label": "Limit description width",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "desc_max_width",
+        "label": "Description max width",
+        "min": 320,
+        "max": 1200,
+        "step": 20,
+        "unit": "px",
+        "default": 720,
+        "info": "Used when “Limit description width” is enabled."
       },
       {
         "type": "richtext",

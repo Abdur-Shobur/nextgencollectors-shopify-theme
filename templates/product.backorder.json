@@ -87,15 +87,15 @@
           }
         },
         "bundler_quantity_break_target_element_wkpmVE": {
-          "type": "shopify://apps/bundler/blocks/quantity-break-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+          "type": "shopify://apps/bundler-bundles-app/blocks/quantity-break-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
           "settings": {}
         },
         "bundler_bundler_target_element_CiR8dF": {
-          "type": "shopify://apps/bundler/blocks/bundler-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+          "type": "shopify://apps/bundler-bundles-app/blocks/bundler-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
           "settings": {}
         },
         "bundler_volume_target_element_TgmTXp": {
-          "type": "shopify://apps/bundler/blocks/volume-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+          "type": "shopify://apps/bundler-bundles-app/blocks/volume-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
           "settings": {}
         },
         "image_hWhNGd": {

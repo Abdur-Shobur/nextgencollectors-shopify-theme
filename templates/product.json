@@ -72,7 +72,7 @@
           }
         },
         "bundler_quantity_break_target_element_zdqnYC": {
-          "type": "shopify://apps/bundler/blocks/quantity-break-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+          "type": "shopify://apps/bundler-bundles-app/blocks/quantity-break-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
           "settings": {}
         },
         "aov_ai_bundle_offer_volume_zNzNBq": {
@@ -96,7 +96,7 @@
           }
         },
         "bundler_volume_target_element_igN8AW": {
-          "type": "shopify://apps/bundler/blocks/volume-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+          "type": "shopify://apps/bundler-bundles-app/blocks/volume-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
           "settings": {}
         },
         "aov_ai_bundle_mix_match_offer_inline_YXGNBC": {
@@ -104,7 +104,7 @@
           "settings": {}
         },
         "bundler_bundler_target_element_zaGV8d": {
-          "type": "shopify://apps/bundler/blocks/bundler-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+          "type": "shopify://apps/bundler-bundles-app/blocks/bundler-target-element/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
           "settings": {}
         },
         "image_8yQk86": {
