@@ -43,7 +43,7 @@
       <ul class="mt-5 md:mt-16 grid md:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
         {% for item in search.results %}
           {% if item.object_type == 'product' %}
-            {% render 'product-card', product: item %}
+            {% render 'product-card', product: item, card_style: '5', image_ratio: settings.pcard_image_ratio %}
           {% endif %}
         {% endfor %}
       </ul>

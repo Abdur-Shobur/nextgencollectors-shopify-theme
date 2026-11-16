@@ -14,7 +14,7 @@
       "settings": {
         "container": "container-fluid",
         "layout": "without_breadcrumb",
-        "header_height": "medium",
+        "header_height": "small",
         "text_alignment": "center",
         "vertical_alignment": "center",
         "text_color": "dark",

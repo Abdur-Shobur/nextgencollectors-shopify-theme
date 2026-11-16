@@ -16,6 +16,14 @@
 	flex-direction: column;
 }
 
+.ng-pcard__form {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	height: 100%;
+	margin: 0;
+}
+
 .ng-pcard__media {
 	position: relative;
 	background: var(--ng-pc-img-bg);
@@ -309,4 +317,336 @@
 
 .sf__featured-collection.ng-fc--style-5 .sf__featured-collection-button {
 	display: none;
+}
+
+/* ---------- Collection / listing grid ---------- */
+.ng-collection-grid .ng-collection-grid__items,
+.ng-collection-grid [data-globo-filter-items] {
+	align-items: flex-start;
+}
+
+.ng-collection-grid .sf__col-item {
+	display: flex;
+	align-items: stretch;
+	margin-bottom: 1.25rem;
+}
+
+.ng-collection-grid .sf__col-item > .ng-pcard,
+.ng-collection-grid .sf__col-item > .sf__pcard {
+	width: 100%;
+}
+
+.ng-collection-grid .ng-pcard__form {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.ng-collection-grid .ng-pcard__title {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* Hide theme sidebar if Globo filter DOM is present (runtime fallback) */
+body:has(#gf-tree) .ng-collection-grid .sf__sidebar,
+body:has(.gf-filter-contents) .ng-collection-grid .sf__sidebar,
+body:has(.globo-listcollection-sidebar) .ng-collection-grid .sf__sidebar,
+.ng-collection-grid--globo .sf__sidebar {
+	display: none !important;
+}
+
+body:has(#gf-tree) .ng-collection-grid .sf__collection-container.sidebar__leftColumn,
+body:has(#gf-tree) .ng-collection-grid .sf__collection-container.sidebar__rightColumn,
+.ng-collection-grid--globo .sf__collection-container.sidebar__leftColumn,
+.ng-collection-grid--globo .sf__collection-container.sidebar__rightColumn {
+	display: block;
+}
+
+body:has(#gf-tree) .ng-collection-grid #CollectionProductGrid,
+.ng-collection-grid--globo #CollectionProductGrid {
+	width: 100% !important;
+	max-width: 100%;
+}
+
+/* Globo column wrappers — keep even row gaps */
+.ng-collection-grid [class*="spf-col-"] {
+	display: flex;
+	align-items: stretch;
+	margin-bottom: 1.25rem;
+	box-sizing: border-box;
+}
+
+.ng-collection-grid [class*="spf-col-"] > .spf-product-card {
+	width: 100%;
+}
+
+/* Globo filter cards → match Style 5 look */
+.spf-product-card {
+	--ng-pc-border: #e8e4dc;
+	--ng-pc-muted: #8a8580;
+	--ng-pc-ink: #231f20;
+	--ng-pc-bg: #fff;
+	--ng-pc-img-bg: #f5f3ef;
+	position: relative;
+	height: auto;
+	min-height: 0;
+	background: var(--ng-pc-bg);
+	border: 1px solid var(--ng-pc-border);
+	border-radius: 0.75rem;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	box-shadow: none;
+	margin: 0;
+}
+
+.spf-product-card__inner {
+	position: relative;
+	flex: none;
+	background: var(--ng-pc-img-bg);
+	border-radius: 0;
+	overflow: hidden;
+}
+
+/* Prefer footer ATC; hide legacy image-overlay form when footer exists */
+.spf-product-card:has(.spf-product-card__footer) .spf-product-card__inner > .spf-product__form {
+	display: none !important;
+}
+
+.spf-product-card__image-wrapper {
+	display: block;
+	position: relative;
+	padding-top: 100% !important;
+	height: 0 !important;
+	background: var(--ng-pc-img-bg);
+	overflow: hidden;
+}
+
+.spf-product-card__image {
+	position: absolute !important;
+	inset: 0;
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: contain !important;
+	object-position: center;
+}
+
+.spf-product-card .open-quick-view {
+	display: none !important;
+}
+
+.spf-product-card .spf-product__info {
+	padding: 0.875rem 1rem 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	flex: 1 1 auto;
+	min-height: 0;
+}
+
+.spf-product-card__footer {
+	margin-top: auto;
+	padding-top: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.spf-product-card .spf-product__form {
+	position: static !important;
+	flex: none;
+	width: auto !important;
+	height: auto !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	background: transparent !important;
+	transform: none !important;
+	inset: auto !important;
+	writing-mode: horizontal-tb !important;
+}
+
+.spf-product-card .spf-product__variants {
+	display: none !important;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart {
+	position: static !important;
+	width: 2.5rem !important;
+	height: 2.5rem !important;
+	min-width: 2.5rem !important;
+	max-width: 2.5rem !important;
+	min-height: 2.5rem !important;
+	max-height: 2.5rem !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border-radius: 0.5rem !important;
+	border: 1px solid var(--ng-pc-border) !important;
+	background: #fff !important;
+	color: var(--ng-pc-ink) !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	box-shadow: none !important;
+	overflow: visible !important;
+	writing-mode: horizontal-tb !important;
+	transform: none !important;
+	inset: auto !important;
+	left: auto !important;
+	right: auto !important;
+	top: auto !important;
+	bottom: auto !important;
+	cursor: pointer;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart:hover {
+	border-color: var(--ng-pc-ink) !important;
+	background: #faf9f7 !important;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart .spf-atc-text {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	border: 0 !important;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart .spf-atc-icon {
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	width: 1.125rem;
+	height: 1.125rem;
+	position: static !important;
+	clip: auto !important;
+	overflow: visible !important;
+	margin: 0 !important;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart .spf-atc-icon svg {
+	width: 1.125rem;
+	height: 1.125rem;
+	display: block;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart::before {
+	display: none !important;
+	content: none !important;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart.gPreorderBtn,
+.spf-product-card .spf-product__form-btn-addtocart.is-preorder {
+	width: auto !important;
+	min-width: 2.5rem !important;
+	max-width: none !important;
+	height: auto !important;
+	min-height: 2.5rem !important;
+	max-height: none !important;
+	padding: 0.4rem 0.75rem !important;
+	font-size: 0.6875rem !important;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	line-height: 1.2 !important;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart.gPreorderBtn .spf-atc-icon,
+.spf-product-card .spf-product__form-btn-addtocart.is-preorder .spf-atc-icon {
+	display: none !important;
+}
+
+.spf-product-card .spf-product__form-btn-addtocart.gPreorderBtn .spf-atc-text,
+.spf-product-card .spf-product__form-btn-addtocart.is-preorder .spf-atc-text {
+	position: static !important;
+	width: auto !important;
+	height: auto !important;
+	margin: 0 !important;
+	clip: auto !important;
+	overflow: visible !important;
+	font-size: inherit !important;
+}
+
+.spf-product-card__vendor,
+.spf-product-card__vendor a {
+	margin: 0;
+	font-size: 0.8125rem;
+	color: var(--ng-pc-muted);
+	text-decoration: none;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+.spf-product-card__title,
+.spf-product-card__title.h4 {
+	margin: 0;
+	font-size: 0.9375rem;
+	font-weight: 700;
+	line-height: 1.35;
+	color: var(--ng-pc-ink);
+	text-transform: none;
+	letter-spacing: -0.01em;
+}
+
+.spf-product-card__title a {
+	color: inherit;
+	text-decoration: none;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.spf-product-card__title a:hover {
+	color: var(--color-secondary, #8a6a1f);
+}
+
+.spf-product-card__price-wrapper {
+	margin: 0;
+	padding: 0;
+	min-width: 0;
+	font-size: 0.9375rem;
+	font-weight: 700;
+	color: var(--ng-pc-ink);
+}
+
+.spf-product-card__oldprice {
+	font-size: 0.8125rem;
+	font-weight: 500;
+	color: var(--ng-pc-muted);
+	margin-right: 0.35rem;
+}
+
+.spf-product-card__saleprice,
+.spf-product-card__price {
+	font-weight: 700;
+	color: var(--ng-pc-ink);
+}
+
+.spf-product-card .spf-product__label,
+.spf-product__label {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 3;
+	margin: 0;
+	border-radius: 0.35rem;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
 }

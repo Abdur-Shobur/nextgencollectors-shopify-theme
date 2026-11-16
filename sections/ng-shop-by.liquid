@@ -6,6 +6,9 @@
   assign view_all_link = section.settings.view_all_link
   assign show_arrows = section.settings.show_arrows
   assign image_fit = section.settings.image_fit
+  assign limit = section.settings.collections_to_show | default: 10
+  assign source = section.settings.source | default: 'selected'
+  assign shown = 0
 -%}
 
 <style>
@@ -48,38 +51,20 @@
       {%- endif -%}
 
       <div class="ng-shop-by__track" data-ng-shop-by-track>
-        {%- for block in section.blocks -%}
-          {%- liquid
-            assign item_title = blank
-            assign item_url = blank
-            assign item_image = blank
-
-            if block.type == 'collection'
-              assign col = block.settings.collection
-              if col != blank
-                assign item_title = block.settings.title | default: col.title
-                assign item_url = col.url
-                if block.settings.image != blank
-                  assign item_image = block.settings.image
-                elsif col.featured_image != blank
-                  assign item_image = col.featured_image
-                elsif col.products.first and col.products.first.featured_image
-                  assign item_image = col.products.first.featured_image
-                endif
+        {%- if source == 'all' -%}
+          {%- for collection in collections -%}
+            {%- if shown >= limit -%}{%- break -%}{%- endif -%}
+            {%- if collection.handle == 'frontpage' or collection.all_products_count == 0 -%}{%- continue -%}{%- endif -%}
+            {%- liquid
+              assign item_title = collection.title
+              assign item_url = collection.url
+              assign item_image = collection.featured_image
+              if item_image == blank and collection.products.first and collection.products.first.featured_image
+                assign item_image = collection.products.first.featured_image
               endif
-            else
-              assign item_title = block.settings.title
-              assign item_url = block.settings.link
-              assign item_image = block.settings.image
-            endif
-          -%}
-
-          {%- if item_title != blank or item_image != blank -%}
-            <a
-              class="ng-shop-by__item"
-              href="{{ item_url | default: '#' }}"
-              {{ block.shopify_attributes }}
-            >
+              assign shown = shown | plus: 1
+            -%}
+            <a class="ng-shop-by__item" href="{{ item_url }}">
               <span class="ng-shop-by__circle{% if image_fit == 'cover' %} ng-shop-by__circle--cover{% endif %}">
                 {%- if item_image != blank -%}
                   {{ item_image | image_url: width: 400 | image_tag:
@@ -92,12 +77,93 @@
                   {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
                 {%- endif -%}
               </span>
-              {%- if item_title != blank -%}
-                <span class="ng-shop-by__label">{{ item_title }}</span>
-              {%- endif -%}
+              <span class="ng-shop-by__label">{{ item_title }}</span>
             </a>
-          {%- endif -%}
-        {%- endfor -%}
+          {%- endfor -%}
+
+        {%- elsif source == 'selected' and section.settings.collections != blank -%}
+          {%- for collection in section.settings.collections -%}
+            {%- if shown >= limit -%}{%- break -%}{%- endif -%}
+            {%- liquid
+              assign item_title = collection.title
+              assign item_url = collection.url
+              assign item_image = collection.featured_image
+              if item_image == blank and collection.products.first and collection.products.first.featured_image
+                assign item_image = collection.products.first.featured_image
+              endif
+              assign shown = shown | plus: 1
+            -%}
+            <a class="ng-shop-by__item" href="{{ item_url }}">
+              <span class="ng-shop-by__circle{% if image_fit == 'cover' %} ng-shop-by__circle--cover{% endif %}">
+                {%- if item_image != blank -%}
+                  {{ item_image | image_url: width: 400 | image_tag:
+                    loading: 'lazy',
+                    widths: '120, 180, 240, 320, 400',
+                    sizes: '(max-width: 767px) 26vw, 140px',
+                    alt: item_title
+                  }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </span>
+              <span class="ng-shop-by__label">{{ item_title }}</span>
+            </a>
+          {%- endfor -%}
+
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            {%- if shown >= limit -%}{%- break -%}{%- endif -%}
+            {%- liquid
+              assign item_title = blank
+              assign item_url = blank
+              assign item_image = blank
+
+              if block.type == 'collection'
+                assign col = block.settings.collection
+                if col != blank
+                  assign item_title = block.settings.title | default: col.title
+                  assign item_url = col.url
+                  if block.settings.image != blank
+                    assign item_image = block.settings.image
+                  elsif col.featured_image != blank
+                    assign item_image = col.featured_image
+                  elsif col.products.first and col.products.first.featured_image
+                    assign item_image = col.products.first.featured_image
+                  endif
+                endif
+              else
+                assign item_title = block.settings.title
+                assign item_url = block.settings.link
+                assign item_image = block.settings.image
+              endif
+            -%}
+
+            {%- if item_title != blank or item_image != blank -%}
+              {%- assign shown = shown | plus: 1 -%}
+              <a
+                class="ng-shop-by__item"
+                href="{{ item_url | default: '#' }}"
+                {{ block.shopify_attributes }}
+              >
+                <span class="ng-shop-by__circle{% if image_fit == 'cover' %} ng-shop-by__circle--cover{% endif %}">
+                  {%- if item_image != blank -%}
+                    {{ item_image | image_url: width: 400 | image_tag:
+                      loading: 'lazy',
+                      widths: '120, 180, 240, 320, 400',
+                      sizes: '(max-width: 767px) 26vw, 140px',
+                      alt: item_title
+                    }}
+                  {%- else -%}
+                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </span>
+                {%- if item_title != blank -%}
+                  <span class="ng-shop-by__label">{{ item_title }}</span>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -110,6 +176,7 @@
   "name": "Shop by circles",
   "tag": "section",
   "class": "section-ng-shop-by",
+  "max_blocks": 50,
   "settings": [
     {
       "type": "text",
@@ -127,6 +194,48 @@
       "type": "url",
       "id": "view_all_link",
       "label": "View all link"
+    },
+    {
+      "type": "header",
+      "content": "Collections"
+    },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Collections source",
+      "default": "selected",
+      "options": [
+        {
+          "value": "selected",
+          "label": "Selected collections"
+        },
+        {
+          "value": "all",
+          "label": "All collections"
+        },
+        {
+          "value": "blocks",
+          "label": "Manual blocks"
+        }
+      ],
+      "info": "Selected = use the collection picker below. All = auto from store. Blocks = use section blocks."
+    },
+    {
+      "type": "collection_list",
+      "id": "collections",
+      "label": "Select collections",
+      "limit": 50,
+      "info": "Used when source is “Selected collections”."
+    },
+    {
+      "type": "range",
+      "id": "collections_to_show",
+      "label": "Collections to show",
+      "min": 4,
+      "max": 30,
+      "step": 1,
+      "default": 10,
+      "info": "Maximum number of category circles to display."
     },
     {
       "type": "select",
@@ -234,16 +343,10 @@
   "presets": [
     {
       "name": "Shop by circles",
-      "blocks": [
-        { "type": "custom", "settings": { "title": "Gold" } },
-        { "type": "custom", "settings": { "title": "Silver" } },
-        { "type": "custom", "settings": { "title": "Copper" } },
-        { "type": "custom", "settings": { "title": "Accessories" } },
-        { "type": "custom", "settings": { "title": "Australian Coins" } },
-        { "type": "custom", "settings": { "title": "Germania Mint" } },
-        { "type": "custom", "settings": { "title": "Perth Mint" } },
-        { "type": "custom", "settings": { "title": "Mint XXI" } }
-      ]
+      "settings": {
+        "source": "selected",
+        "collections_to_show": 10
+      }
     }
   ]
 }

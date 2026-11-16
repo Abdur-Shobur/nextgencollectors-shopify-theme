@@ -13,12 +13,25 @@
   {%- assign show_filter = false -%}
 {%- endif -%}
 
+{%- comment -%} Globo Product Filter already renders its own sidebar — avoid duplicate theme filters {%- endcomment -%}
+{%- assign globo_filter_active = false -%}
+{%- if shop.metafields.globoFilter != blank -%}
+  {%- assign globo_filter_active = true -%}
+{%- endif -%}
+{%- assign show_theme_filter = show_filter -%}
+{%- if globo_filter_active and st.hide_theme_filter_with_globo -%}
+  {%- assign show_theme_filter = false -%}
+{%- endif -%}
+
+{{ 'ng-product-card.css' | asset_url | stylesheet_tag }}
+
 <section
   data-section-type="collection-template"
   data-section-id="{{ section.id }}"
+  class="ng-collection-grid{% if globo_filter_active %} ng-collection-grid--globo{% endif %}"
   data-filters-type="{{ st.filters_type }}"
   data-filters-position="{{ st.sidebar }}"
-  data-enable-filters="{{ st.show_filter }}"
+  data-enable-filters="{{ show_theme_filter }}"
   data-enable-sorting="{{ st.show_sorting }}"
   data-show-col-switchers="{{ st.show_columns_switcher }}"
   data-pagination-type="{{ st.paginate_type }}"
@@ -26,11 +39,11 @@
   data-initial-column="{{ initial_column }}"
 >
   <div class="{{ st.container }}{% if st.container == 'w-full' %} px-4 xl:px-[30px]{% endif %}">
-    <div class="sf__collection-container {% if st.show_filter %}sidebar__{{ st.sidebar }}{% endif %}">
-      {%- render 'collection-sidebar', show_filter: show_filter -%}
-      <div id="CollectionProductGrid" class="flex-1 w-full {% unless st.sidebar == 'fixed' or st.show_filter == false %}xl:w-3/4 2xl:w-4/5{% endunless %}">
-        {%- render 'collection-page-toolbar', show_filter: show_filter -%}
-        {%- if st.show_filter -%}
+    <div class="sf__collection-container {% if show_theme_filter %}sidebar__{{ st.sidebar }}{% endif %}">
+      {%- render 'collection-sidebar', show_filter: show_theme_filter -%}
+      <div id="CollectionProductGrid" class="flex-1 w-full {% unless st.sidebar == 'fixed' or show_theme_filter == false %}xl:w-3/4 2xl:w-4/5{% endunless %}">
+        {%- render 'collection-page-toolbar', show_filter: show_theme_filter -%}
+        {%- if show_theme_filter -%}
           {%- if st.filters_type == 'storefront_filters' -%}
             {%- render 'collection-filters-facets' -%}
           {%- else -%}
@@ -49,12 +62,12 @@
               data-total-pages="{{ paginate.pages }}"
               data-product-container
             >
-              <div class="mt-6 flex flex-wrap -mx-2 xl:-mx-3"
+              <div class="mt-6 flex flex-wrap -mx-2 xl:-mx-3 ng-collection-grid__items"
                 data-globo-filter-items data-section-id="{% if section.id %}{{section.id}}{% endif %}" data-sectionId="{% if section.id %}{{section.id}}{% endif %}" {% if section.blocks %}data-blocks='{ {%- capture blocks_json -%}{% for block in section.blocks %}{%- capture block_json -%}"{{ block.type }}":{{ block.settings | json }}{%- endcapture -%}{{ block_json | prepend: ","  }}{% endfor %}{%- endcapture -%}{{ blocks_json | remove_first: "," }} }' {% endif %} data-settings='{% if section.settings %}{{section.settings | json}}{% endif %}'
                 >
                 {%- for product in collection.products -%}
                   <div class="sf__col-item w-6/12 md:w-4/12 px-2 xl:px-3">
-                    {%- render 'product-card', product: product -%}
+                    {%- render 'product-card', product: product, card_style: '5', image_ratio: settings.pcard_image_ratio -%}
                   </div>
                 {%- endfor -%}
               </div>
@@ -178,6 +191,13 @@
         "id": "show_filter",
         "label": "Enable filtering",
         "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_theme_filter_with_globo",
+        "label": "Hide theme filters when Globo Filter is active",
+        "default": true,
+        "info": "Prevents duplicate sidebars. Keep Globo Product Filter as the only filter UI."
       },
       {
         "type": "select",

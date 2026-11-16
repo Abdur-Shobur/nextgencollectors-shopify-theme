@@ -1,0 +1,57 @@
+{%- liquid
+  assign card_title = title | default: collection.title | default: 'Collection'
+  assign card_url = collection.url | default: '#'
+  assign card_image = image
+  if card_image == blank and collection != blank and collection.featured_image != blank
+    assign card_image = collection.featured_image
+  endif
+  if card_image == blank and collection != blank and collection.products.first and collection.products.first.featured_image
+    assign card_image = collection.products.first.featured_image
+  endif
+
+  assign card_meta = collection.description | strip_html | truncate: 72
+  if card_meta == blank and collection != blank and collection.all_products_count != blank
+    assign card_meta = collection.all_products_count | append: ' products'
+  endif
+
+  assign product_count = collection.all_products_count | default: 0
+-%}
+
+<a
+  class="ng-coll-card"
+  href="{{ card_url }}"
+  {% if block %}{{ block.shopify_attributes }}{% endif %}
+>
+  <div class="ng-coll-card__media">
+    {%- if card_image != blank -%}
+      {{ card_image | image_url: width: 800 | image_tag:
+        loading: 'lazy',
+        widths: '200, 300, 400, 600, 800',
+        sizes: '(max-width: 767px) 50vw, 25vw',
+        alt: card_title
+      }}
+    {%- else -%}
+      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+
+  <div class="ng-coll-card__body">
+    <h3 class="ng-coll-card__title">{{ card_title }}</h3>
+    {%- if card_meta != blank -%}
+      <p class="ng-coll-card__meta">{{ card_meta }}</p>
+    {%- endif -%}
+
+    <div class="ng-coll-card__footer">
+      <p class="ng-coll-card__count">
+        {{ product_count }}
+        <span>{% if product_count == 1 %}item{% else %}items{% endif %}</span>
+      </p>
+      <span class="ng-coll-card__cta" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/>
+          <path d="m13 6 6 6-6 6"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+</a>
