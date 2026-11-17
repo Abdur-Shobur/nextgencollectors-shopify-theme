@@ -1,64 +1,112 @@
-/* NextGen trust / value bar — horizontal icon + text */
+/* NextGen trust / value props */
 
 .ng-vp {
 	--ng-vp-ink: #231f20;
-	--ng-vp-muted: #6b6560;
-	--ng-vp-line: #ebe6dc;
+	--ng-vp-muted: #6f6963;
+	--ng-vp-line: rgba(35, 31, 32, 0.1);
 	--ng-vp-bar: #f4f1ea;
 	--ng-vp-accent: #d3b566;
+	--ng-vp-icon-bg: #fff;
 	background: transparent;
 	color: var(--ng-vp-ink);
-	padding: clamp(1.25rem, 3vw, 2rem) 0;
+	padding: var(--ng-vp-pad-y, 2rem) 0;
+}
+
+.ng-vp__heading {
+	margin: 0 0 1.35rem;
+	font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.85rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+	color: var(--ng-vp-ink);
 }
 
 .ng-vp__bar {
-	border: 1px solid var(--ng-vp-bar);
-	border-radius: 1.25rem;
-	padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1rem, 2.5vw, 2rem);
+	position: relative;
+	background: var(--ng-vp-bar);
+	border: 1px solid var(--ng-vp-line);
+	border-radius: 1.35rem;
+	padding: clamp(1.5rem, 2.8vw, 2.15rem) clamp(1.1rem, 2.5vw, 2rem);
+	overflow: hidden;
+}
+
+.ng-vp__bar::before {
+	content: "";
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: 4px;
+	background: linear-gradient(180deg, var(--ng-vp-accent), color-mix(in srgb, var(--ng-vp-accent) 45%, #231f20));
+	border-radius: 1.25rem 0 0 1.25rem;
+	pointer-events: none;
 }
 
 .ng-vp__grid {
 	display: grid;
 	grid-template-columns: repeat(var(--ng-vp-cols, 4), minmax(0, 1fr));
-	gap: clamp(1rem, 2.5vw, 2rem);
-	align-items: center;
+	gap: 0;
+	align-items: stretch;
 }
 
 .ng-vp__card {
+	position: relative;
 	display: flex;
-	align-items: flex-start;
-	gap: 0.875rem;
+	align-items: center;
+	gap: 1.1rem;
+	min-width: 0;
+	padding: 0.75rem 1.35rem;
 	text-decoration: none;
 	color: inherit;
-	min-width: 0;
-	transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+	transition:
+		transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+		background-color 0.2s ease;
 }
 
-.ng-vp__card:hover {
+.ng-vp__card + .ng-vp__card::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 18%;
+	bottom: 18%;
+	width: 1px;
+	background: var(--ng-vp-line);
+}
+
+a.ng-vp__card:hover {
 	transform: translateY(-2px);
+}
+
+a.ng-vp__card:focus-visible {
+	outline: 2px solid var(--ng-vp-accent);
+	outline-offset: 3px;
+	border-radius: 0.75rem;
 }
 
 .ng-vp__icon {
 	flex: none;
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 3.5rem;
+	height: 3.5rem;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	border-radius: 50%;
+	background: var(--ng-vp-icon-bg);
+	border: 1px solid color-mix(in srgb, var(--ng-vp-accent) 35%, #e8e4dc);
+	box-shadow: 0 1px 2px rgba(35, 31, 32, 0.04);
 	color: var(--ng-vp-ink);
 }
 
 .ng-vp__icon img {
-	width: 100%;
-	height: 100%;
+	width: 1.75rem;
+	height: 1.75rem;
 	object-fit: contain;
 	display: block;
 }
 
 .ng-vp__icon svg {
-	width: 1.625rem;
-	height: 1.625rem;
-	stroke-width: 1.6;
+	width: 1.65rem;
+	height: 1.65rem;
+	stroke-width: 1.7;
+	color: var(--ng-vp-accent);
 }
 
 .ng-vp__content {
@@ -71,17 +119,17 @@
 
 .ng-vp__title {
 	margin: 0;
-	font-size: 0.95rem;
+	font-size: 1.05rem;
 	font-weight: 700;
 	line-height: 1.3;
-	letter-spacing: -0.01em;
+	letter-spacing: -0.015em;
 	color: var(--ng-vp-ink);
 }
 
 .ng-vp__text {
 	margin: 0;
-	font-size: 0.8125rem;
-	line-height: 1.4;
+	font-size: 0.9rem;
+	line-height: 1.45;
 	color: var(--ng-vp-muted);
 }
 
@@ -90,34 +138,56 @@
 }
 
 .ng-vp__text p + p {
-	margin-top: 0.2rem;
+	margin-top: 0.15rem;
 }
 
 @media (max-width: 989.98px) {
+	.ng-vp__bar::before {
+		display: none;
+	}
+
 	.ng-vp__grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1.25rem 1.5rem;
+		gap: 0.75rem;
+	}
+
+	.ng-vp__card {
+		padding: 0.85rem 0.9rem;
+		background: color-mix(in srgb, #fff 70%, var(--ng-vp-bar));
+		border-radius: 0.9rem;
+		border: 1px solid var(--ng-vp-line);
+	}
+
+	.ng-vp__card + .ng-vp__card::before {
+		display: none;
 	}
 }
 
 @media (max-width: 549.98px) {
 	.ng-vp__bar {
 		border-radius: 1rem;
-		padding: 1.125rem 1rem;
+		padding: 0.85rem;
 	}
 
 	.ng-vp__grid {
 		grid-template-columns: 1fr;
-		gap: 1.125rem;
+		gap: 0.65rem;
+	}
+
+	.ng-vp__card {
+		padding: 0.9rem 1rem;
+	}
+
+	.ng-vp__icon {
+		width: 2.75rem;
+		height: 2.75rem;
 	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.ng-vp__card {
+	.ng-vp__card,
+	a.ng-vp__card:hover {
 		transition: none;
-	}
-
-	.ng-vp__card:hover {
 		transform: none;
 	}
 }

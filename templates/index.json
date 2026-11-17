@@ -193,49 +193,57 @@
         "sb_gold": {
           "type": "custom",
           "settings": {
-            "title": "Gold"
+            "title": "Gold",
+            "link": ""
           }
         },
         "sb_silver": {
           "type": "custom",
           "settings": {
-            "title": "Silver"
+            "title": "Silver",
+            "link": ""
           }
         },
         "sb_copper": {
           "type": "custom",
           "settings": {
-            "title": "Copper"
+            "title": "Copper",
+            "link": ""
           }
         },
         "sb_accessories": {
           "type": "custom",
           "settings": {
-            "title": "Accessories"
+            "title": "Accessories",
+            "link": ""
           }
         },
         "sb_aus": {
           "type": "custom",
           "settings": {
-            "title": "Australian Coins"
+            "title": "Australian Coins",
+            "link": ""
           }
         },
         "sb_germania": {
           "type": "custom",
           "settings": {
-            "title": "Germania Mint"
+            "title": "Germania Mint",
+            "link": ""
           }
         },
         "sb_perth": {
           "type": "custom",
           "settings": {
-            "title": "Perth Mint"
+            "title": "Perth Mint",
+            "link": ""
           }
         },
         "sb_mintxxi": {
           "type": "custom",
           "settings": {
-            "title": "Mint XXI"
+            "title": "Mint XXI",
+            "link": ""
           }
         }
       },
@@ -253,9 +261,9 @@
         "heading": "Shop by Category",
         "view_all_label": "View all categories →",
         "view_all_link": "shopify://collections",
-        "source": "blocks",
+        "source": "all",
         "collections": [],
-        "collections_to_show": 10,
+        "collections_to_show": 30,
         "container": "container-fluid",
         "item_size": 128,
         "image_fit": "contain",
@@ -305,6 +313,7 @@
         "ad_c1": {
           "type": "ad",
           "settings": {
+            "image": "shopify://shop_images/Witchcraft_Medium_Banner_1440x900_0e0f5c08-9f96-4aea-9162-78b211c69767.png",
             "link": "",
             "alt_text": "Promo 1"
           }
@@ -422,8 +431,12 @@
         "heading": "",
         "header_alignment": "center",
         "container": "container-fluid",
+        "item_per_row": 4,
+        "use_line_icons": true,
         "background_color": "#f4f1ea",
         "accent_color": "#d3b566",
+        "icon_background": "#ffffff",
+        "padding_y": 36,
         "item_per_row": 4,
         "use_line_icons": true
       }
@@ -468,6 +481,7 @@
         "ad_1": {
           "type": "ad",
           "settings": {
+            "image": "shopify://shop_images/Witchcraft_Medium_Banner_1440x900_0e0f5c08-9f96-4aea-9162-78b211c69767.png",
             "link": "shopify://collections/black-friday-sales",
             "alt_text": "Promo 1"
           }

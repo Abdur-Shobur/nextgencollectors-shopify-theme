@@ -9,7 +9,9 @@
   #ng-vp-{{ section.id }} {
     --ng-vp-bar: {{ section.settings.background_color | default: '#f4f1ea' }};
     --ng-vp-accent: {{ section.settings.accent_color | default: settings.color_primary | default: '#d3b566' }};
+    --ng-vp-icon-bg: {{ section.settings.icon_background | default: '#ffffff' }};
     --ng-vp-cols: {{ cols }};
+    --ng-vp-pad-y: {{ section.settings.padding_y | default: 36 }}px;
   }
 </style>
 
@@ -20,7 +22,7 @@
 >
   <div class="{{ section.settings.container }}">
     {%- if section.settings.heading != blank -%}
-      <h2 class="ng-vp__heading" style="margin:0 0 1rem;font-size:1.5rem;font-weight:700;text-align:{{ section.settings.header_alignment }};">
+      <h2 class="ng-vp__heading" style="text-align:{{ section.settings.header_alignment }};">
         {{ section.settings.heading }}
       </h2>
     {%- endif -%}
@@ -123,17 +125,33 @@
       "default": 4
     },
     {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
       "type": "checkbox",
       "id": "use_line_icons",
       "label": "Use line icons (ignore uploaded images)",
       "default": true,
-      "info": "Matches the trust-bar mock. Turn off to use custom icon images."
+      "info": "Turn off to use custom icon images."
     },
     {
       "type": "color",
       "id": "background_color",
       "label": "Bar background",
       "default": "#f4f1ea"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Icon background",
+      "default": "#ffffff"
     },
     {
       "type": "color",
@@ -192,32 +210,32 @@
         {
           "type": "item",
           "settings": {
-            "icon_type": "shipping",
-            "title": "Free Shipping",
-            "description": "<p>On orders over $50</p>"
+            "icon_type": "price",
+            "title": "Competitive Pricing",
+            "description": "<p>Aligned with Australian dealers</p>"
           }
         },
         {
           "type": "item",
           "settings": {
-            "icon_type": "returns",
-            "title": "Easy Returns",
-            "description": "<p>30-day money back</p>"
+            "icon_type": "shipping",
+            "title": "Domestic & International",
+            "description": "<p>Shipped with Australia Post</p>"
           }
         },
         {
           "type": "item",
           "settings": {
             "icon_type": "secure",
-            "title": "Secure Payments",
-            "description": "<p>100% protected checkout</p>"
+            "title": "Secure Shipping",
+            "description": "<p>Tracked, signature & insurance options</p>"
           }
         },
         {
           "type": "item",
           "settings": {
             "icon_type": "support",
-            "title": "24/7 Support",
+            "title": "Expert Support",
             "description": "<p>We’re here to help</p>"
           }
         }
