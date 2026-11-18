@@ -134,103 +134,165 @@
               "link": "/"
             }
           },
-          "nav_latest": {
-            "type": "nav_link",
+          "mega_new": {
+            "type": "mega_columns",
             "settings": {
-              "label": "Latest Releases"
+              "label": "New Releases",
+              "columns": 4,
+              "show_collection_images": true,
+              "image_style": "rounded",
+              "col_1_heading": "New Arrivals",
+              "col_1_collections": [
+                "recently-added",
+                "new-releases",
+                "latest-silver",
+                "perth-mint-latest-release"
+              ],
+              "col_2_heading": "Popular",
+              "col_2_collections": [
+                "top-sellers",
+                "in-stock"
+              ],
+              "col_3_heading": "Upcoming",
+              "col_3_collections": [
+                "preorders"
+              ],
+              "col_4_heading": "Special Offers",
+              "col_4_collections": [
+                "black-friday-sales"
+              ],
+              "footer_label": "",
+              "footer_url": ""
             }
           },
-          "mega_buy": {
-            "type": "mega_buy",
+          "mega_shop_all": {
+            "type": "mega_columns",
             "settings": {
-              "label": "Buy",
-              "metal_heading": "Shop by metal",
-              "metal_1_title": "Gold Collectables",
-              "metal_1_swatch": "gold",
-              "metal_1_link_1_label": "Gold Collectables Coins",
-              "metal_1_link_2_label": "Gold Proof Coins",
-              "metal_2_title": "Silver Collectables",
-              "metal_2_swatch": "silver",
-              "metal_2_link_1_label": "All Silver Collectables",
-              "metal_2_link_2_label": "American Eagles Coins",
-              "metal_2_link_3_label": "Mexican Libertads Coins",
-              "metal_3_title": "Copper",
-              "metal_3_swatch": "copper",
-              "metal_3_link_1_label": "Shop all Copper",
-              "mint_heading": "Shop by mint",
-              "mint_1_mark": "G",
-              "mint_1_label": "Germania Mint",
-              "mint_2_mark": "M",
-              "mint_2_label": "La Casa de Moneda de México",
-              "mint_3_mark": "X",
-              "mint_3_label": "Mint XXI",
-              "mint_4_mark": "S",
-              "mint_4_label": "Scottsdale Mint",
-              "mint_5_mark": "T",
-              "mint_5_label": "T&S",
-              "mint_6_mark": "P",
-              "mint_6_label": "The Perth Mint",
-              "mint_7_mark": "R",
-              "mint_7_label": "The Royal Australian Mint",
-              "mint_8_mark": "U",
-              "mint_8_label": "US Mint",
-              "mint_9_mark": "C",
-              "mint_9_label": "United Crypto States",
-              "series_heading": "Silver series",
-              "series_1_label": "Christmas American Silver Eagles Coins",
-              "series_2_label": "Germania Mint – Rune Series",
-              "series_3_label": "Germania Mint – Norns Coins",
-              "series_4_label": "Mint XXI Coins",
-              "series_5_label": "Scottsdale Mint Coins",
-              "series_6_label": "T&S Coins",
-              "series_7_label": "The Perth Mint Coins",
-              "series_8_label": "The Royal Australian Mint Coins",
-              "series_9_label": "United Crypto States Coins"
-            }
-          },
-          "nav_copper": {
-            "type": "nav_dropdown",
-            "settings": {
-              "label": "Copper",
-              "link_1_label": "Shop all Copper",
-              "link_2_label": "Copper Bars"
+              "label": "Shop All",
+              "columns": 4,
+              "show_collection_images": true,
+              "image_style": "rounded",
+              "col_1_heading": "Shop by Metal",
+              "col_1_collections": [
+                "gold-coins",
+                "gold-minted-bars",
+                "silver",
+                "silver-coins",
+                "copper"
+              ],
+              "col_2_heading": "Shop by Mint",
+              "col_2_collections": [
+                "germania",
+                "scottsdale-mint",
+                "mint-xxi",
+                "the-perth-mint",
+                "royal-australian-mint",
+                "t-s-coins"
+              ],
+              "col_3_heading": "Silver Series",
+              "col_3_collections": [
+                "american-silver-eagles",
+                "germania-witchcraft-series",
+                "ragnarok-series",
+                "norns-series",
+                "runes",
+                "lunar-coins",
+                "proof"
+              ],
+              "col_4_heading": "Shop by Interest",
+              "col_4_collections": [
+                "limited-edition-coins",
+                "commemorative-coins",
+                "coloured-coins",
+                "pokemon",
+                "sports",
+                "gift-ideas",
+                "theme"
+              ],
+              "footer_label": "View all collections",
+              "footer_url": "shopify://collections"
             }
           },
           "mega_aus": {
-            "type": "mega_feature",
+            "type": "mega_columns",
             "settings": {
               "label": "Australian Coins",
-              "links_heading": "Australian Coins",
-              "link_1_label": "Uncirculated $2 Coins - Bundle Page",
-              "link_2_label": "Uncirculated $2 Coins",
-              "link_3_label": "Bluey 2026 5 Coin Folder",
-              "link_4_label": "C-Mint Cards",
-              "featured_heading": "Featured",
-              "featured_1_title": "Uncirculated $2 Coins - Bundle Page"
+              "columns": 3,
+              "show_collection_images": true,
+              "image_style": "rounded",
+              "col_1_heading": "Uncirculated Coins",
+              "col_1_collections": [
+                "uncirculated-1-coins",
+                "uncirculated-2-coins"
+              ],
+              "col_2_heading": "Special Collections",
+              "col_2_collections": [
+                "bluey",
+                "coloured-coins",
+                "c-mint-cards"
+              ],
+              "col_3_heading": "Browse Australian Coins",
+              "col_3_collections": [
+                "australian-coins",
+                "australian-currency",
+                "royal-australian-mint"
+              ],
+              "footer_label": "",
+              "footer_url": ""
+            }
+          },
+          "mega_copper": {
+            "type": "mega_columns",
+            "settings": {
+              "label": "Copper",
+              "columns": 3,
+              "show_collection_images": true,
+              "image_style": "rounded",
+              "col_1_heading": "Shop Copper",
+              "col_1_collections": [
+                "copper"
+              ],
+              "col_2_heading": "Shop by Mint",
+              "col_2_collections": [
+                "scottsdale-mint-copper",
+                "nextgen-collectors-copper"
+              ],
+              "col_3_heading": "Themed Copper",
+              "col_3_collections": [
+                "bluey-copper"
+              ],
+              "footer_label": "",
+              "footer_url": ""
             }
           },
           "mega_acc": {
-            "type": "mega_feature",
+            "type": "mega_columns",
             "settings": {
               "label": "Accessories",
-              "links_heading": "Accessories",
-              "link_1_label": "$2 - Display Cases",
-              "link_2_label": "Archival Flips",
-              "link_3_label": "Coin Stands",
-              "link_4_label": "Coin Capsules (Round)",
-              "link_5_label": "Coin Tubes",
-              "link_6_label": "Coin Displays",
-              "link_7_label": "Rectangular Bar Capsules",
-              "featured_heading": "Featured",
-              "featured_1_title": "Display Cases",
-              "featured_2_title": "Rectangular Bar Capsules",
-              "featured_3_title": "Round Coin Capsules"
+              "columns": 3,
+              "show_collection_images": true,
+              "image_style": "rounded",
+              "col_1_heading": "All Accessories",
+              "col_1_collections": [
+                "accessories"
+              ],
+              "col_2_heading": "Coin Storage",
+              "col_2_collections": [
+                "display-cases"
+              ],
+              "col_3_heading": "Gifts",
+              "col_3_collections": [
+                "gift-ideas"
+              ],
+              "footer_label": "",
+              "footer_url": ""
             }
           },
           "nav_sale": {
             "type": "nav_sale",
             "settings": {
-              "label": "Black Friday Sales 2026"
+              "label": "Black Friday Sales",
+              "link": "shopify://collections/black-friday-sales"
             }
           }
         },
@@ -238,10 +300,10 @@
           "offer_shipping",
           "offer_releases",
           "nav_home",
-          "nav_latest",
-          "mega_buy",
-          "nav_copper",
+          "mega_new",
+          "mega_shop_all",
           "mega_aus",
+          "mega_copper",
           "mega_acc",
           "nav_sale"
         ],

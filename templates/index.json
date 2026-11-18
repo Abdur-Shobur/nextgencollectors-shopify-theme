@@ -432,13 +432,11 @@
         "header_alignment": "center",
         "container": "container-fluid",
         "item_per_row": 4,
+        "padding_y": 36,
         "use_line_icons": true,
         "background_color": "#f4f1ea",
-        "accent_color": "#d3b566",
         "icon_background": "#ffffff",
-        "padding_y": 36,
-        "item_per_row": 4,
-        "use_line_icons": true
+        "accent_color": "#d3b566"
       }
     },
     "0fd08421-f4d4-4b59-85e9-00a24cb0c8db": {
@@ -551,61 +549,26 @@
         "tab_active_color": "#3b2230"
       }
     },
-    "1757319324032d8f64": {
-      "type": "ng-reviews",
+    "179498616308b3a1e6": {
+      "type": "apps",
       "blocks": {
-        "review_1": {
-          "type": "review",
+        "judge_me_reviews_featured_carousel_g8KVQk": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "rating": 5,
-            "content": "Beautiful coins and packaging was excellent. Arrived quickly and exactly as described.",
-            "author": "Sarah K.",
-            "detail": "Verified buyer · Brisbane"
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "content": "Great prices compared with local dealers. Customer support helped me choose the right piece.",
-            "author": "James R.",
-            "detail": "Verified buyer · Sydney"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "content": "My Perth Mint order was perfect. Will be back for the next release.",
-            "author": "Michelle T.",
-            "detail": "Verified buyer · Melbourne"
-          }
-        },
-        "review_4": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "content": "Secure shipping and clear updates the whole way. Highly recommend for collectors.",
-            "author": "Daniel P.",
-            "detail": "Verified buyer · Perth"
+            "maxwidth": 1080
           }
         }
       },
       "block_order": [
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_4"
+        "judge_me_reviews_featured_carousel_g8KVQk"
       ],
       "settings": {
-        "eyebrow": "Reviews",
-        "heading": "Let customers speak for us",
-        "subtitle": "Real feedback from collectors across Australia.",
-        "container": "container-fluid",
-        "show_arrows": true,
-        "background_color": "#fbf8f1",
-        "accent_color": "#d3b566",
-        "star_color": "#e6b422"
+        "heading": "",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "custom_class": ""
       }
     }
   },
@@ -619,6 +582,6 @@
     "0fd08421-f4d4-4b59-85e9-00a24cb0c8db",
     "ng_promo_ads_home",
     "product_tabs_iA6FKY",
-    "1757319324032d8f64"
+    "179498616308b3a1e6"
   ]
 }

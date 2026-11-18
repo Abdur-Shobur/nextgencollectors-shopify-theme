@@ -22,6 +22,8 @@
         "enable_parallax": false,
         "upper_title": true,
         "show_desc": true,
+        "desc_max_width_enable": true,
+        "desc_max_width": 1200,
         "collection_all_desc": ""
       }
     },

@@ -151,6 +151,151 @@
                   </li>
                 {%- endif -%}
 
+              {%- when 'mega_columns' -%}
+                {%- if block.settings.label != blank -%}
+                  {%- liquid
+                    assign col_count = block.settings.columns | default: 4
+                    assign show_images = block.settings.show_collection_images
+                    if show_images == nil
+                      assign show_images = true
+                    endif
+                    assign image_style = block.settings.image_style | default: 'rounded'
+                    assign has_promo = false
+                    if block.settings.promo_image != blank or block.settings.promo_title != blank
+                      assign has_promo = true
+                    endif
+                  -%}
+                  <li class="ng-nav__item ng-nav__item--has-menu" {{ block.shopify_attributes }}>
+                    <button
+                      class="ng-nav__link"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="ng-mega-{{ block.id }}"
+                      data-ng-trigger
+                    >
+                      {{ block.settings.label }}
+                      <svg class="ng-chevron" aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="ng-mega" id="ng-mega-{{ block.id }}">
+                      <div class="ng-mega__panel{% if has_promo %} ng-mega__panel--with-promo{% endif %}">
+                        <div class="ng-mega__main">
+                          <div class="ng-mega__cols ng-mega__cols--{{ col_count }}{% if show_images %} ng-mega__cols--images{% endif %}">
+                            {%- for c in (1..4) -%}
+                              {%- if c > col_count -%}{%- break -%}{%- endif -%}
+                              {%- assign h_key = 'col_' | append: c | append: '_heading' -%}
+                              {%- assign h_url_key = 'col_' | append: c | append: '_heading_url' -%}
+                              {%- assign list_key = 'col_' | append: c | append: '_collections' -%}
+                              {%- assign heading_val = block.settings[h_key] -%}
+                              {%- assign heading_url = block.settings[h_url_key] -%}
+                              {%- assign col_collections = block.settings[list_key] -%}
+                              {%- if heading_url == blank and col_collections != blank and col_collections.first != blank -%}
+                                {%- assign heading_url = col_collections.first.url -%}
+                              {%- endif -%}
+                              {%- if heading_val != blank or col_collections != blank -%}
+                                <section aria-labelledby="ng-col-{{ block.id }}-{{ c }}">
+                                  {%- if heading_val != blank -%}
+                                    {%- if heading_url != blank -%}
+                                      <h2 class="ng-eyebrow" id="ng-col-{{ block.id }}-{{ c }}">
+                                        <a class="ng-eyebrow__link" href="{{ heading_url }}">{{ heading_val }}</a>
+                                      </h2>
+                                    {%- else -%}
+                                      <h2 class="ng-eyebrow" id="ng-col-{{ block.id }}-{{ c }}">{{ heading_val }}</h2>
+                                    {%- endif -%}
+                                  {%- endif -%}
+                                  <ul class="ng-linklist{% if show_images %} ng-linklist--images{% endif %}">
+                                    {%- if col_collections != blank -%}
+                                      {%- for collection in col_collections limit: 7 -%}
+                                        {%- liquid
+                                          assign item_image = collection.featured_image
+                                          if item_image == blank and collection.products.first and collection.products.first.featured_image
+                                            assign item_image = collection.products.first.featured_image
+                                          endif
+                                        -%}
+                                        <li>
+                                          <a class="ng-collink" href="{{ collection.url }}">
+                                            {%- if show_images -%}
+                                              <span class="ng-collink__media ng-collink__media--{{ image_style }}">
+                                                {%- if item_image != blank -%}
+                                                  {{ item_image | image_url: width: 120 | image_tag:
+                                                    loading: 'lazy',
+                                                    widths: '60, 90, 120',
+                                                    sizes: '44px',
+                                                    alt: collection.title
+                                                  }}
+                                                {%- else -%}
+                                                  <span class="ng-collink__placeholder" aria-hidden="true">{{ collection.title | slice: 0 }}</span>
+                                                {%- endif -%}
+                                              </span>
+                                            {%- endif -%}
+                                            <span class="ng-collink__label">{{ collection.title }}</span>
+                                          </a>
+                                        </li>
+                                      {%- endfor -%}
+                                    {%- else -%}
+                                      {%- for i in (1..7) -%}
+                                        {%- assign l_key = 'col_' | append: c | append: '_link_' | append: i | append: '_label' -%}
+                                        {%- assign u_key = 'col_' | append: c | append: '_link_' | append: i | append: '_url' -%}
+                                        {%- if block.settings[l_key] != blank -%}
+                                          <li>
+                                            <a class="ng-collink" href="{{ block.settings[u_key] | default: '#' }}">
+                                              <span class="ng-collink__label">{{ block.settings[l_key] }}</span>
+                                            </a>
+                                          </li>
+                                        {%- endif -%}
+                                      {%- endfor -%}
+                                    {%- endif -%}
+                                  </ul>
+                                </section>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          </div>
+                          {%- if block.settings.footer_label != blank -%}
+                            <div class="ng-mega__footer">
+                              <a class="ng-mega__footer-link" href="{{ block.settings.footer_url | default: routes.collections_url }}">
+                                {{ block.settings.footer_label }}
+                                <span aria-hidden="true">→</span>
+                              </a>
+                            </div>
+                          {%- endif -%}
+                        </div>
+
+                        {%- if has_promo -%}
+                          {%- assign promo_tag = 'div' -%}
+                          {%- if block.settings.promo_url != blank -%}
+                            {%- assign promo_tag = 'a' -%}
+                          {%- endif -%}
+                          <{{ promo_tag }}
+                            class="ng-mega__promo"
+                            {% if block.settings.promo_url != blank %}href="{{ block.settings.promo_url }}"{% endif %}
+                          >
+                            {%- if block.settings.promo_image != blank -%}
+                              {{ block.settings.promo_image | image_url: width: 800 | image_tag:
+                                loading: 'lazy',
+                                widths: '280, 400, 560, 800',
+                                sizes: '(max-width: 989px) 100vw, 240px',
+                                alt: block.settings.promo_title | default: block.settings.label,
+                                class: 'ng-mega__promo-img'
+                              }}
+                            {%- else -%}
+                              <span class="ng-mega__promo-fallback" aria-hidden="true"></span>
+                            {%- endif -%}
+                            {%- if block.settings.promo_title != blank or block.settings.promo_text != blank -%}
+                              <span class="ng-mega__promo-content">
+                                {%- if block.settings.promo_title != blank -%}
+                                  <span class="ng-mega__promo-title">{{ block.settings.promo_title }}</span>
+                                {%- endif -%}
+                                {%- if block.settings.promo_text != blank -%}
+                                  <span class="ng-mega__promo-text">{{ block.settings.promo_text }}</span>
+                                {%- endif -%}
+                              </span>
+                            {%- endif -%}
+                          </{{ promo_tag }}>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </li>
+                {%- endif -%}
+
               {%- when 'mega_buy' -%}
                 {%- if block.settings.label != blank -%}
                   <li class="ng-nav__item ng-nav__item--has-menu" {{ block.shopify_attributes }}>
@@ -639,6 +784,170 @@
           "type": "url",
           "id": "link_8_url",
           "label": "Link 8 URL"
+        }
+      ]
+    },
+    {
+      "type": "mega_columns",
+      "name": "Mega: Column groups",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Nav label",
+          "default": "Shop All"
+        },
+        {
+          "type": "range",
+          "id": "columns",
+          "label": "Columns",
+          "min": 2,
+          "max": 4,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "show_collection_images",
+          "label": "Show collection images",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "image_style",
+          "label": "Image style",
+          "default": "rounded",
+          "options": [
+            { "value": "rounded", "label": "Rounded square" },
+            { "value": "circle", "label": "Circle" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Column 1"
+        },
+        {
+          "type": "text",
+          "id": "col_1_heading",
+          "label": "Heading",
+          "default": "Shop by Metal"
+        },
+        {
+          "type": "url",
+          "id": "col_1_heading_url",
+          "label": "Heading link",
+          "info": "Optional. Defaults to the first collection in this column."
+        },
+        {
+          "type": "collection_list",
+          "id": "col_1_collections",
+          "label": "Collections",
+          "limit": 7
+        },
+        {
+          "type": "header",
+          "content": "Column 2"
+        },
+        {
+          "type": "text",
+          "id": "col_2_heading",
+          "label": "Heading",
+          "default": "Shop by Mint"
+        },
+        {
+          "type": "url",
+          "id": "col_2_heading_url",
+          "label": "Heading link",
+          "info": "Optional. Defaults to the first collection in this column."
+        },
+        {
+          "type": "collection_list",
+          "id": "col_2_collections",
+          "label": "Collections",
+          "limit": 7
+        },
+        {
+          "type": "header",
+          "content": "Column 3"
+        },
+        {
+          "type": "text",
+          "id": "col_3_heading",
+          "label": "Heading",
+          "default": "Silver Series"
+        },
+        {
+          "type": "url",
+          "id": "col_3_heading_url",
+          "label": "Heading link",
+          "info": "Optional. Defaults to the first collection in this column."
+        },
+        {
+          "type": "collection_list",
+          "id": "col_3_collections",
+          "label": "Collections",
+          "limit": 7
+        },
+        {
+          "type": "header",
+          "content": "Column 4"
+        },
+        {
+          "type": "text",
+          "id": "col_4_heading",
+          "label": "Heading",
+          "default": "Shop by Interest"
+        },
+        {
+          "type": "url",
+          "id": "col_4_heading_url",
+          "label": "Heading link",
+          "info": "Optional. Defaults to the first collection in this column."
+        },
+        {
+          "type": "collection_list",
+          "id": "col_4_collections",
+          "label": "Collections",
+          "limit": 7
+        },
+        {
+          "type": "header",
+          "content": "Promo image"
+        },
+        {
+          "type": "image_picker",
+          "id": "promo_image",
+          "label": "Promo image"
+        },
+        {
+          "type": "text",
+          "id": "promo_title",
+          "label": "Promo title"
+        },
+        {
+          "type": "text",
+          "id": "promo_text",
+          "label": "Promo text"
+        },
+        {
+          "type": "url",
+          "id": "promo_url",
+          "label": "Promo link"
+        },
+        {
+          "type": "header",
+          "content": "Footer link"
+        },
+        {
+          "type": "text",
+          "id": "footer_label",
+          "label": "Footer label",
+          "default": "View all collections"
+        },
+        {
+          "type": "url",
+          "id": "footer_url",
+          "label": "Footer URL"
         }
       ]
     },
@@ -1275,70 +1584,69 @@
         }
       },
       {
-        "type": "offer",
-        "settings": {
-          "message": "New releases drop weekly — shop Latest Releases"
-        }
-      },
-      {
         "type": "nav_link",
         "settings": {
-          "label": "Home"
+          "label": "Home",
+          "link": "/"
         }
       },
       {
-        "type": "nav_link",
+        "type": "mega_columns",
         "settings": {
-          "label": "Latest Releases"
+          "label": "New Releases",
+          "columns": 4,
+          "col_1_heading": "New Arrivals",
+          "col_2_heading": "Popular",
+          "col_3_heading": "Upcoming",
+          "col_4_heading": "Special Offers"
         }
       },
       {
-        "type": "mega_buy",
+        "type": "mega_columns",
         "settings": {
-          "label": "Buy"
+          "label": "Shop All",
+          "columns": 4,
+          "col_1_heading": "Shop by Metal",
+          "col_2_heading": "Shop by Mint",
+          "col_3_heading": "Silver Series",
+          "col_4_heading": "Shop by Interest",
+          "footer_label": "View all collections"
         }
       },
       {
-        "type": "nav_dropdown",
-        "settings": {
-          "label": "Copper",
-          "link_1_label": "Shop all Copper",
-          "link_2_label": "Copper Bars"
-        }
-      },
-      {
-        "type": "mega_feature",
+        "type": "mega_columns",
         "settings": {
           "label": "Australian Coins",
-          "links_heading": "Australian Coins",
-          "link_1_label": "Uncirculated $2 Coins - Bundle Page",
-          "link_2_label": "Uncirculated $2 Coins",
-          "link_3_label": "Bluey 2026 5 Coin Folder",
-          "link_4_label": "C-Mint Cards",
-          "featured_1_title": "Uncirculated $2 Coins - Bundle Page"
+          "columns": 3,
+          "col_1_heading": "Uncirculated Coins",
+          "col_2_heading": "Special Collections",
+          "col_3_heading": "Browse Australian Coins"
         }
       },
       {
-        "type": "mega_feature",
+        "type": "mega_columns",
+        "settings": {
+          "label": "Copper",
+          "columns": 3,
+          "col_1_heading": "Shop Copper",
+          "col_2_heading": "Shop by Mint",
+          "col_3_heading": "Themed Copper"
+        }
+      },
+      {
+        "type": "mega_columns",
         "settings": {
           "label": "Accessories",
-          "links_heading": "Accessories",
-          "link_1_label": "$2 - Display Cases",
-          "link_2_label": "Archival Flips",
-          "link_3_label": "Coin Stands",
-          "link_4_label": "Coin Capsules (Round)",
-          "link_5_label": "Coin Tubes",
-          "link_6_label": "Coin Displays",
-          "link_7_label": "Rectangular Bar Capsules",
-          "featured_1_title": "Display Cases",
-          "featured_2_title": "Rectangular Bar Capsules",
-          "featured_3_title": "Round Coin Capsules"
+          "columns": 3,
+          "col_1_heading": "All Accessories",
+          "col_2_heading": "Coin Storage",
+          "col_3_heading": "Gifts"
         }
       },
       {
         "type": "nav_sale",
         "settings": {
-          "label": "Black Friday Sales 2026"
+          "label": "Black Friday Sales"
         }
       }
     ]
