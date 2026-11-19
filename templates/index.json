@@ -66,7 +66,6 @@
           "type": "slider_item",
           "settings": {
             "background": "shopify://shop_images/Nextgen_1_kg_Copper_Bar_Preorder.png",
-            "mb_background": "shopify://shop_images/NextGen_copper_bar_product_banner.png",
             "image_alignment": "center",
             "content_in_container": false,
             "content_position": "center middle",

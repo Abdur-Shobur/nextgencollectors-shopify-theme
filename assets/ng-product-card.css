@@ -208,9 +208,9 @@
 	height: 2.5rem;
 	min-width: 2.5rem;
 	border-radius: 0.5rem;
-	border: 1px solid var(--ng-pc-border);
-	background: #fff;
-	color: var(--ng-pc-ink);
+	border: 1px solid var(--color-btn-bg-hover);
+	background: var(--color-btn-bg-hover);
+	color: var(--ng-pc-bg);
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -224,8 +224,9 @@
 }
 
 .ng-pcard__cart:hover {
-	border-color: var(--ng-pc-ink);
+	border-color: var(--color-btn-bg-hover);
 	background: #faf9f7;
+	color: var(--color-btn-bg-hover);
 }
 
 .ng-pcard__cart.disabled,
@@ -357,8 +358,12 @@ body:has(.globo-listcollection-sidebar) .ng-collection-grid .sf__sidebar,
 	display: none !important;
 }
 
-body:has(#gf-tree) .ng-collection-grid .sf__collection-container.sidebar__leftColumn,
-body:has(#gf-tree) .ng-collection-grid .sf__collection-container.sidebar__rightColumn,
+body:has(#gf-tree)
+	.ng-collection-grid
+	.sf__collection-container.sidebar__leftColumn,
+body:has(#gf-tree)
+	.ng-collection-grid
+	.sf__collection-container.sidebar__rightColumn,
 .ng-collection-grid--globo .sf__collection-container.sidebar__leftColumn,
 .ng-collection-grid--globo .sf__collection-container.sidebar__rightColumn {
 	display: block;
@@ -371,14 +376,14 @@ body:has(#gf-tree) .ng-collection-grid #CollectionProductGrid,
 }
 
 /* Globo column wrappers — keep even row gaps */
-.ng-collection-grid [class*="spf-col-"] {
+.ng-collection-grid [class*='spf-col-'] {
 	display: flex;
 	align-items: stretch;
 	margin-bottom: 1.25rem;
 	box-sizing: border-box;
 }
 
-.ng-collection-grid [class*="spf-col-"] > .spf-product-card {
+.ng-collection-grid [class*='spf-col-'] > .spf-product-card {
 	width: 100%;
 }
 
@@ -412,7 +417,9 @@ body:has(#gf-tree) .ng-collection-grid #CollectionProductGrid,
 }
 
 /* Prefer footer ATC; hide legacy image-overlay form when footer exists */
-.spf-product-card:has(.spf-product-card__footer) .spf-product-card__inner > .spf-product__form {
+.spf-product-card:has(.spf-product-card__footer)
+	.spf-product-card__inner
+	> .spf-product__form {
 	display: none !important;
 }
 
