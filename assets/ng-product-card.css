@@ -481,7 +481,7 @@ body:has(#gf-tree) .ng-collection-grid #CollectionProductGrid,
 	display: none !important;
 }
 
-.spf-product-card .spf-product__form-btn-addtocart {
+.spf-product-card button.spf-product__form-btn-addtocart {
 	position: static !important;
 	width: 2.5rem !important;
 	height: 2.5rem !important;
@@ -492,9 +492,9 @@ body:has(#gf-tree) .ng-collection-grid #CollectionProductGrid,
 	padding: 0 !important;
 	margin: 0 !important;
 	border-radius: 0.5rem !important;
-	border: 1px solid var(--ng-pc-border) !important;
-	background: #fff !important;
-	color: var(--ng-pc-ink) !important;
+	border: 1px solid var(--color-btn-bg-hover) !important;
+	background: var(--color-btn-bg-hover) !important;
+	color: #fff !important;
 	font-size: 0 !important;
 	line-height: 0 !important;
 	display: inline-flex !important;
@@ -512,9 +512,10 @@ body:has(#gf-tree) .ng-collection-grid #CollectionProductGrid,
 	cursor: pointer;
 }
 
-.spf-product-card .spf-product__form-btn-addtocart:hover {
-	border-color: var(--ng-pc-ink) !important;
+.spf-product-card button.spf-product__form-btn-addtocart:hover {
+	border-color: var(--color-btn-bg-hover) !important;
 	background: #faf9f7 !important;
+	color: var(--color-btn-bg-hover) !important;
 }
 
 .spf-product-card .spf-product__form-btn-addtocart:disabled {

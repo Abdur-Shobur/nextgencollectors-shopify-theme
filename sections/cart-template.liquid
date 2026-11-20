@@ -91,7 +91,7 @@
               {% render 'agree-terms-checkbox' %}
               {% assign show_terms = true %}
             {% endif %}
-            <div class="sf-cart__submit-controls{% if show_terms %} mt-3{% endif %}"{% if show_terms %} data-terms-action disabled{% endif %}>
+            <div class="mb-4 sf-cart__submit-controls{% if show_terms %} mt-3{% endif %}"{% if show_terms %} data-terms-action disabled{% endif %}>
               <button type="submit" name="checkout" class="w-full cart__submit sf__btn sf__btn-primary">
                 {{ 'cart.general.checkout' | t | upcase }}
               </button>

@@ -1,221 +1,223 @@
 /* NextGen collection list cards */
 
 .ng-coll-page {
-  --ng-coll-bg: #f4f2ee;
-  --ng-coll-card: #ffffff;
-  --ng-coll-img: #eceae6;
-  --ng-coll-ink: #1a1a1a;
-  --ng-coll-muted: #8a8580;
-  --ng-coll-radius: 1.25rem;
-  --ng-coll-radius-inner: 0.875rem;
-  background: var(--ng-coll-bg);
-  padding: 2.5rem 0 3.5rem;
+	--ng-coll-bg: #f4f2ee;
+	--ng-coll-card: #ffffff;
+	--ng-coll-img: #eceae6;
+	--ng-coll-ink: #1a1a1a;
+	--ng-coll-muted: #8a8580;
+	--ng-coll-radius: 1.25rem;
+	--ng-coll-radius-inner: 0.875rem;
+	background: var(--ng-coll-bg);
+	padding: 2.5rem 0 3.5rem;
 }
 
 .ng-coll-page__header {
-  text-align: center;
-  max-width: 42rem;
-  margin: 0 auto 2.25rem;
+	text-align: center;
+	max-width: 42rem;
+	margin: 0 auto 2.25rem;
 }
 
 .ng-coll-page__title {
-  margin: 0 0 0.75rem;
-  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: var(--ng-coll-ink);
-  line-height: 1.15;
+	margin: 0 0 0.75rem;
+	font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	color: var(--ng-coll-ink);
+	line-height: 1.15;
 }
 
 .ng-coll-page__desc {
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: var(--ng-coll-muted);
+	margin: 0;
+	font-size: 0.9375rem;
+	line-height: 1.55;
+	color: var(--ng-coll-muted);
 }
 
 .ng-coll-page__desc p {
-  margin: 0;
+	margin: 0;
 }
 
 .ng-coll-page__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.25rem;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1.25rem;
 }
 
 .ng-coll-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: var(--ng-coll-card);
-  border-radius: var(--ng-coll-radius);
-  padding: 0.75rem 0.75rem 1rem;
-  text-decoration: none;
-  color: inherit;
-  transition:
-    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.25s ease;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: var(--ng-coll-card);
+	border-radius: var(--ng-coll-radius);
+	padding: 0.75rem 0.75rem 1rem;
+	text-decoration: none;
+	color: inherit;
+	transition:
+		transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 0.25s ease;
 }
 
 .ng-coll-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+	transform: translateY(-3px);
+	box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
 }
 
 .ng-coll-card:focus-visible {
-  outline: 2px solid var(--color-secondary, #d3b566);
-  outline-offset: 3px;
+	outline: 2px solid var(--color-secondary, #d3b566);
+	outline-offset: 3px;
 }
 
 .ng-coll-card__media {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  border-radius: var(--ng-coll-radius-inner);
-  background: var(--ng-coll-img);
-  overflow: hidden;
+	position: relative;
+	aspect-ratio: 1 / 1;
+	border-radius: var(--ng-coll-radius-inner);
+	background: var(--ng-coll-img);
+	overflow: hidden;
 }
 
 .ng-coll-card__media img,
 .ng-coll-card__media .placeholder-svg,
 .ng-coll-card__media svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	object-position: center;
+	transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .ng-coll-card:hover .ng-coll-card__media img {
-  transform: scale(1.04);
+	transform: scale(1.04);
 }
 
 .ng-coll-card__body {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 0.9rem 0.35rem 0.15rem;
-  min-width: 0;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 0.9rem 0.35rem 0.15rem;
+	min-width: 0;
 }
 
 .ng-coll-card__title {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-  color: var(--ng-coll-ink);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.3;
+	letter-spacing: -0.02em;
+	color: var(--ng-coll-ink);
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .ng-coll-card__meta {
-  margin: 0.3rem 0 0;
-  font-size: 0.8125rem;
-  line-height: 1.35;
-  color: var(--ng-coll-muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+	margin: 0.3rem 0 0;
+	font-size: 0.8125rem;
+	line-height: 1.35;
+	color: var(--ng-coll-muted);
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .ng-coll-card__footer {
-  margin-top: auto;
-  padding-top: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+	margin-top: auto;
+	padding-top: 0.85rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
 }
 
 .ng-coll-card__count {
-  margin: 0;
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--ng-coll-ink);
-  line-height: 1.2;
+	margin: 0;
+	font-size: 0.875rem;
+	font-weight: 700;
+	color: var(--ng-coll-ink);
+	line-height: 1.2;
 }
 
 .ng-coll-card__count span {
-  display: block;
-  margin-top: 0.15rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--ng-coll-muted);
+	display: block;
+	margin-top: 0.15rem;
+	font-size: 0.75rem;
+	font-weight: 500;
+	color: var(--ng-coll-muted);
 }
 
 .ng-coll-card__cta {
-  flex: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: var(--ng-coll-ink);
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
+	flex: none;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	background: var(--color-btn-bg-hover);
+	color: #fff;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		background-color 0.2s ease,
+		transform 0.2s ease;
 }
 
 .ng-coll-card:hover .ng-coll-card__cta {
-  background: var(--color-secondary, #8a6a1f);
-  transform: scale(1.05);
+	background: var(--ng-coll-bg);
+	border: 1px solid var(--color-btn-bg-hover);
+	color: var(--color-btn-bg-hover);
+	transform: scale(1.05);
 }
 
 .ng-coll-card__cta svg {
-  width: 0.9rem;
-  height: 0.9rem;
+	width: 0.9rem;
+	height: 0.9rem;
 }
 
 @media (max-width: 1199.98px) {
-  .ng-coll-page__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+	.ng-coll-page__grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
 }
 
 @media (max-width: 767.98px) {
-  .ng-coll-page {
-    padding: 1.75rem 0 2.5rem;
-  }
+	.ng-coll-page {
+		padding: 1.75rem 0 2.5rem;
+	}
 
-  .ng-coll-page__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.875rem;
-  }
+	.ng-coll-page__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.875rem;
+	}
 
-  .ng-coll-card {
-    padding: 0.55rem 0.55rem 0.75rem;
-    border-radius: 1rem;
-  }
+	.ng-coll-card {
+		padding: 0.55rem 0.55rem 0.75rem;
+		border-radius: 1rem;
+	}
 
-  .ng-coll-card__title {
-    font-size: 0.875rem;
-  }
+	.ng-coll-card__title {
+		font-size: 0.875rem;
+	}
 
-  .ng-coll-card__cta {
-    width: 2.15rem;
-    height: 2.15rem;
-  }
+	.ng-coll-card__cta {
+		width: 2.15rem;
+		height: 2.15rem;
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ng-coll-card,
-  .ng-coll-card__media img,
-  .ng-coll-card__cta {
-    transition: none;
-  }
+	.ng-coll-card,
+	.ng-coll-card__media img,
+	.ng-coll-card__cta {
+		transition: none;
+	}
 
-  .ng-coll-card:hover {
-    transform: none;
-  }
+	.ng-coll-card:hover {
+		transform: none;
+	}
 
-  .ng-coll-card:hover .ng-coll-card__media img {
-    transform: none;
-  }
+	.ng-coll-card:hover .ng-coll-card__media img {
+		transform: none;
+	}
 }

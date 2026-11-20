@@ -13,7 +13,7 @@
 <button
   type="submit"
   name="add"
-  class="add-to-cart sf__btn flex-grow shrink not-change relative {{ class }} {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}"
+  class="add-to-cart  ng_button flex-grow shrink not-change relative {{ class }} {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}"
   data-atc-text="{{ btn_text | default: atc_text }}"
 >
   {% render 'atc-spinner' %}
